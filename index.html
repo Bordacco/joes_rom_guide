@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joes Romguide — Adgangsprøve</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --parchment: #ede4cc;
+    --dark-ink: #2a1f0e;
+    --terracotta: #b5451b;
+    --rust: #8b3a1a;
+    --gold: #c9922a;
+    --faded: #7a6a52;
+    --light-faded: #a89880;
+    --border: #c8b89a;
+    --card-bg: #faf6ee;
+    --green: #3a5c3a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--dark-ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8b89a' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .stage {
+    width: 100%;
+    max-width: 680px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+  }
+  .stage.active { display: flex; }
+
+  /* ─── ORNAMENTS ─── */
+  .ornament {
+    color: var(--terracotta);
+    font-size: 1.4rem;
+    letter-spacing: 0.4em;
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin: 1rem 0;
+  }
+  .rule::before, .rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .rule span { color: var(--terracotta); font-size: 1rem; }
+
+  /* ─── TITLES ─── */
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.8rem, 8vw, 5rem);
+    font-weight: 700;
+    line-height: 0.95;
+    color: var(--dark-ink);
+    text-align: center;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3rem;
+  }
+  h1 em { font-style: italic; color: var(--terracotta); }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    text-align: center;
+    color: var(--dark-ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-style: italic;
+    color: var(--faded);
+    text-align: center;
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ─── CARD ─── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  /* ─── INTRO TEXT ─── */
+  .intro-body {
+    font-size: 1.05rem;
+    color: var(--dark-ink);
+    line-height: 1.9;
+    text-align: center;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.75rem 2.5rem;
+    background: var(--dark-ink);
+    color: var(--parchment);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--terracotta); }
+
+  /* ─── PROGRESS ─── */
+  .progress-bar {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .progress-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: background 0.3s;
+  }
+  .progress-dot.done { background: var(--green); }
+  .progress-dot.current { background: var(--terracotta); }
+
+  /* ─── CATEGORY BADGE ─── */
+  .category-badge {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--terracotta);
+    border: 1px solid var(--terracotta);
+    padding: 0.2rem 0.75rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  /* ─── QUESTION ─── */
+  .question-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 3vw, 1.35rem);
+    font-weight: 400;
+    color: var(--dark-ink);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* ─── ANSWERS ─── */
+  .answers {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .answer-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 0.85rem 1.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--dark-ink);
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .answer-btn:hover:not(:disabled) {
+    background: var(--parchment);
+    border-color: var(--faded);
+  }
+  .answer-btn.correct {
+    background: #eaf3de;
+    border-color: #7aad5a;
+    color: #3a6622;
+  }
+  .answer-btn.wrong {
+    background: #fde8c8;
+    border-color: #e8a043;
+    color: #6b3a0f;
+    font-style: italic;
+  }
+  .answer-btn:disabled { cursor: default; }
+
+  /* ─── FEEDBACK ─── */
+  .feedback-box {
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--terracotta);
+    background: #faf6ee;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--faded);
+    display: none;
+  }
+  .feedback-box.visible { display: block; }
+
+  /* Correct: warm golden glow */
+  .feedback-box.correct-fb {
+    border-left: 4px solid #7aad5a;
+    background: #f4faed;
+    color: #3a6622;
+    font-size: 1.05rem;
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  /* Wrong: bright, warm, encouraging — not punishing */
+  .feedback-box.wrong-fb {
+    border: none;
+    border-radius: 2px;
+    background: linear-gradient(135deg, #fff4e0 0%, #fde8c8 100%);
+    color: #6b3a0f;
+    padding: 1.4rem 1.75rem;
+    margin-top: 1.5rem;
+    position: relative;
+    font-style: normal;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    box-shadow: 0 2px 12px rgba(197, 120, 30, 0.18);
+    animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .feedback-box.wrong-fb::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: linear-gradient(to right, #e8a043, transparent);
+    margin-top: 1rem;
+  }
+
+  /* Near miss: picked a real Roman pasta in the fire question */
+  .feedback-box.nearmiss-fb {
+    border: none;
+    border-radius: 2px;
+    background: linear-gradient(135deg, #e8f4fd 0%, #cde8f7 100%);
+    color: #1a4a6b;
+    padding: 1.4rem 1.75rem;
+    margin-top: 1.5rem;
+    position: relative;
+    font-style: normal;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    box-shadow: 0 2px 12px rgba(30, 100, 180, 0.13);
+    animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .feedback-box.nearmiss-fb::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: linear-gradient(to right, #5aaad4, transparent);
+    margin-top: 1rem;
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.96) translateY(6px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .continue-btn {
+    display: none;
+    margin-top: 1.25rem;
+    align-self: flex-end;
+    padding: 0.6rem 1.75rem;
+    background: var(--dark-ink);
+    color: var(--parchment);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .continue-btn:hover { background: var(--terracotta); }
+  .continue-btn.visible { display: inline-block; }
+
+  /* ─── OUTCOME ─── */
+  .outcome-icon {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .outcome-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--terracotta);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .outcome-title.success { color: var(--green); }
+
+  .outcome-text {
+    font-size: 1.05rem;
+    color: var(--dark-ink);
+    text-align: center;
+    line-height: 1.9;
+  }
+
+  /* ─── TIMER ─── */
+  .timer-display {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--terracotta);
+    text-align: center;
+    margin: 1rem 0;
+    letter-spacing: 0.05em;
+  }
+
+  .timer-label {
+    font-style: italic;
+    color: var(--faded);
+    text-align: center;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ─── ENTER BTN ─── */
+  .enter-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 1rem 3rem;
+    background: var(--green);
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .enter-btn:hover { background: var(--rust); background: #2d4a2d; }
+
+  @media (max-width: 500px) {
+    .card { padding: 1.5rem 1.25rem; }
+  }
+
+  /* ─── DEBUG PANEL ─── */
+  #debug-panel {
+    display: none;
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 360px;
+    background: #1a1a2e;
+    color: #e0e0e0;
+    font-family: monospace;
+    font-size: 0.76rem;
+    padding: 1rem 1rem 2rem;
+    z-index: 9999;
+    border-left: 2px solid #b5451b;
+    overflow-y: auto;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.4);
+  }
+  #debug-panel.visible { display: block; }
+  #debug-panel h4 {
+    color: #c9922a;
+    margin-bottom: 0.75rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    position: sticky;
+    top: 0;
+    background: #1a1a2e;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #333;
+    margin-top: 0;
+  }
+  #debug-panel .debug-section {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #2a2a40;
+  }
+  #debug-panel .debug-section-title {
+    color: #b5451b;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  #debug-panel .debug-q { margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #252535; }
+  #debug-panel .debug-q:last-child { border-bottom: none; }
+  #debug-panel .label { color: #888; display: block; margin-top: 0.3rem; }
+  #debug-panel .val-correct { color: #7ec87e; }
+  #debug-panel .val-nearmiss { color: #7ec8e0; }
+  #debug-panel .val-wrong { color: #e07070; }
+  #debug-panel .val { color: #ddd; }
+  #debug-panel .swatch-row {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;
+  }
+  #debug-panel .swatch {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+    border-radius: 2px;
+  }
+  #debug-badge {
+    display: none;
+    position: fixed;
+    top: 0.5rem; right: 370px;
+    background: #b5451b;
+    color: #fff;
+    font-family: monospace;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    z-index: 9999;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+  }
+  #debug-badge.visible { display: block; }
+  /* Push page content left when panel is open so nothing is hidden behind it */
+  body.debug-open { padding-right: 360px; }
+  .debug-skip-btn {
+    display: none;
+    background: #c9922a;
+    color: #fff;
+    border: none;
+    font-family: monospace;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.75rem;
+    cursor: pointer;
+    margin-left: 1rem;
+  }
+  .debug-skip-btn.visible { display: inline-block; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     STAGE 0: INTRO
+══════════════════════════════════════════ -->
+<div class="stage active" id="stage-intro">
+  <div class="ornament">✦ ✦ ✦</div>
+  <h1><em>Joes</em><br>Romguide</h1>
+  <div class="rule"><span>✦</span></div>
+  <div class="card">
+    <p class="intro-body" id="intro-text"></p>
+    <div style="text-align:center;">
+      <button class="btn-primary" onclick="startQuiz()">Test din værdighed →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STAGE 1–3: QUESTIONS
+══════════════════════════════════════════ -->
+<div class="stage" id="stage-question">
+  <div class="ornament">✦ ✦ ✦</div>
+  <h2>Adgangsprøven</h2>
+  <div class="subtitle" id="q-subtitle">Spørgsmål 1 af 3</div>
+
+  <div class="progress-bar" id="progress-bar">
+    <div class="progress-dot current" id="dot-0"></div>
+    <div class="progress-dot" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+  </div>
+
+  <div class="card" style="display:flex;flex-direction:column;">
+    <div style="text-align:center;">
+      <span class="category-badge" id="q-category">Pasta</span>
+    </div>
+    <p class="question-text" id="q-text"></p>
+    <div class="answers" id="q-answers"></div>
+    <div class="feedback-box" id="q-feedback"></div>
+    <button class="continue-btn" id="continue-btn" onclick="nextQuestion()">Videre →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STAGE 4: SUCCESS
+══════════════════════════════════════════ -->
+<div class="stage" id="stage-success">
+  <div class="ornament">✦ ✦ ✦</div>
+  <div class="outcome-icon">🏛️</div>
+  <div class="outcome-title success" id="success-title">DAJE!</div>
+  <div class="rule"><span>✦</span></div>
+  <div class="card">
+    <p class="outcome-text" id="success-text"></p>
+    <div style="text-align:center;">
+      <!-- Replace href with your actual guide page when ready -->
+      <a class="enter-btn" href="guide.html">Træd ind i Rom →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STAGE 5: FAILURE
+══════════════════════════════════════════ -->
+<div class="stage" id="stage-fail">
+  <div class="ornament">✦ ✦ ✦</div>
+  <div class="outcome-icon">⚔️</div>
+  <div class="outcome-title" id="fail-title">Infamis!</div>
+  <div class="rule"><span>✦</span></div>
+  <div class="card">
+    <p class="outcome-text" id="fail-text"></p>
+    <div class="timer-display" id="timer-display">2:00</div>
+    <div style="text-align:center;">
+      <button class="btn-primary" id="retry-btn" onclick="retryQuiz()" disabled>Forsøg igen →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── DEBUG PANEL ─── -->
+<div id="debug-badge">🛠 DEBUG MODE</div>
+<div id="debug-panel">
+  <h4>🛠 DEBUG MODE &nbsp;<span style="color:#aaa;font-weight:normal;font-size:0.72rem;">Press D again to hide · Timer disabled · Questions logged below</span></h4>
+  <div id="debug-content"></div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+//  DATA FROM SPREADSHEETS
+// ══════════════════════════════════════════
+
+const INTRO_TEXT = "Inden du får adgang til Romguiden, skal du svare rigtigt på tre spørgsmål for at bevise din værdighed. Du vil blive quizzet i kategorierne pasta, fodbold og La Dolce Vita. Husk, at svarene testen er det tætteste, som subjektive holdninger kan komme på en objektiv sandhed.";
+
+const SUCCESS_TEMPLATE = "Daje! [aktør] har fundet dig værdig. Du har nu adgang til Romguiden.";
+const FAIL_TEMPLATE = "[aktør] har talt, og du er ikke værdig til at få adgang til Romguiden. Du er derfor dømt til at vente [begivenhed], inden du kan prøve igen. Heldigvis er italienere ikke så gode til at overholde tiden, så du kan forsøge igen om lidt.";
+
+const AKTØRER = ["Konsulerne", "Det første Triumvirat", "Det andet Triumvirat", "Senatet", "Tribunalet", "Vestalinderne"];
+const BEGIVENHEDER = [
+  "til Italien kvalificerer sig til VM igen",
+  "lige så længe som det tager at få noget godkendt i det italienske bureaukrati",
+  "lige så længe som det tager få dig ud af en elevator som sidder fast i Italien",
+  "indtil Roma finder en værdig arvtager til 10 tallet på trøjen",
+  "til trafikken på Il raccordo er begynder at køre igen"
+];
+
+const PASTA_INGREDIENSER = [
+  { q: "Skal der fløde i cabonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej selvfølgelig skal der ikke fløde i cabonara, men der findes mange andre lækre pastaretter med fløde i fx Tagliatelle al salmone e panna" },
+  { q: "Skal der ærter i cabonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej selvfølgelig skal der ikke ærter i cabonara, men der findes mange andre lækre pastaretter med ærter i fx Pasta e piselli alla Napolitana" },
+  { q: "Skal der persille på cabonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej selvfølgelig skal der ikke persille på cabonara, men hvis du absolut skal drysse persille ud over din pasta vil jeg anbefale at gøre det over en lækker omgang aglio, olio e peperoncino." },
+  { q: "Skal der panchetta i cabonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det skal der ikke, men det kan gå an, hvis du ikke kan finde guanciale." },
+  { q: "Skal der bacon i cabornara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det skal der ikke, men hvis det kan gå an i aller yderste nødstilfælde, hvis du ikke kan finde panchetta eller guanciale." },
+  { q: "Skal der hvidløg i amatriciana?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det skal der ikke, med mindre du sætte al din ære og integritet over styr og starte en national shit storm, som ender med, at Amatrices borgermester sender dig en skrivelse med den rigtige opskrift. Og nej ærligt Amatrice har været nok igennem siden jordskælvet." },
+  { q: "Kan man bruge spaghetti til amatriciana?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det skal man ikke, men det kan gå an, hvis du ikke har bugatini" },
+  { q: "Kan man bruge tagliatelle til carbonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det kan man ikke, og det giver slet ikke mening at bruge en bløg æggebaseret pastatype til en blød æggebaseret pastasauce." },
+  { q: "Består en bolognese af løg, hvidløg og oksekød?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det gør det ikke, og der burde blive rejst en rigsretssag mod Mette Frederiksen for at være så skråsikker over opskriften." },
+  { q: "Skal der kulør i en bolognese?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej for så bliver det en kødsovs, og det er en helt anden ret." },
+  { q: "Skal der cocktailpølser i en bolognese?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej!" },
+];
+
+// ── PASTA: De fire romerske pastaretter ──
+// The question asks which pasta does NOT belong among the four classical ones.
+// "Rigtig svar 1–4" = the four classical Roman pastas = WRONG answers to the question (they DO belong)
+//   → Svartekst 1–4 = encouraging near-miss feedback when one of these is picked
+// "Forkert svar 1–12" = non-Roman pastas = CORRECT answers to the question (they do NOT belong)
+//   → Svartekst 5–16 = feedback when the correct option is picked (Forkert svar N → Svartekst N+4)
+// Options shown: 3 random from the 4 Roman pastas + 1 random from the 12 non-Roman pastas (the correct one)
+const PASTA_FIRE = {
+  q: "Hvilken af disse fire pastaretter hører ikke til blandt de fire klassiske pastaretter?",
+  // Roman pastas — wrong answers to the question, with near-miss feedback
+  romanPastas: [
+    { text: "Carbonara",    svar: "Evviva!" },
+    { text: "Gricia",       svar: "Dai!" },
+    { text: "Cacio e pepe", svar: "Grande!" },
+    { text: "Amatriciana",  svar: "Forza!" },
+  ],
+  // Non-Roman pastas — these ARE the correct answer, each with its own feedback
+  nonRomanPastas: [
+    { text: "Pasta alla Zozzona",           svar: "Nej, men den er fra Rom, så prøv den, hvis du er meget sulten og klar på en kamp for at spise op." },
+    { text: "Rigatoni con la Pajata",        svar: "Nej, men den er fra Rom, så prøv den hvis du gerne vil bryde en mental barierer" },
+    { text: "Penne all'Arabiata",            svar: "Nej, men den er fra Rom, så prøv den, hvis du gerne vil have lidt varme i varmen." },
+    { text: "Tagliatelle al Ragu Bolognese", svar: "Nej og som navnet afslører er den fra Bologna. Så prøv den i Bologna, hvor du ikke behøves at sige bolognese." },
+    { text: "Lasange alla Bolognese",        svar: "Nej og som navnet afslører er den fra Bologna. Så prøv den i Bologna, hvor du ikke behøves at sige bolognese." },
+    { text: "Trofie al Pesto Genovese",      svar: "Nej og som navnet afslører er den fra Genoa. Så prøv den i Genoa, hvor du ikke behøves at sige genovese." },
+    { text: "Spaghetti alle Vongole",        svar: "Nej, men det er en lækker ret så prøv den, hvis du er tæt på Napoli eller havet." },
+    { text: "Spaghetti alla Putanesca",      svar: "Nej, men det er en lækker ret så prøv den, hvis du er tæt på Napoli." },
+    { text: "Pasta alla Norma",              svar: "Nej, men det er en lækker ret så prøv den, hvis du er på Sicilien." },
+    { text: "Fettuchini Alfredo",            svar: "Nej, det er en eller anden americansk bastard." },
+    { text: "Pasta alla Trapanese",          svar: "Nej og som navnet afslører er den fra Trapani. Så prøv den i Trapani." },
+    { text: "Ziti alla Genovese",            svar: "Nej og lad dig ikke nare af navnet. Den er ikke som navnet indikerer fra Genoa, men faktisk fra Napoli, så prøv den der." },
+  ]
+};
+
+// ── FOOTBALL: Hvor var Joe (gid=727533822) ──
+// For fun only — always passes regardless of answer. No svar tekst.
+const HVOR_VAR_JOE = [
+  { q: "Hvor var Joe, da Italien vandt VM i 2006?", a1: "På en tilfældig bar i Silkeborg", a2: "Sammen med sin far og andre tilfældige italienere", correct: "På en tilfældig bar i Silkeborg" },
+  { q: "Hvor var Joe, da Totti scorede på et straffespark i det sidste minut i ottendedelsfinalen mod Australien ved VM 2006?", a1: "Omringet af australiere ved skatescenen på Roskilde Festival", a2: "I sin lejlighed på Islandsbrygge med gymnasievennerne", correct: "Omringet af australiere ved skatescenen på Roskilde Festival" },
+  { q: "Hvor var Joe, da Danmark slog Holland på straffe i EM-semifinalen i 1992?", a1: "I lejligheden på Niels Ebbesensvej, hvor den hollandske gæst Kyhn fik et astmaanfald, da Van Basten brændte straffesparket.", a2: "På spejderlejr", correct: "I lejligheden på Niels Ebbesensvej, hvor den hollandske gæst Kyhn fik et astmaanfald, da Van Basten brændte straffesparket." },
+  { q: "Hvor var Joe, da Roma slog Silkeborg i UEFA Cuppen i 1998?", a1: "På Silkeborg Stadion", a2: "Hjemme hos forældrene, fordi skolen ikke ville give fri, så han kunne nå fra Frederiksberg til Silkeborg inden kampstart", correct: "På Silkeborg Stadion" },
+  { q: "Hvor var Joe, da Roma vandt Serie A i 2000/2001?", a1: "På en tilfældig bar i Ostia", a2: "På det Olympiske Stadion i Rom", correct: "På en tilfældig bar i Ostia" },
+  { q: "Hvor var Joe, da Roma vandt Conference League i 2021/2022?", a1: "På Léanowski", a2: "På det Olympiske Stadion i Rom", correct: "På Léanowski" },
+  { q: "Hvor var Joe, da Roma tabte Europa League-finalen i 2022/2023?", a1: "På Léanowski", a2: "På Torvet", correct: "På Léanowski" },
+  { q: "Hvor var Joe, da Italien vandt EM i 2020 (afholdt 2021)?", a1: "På Torvet", a2: "På Pizzeria La Fioritta med hans far og en masse tilfældige italienere", correct: "På Torvet" },
+  { q: "Hvor var Joe, da Italien tabte EM-finalen i 2000?", a1: "I Islamabad med en masse tilfældige piloter", a2: "På karatelejr", correct: "I Islamabad med en masse tilfældige piloter" },
+  { q: "Hvor var Joe, da Italien tabte EM-finalen i 2012?", a1: "På Pizzeria La Fioritta med hans far og en masse tilfældige italienere", a2: "På Roskilde Festival", correct: "På Pizzeria La Fioritta med hans far og en masse tilfældige italienere" },
+  { q: "Hvor var Joe, da Italien tabte VM-finalen i 1994?", a1: "I seng", a2: "Sammen med familien på Frederiksberg", correct: "I seng" },
+  { q: "Hvor var Joe, da Danmark røg ud til England efter et skandaløst straffespark til EM i 2020 (afholdt 2021)?", a1: "I sommerhus med gode venner", a2: "Til storskærmsarrangement på Ofelia Plads", correct: "I sommerhus med gode venner" },
+  { q: "Hvor var Joe, da Italien røg ud til Sydkorea ved VM i 2002 efter en skandaløs dommeroptræden?", a1: "På café Bankerot", a2: "I skole", correct: "På café Bankerot" },
+];
+
+// ── FOOTBALL: Roma Legender (gid=372313112) ──
+// 4 options: random 3 from pool + correct answer always included
+const ROMA_LEGENDER = [
+  { q: "Hvilken en af disse Roma legender er ikke født i Rom", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Conti" },
+  { q: "Hvilket kælenavn havde den brasilianske forsvarsspiller Aldair", pool: ["Pluto","Topolino (Mickey Mouse)","Pippo (Fedtmule)","Paperino (Anders And)"], correct: "Pluto" },
+  { q: "Hvilken en af disse Roma anfører har ikke vundet et trofæ med det Italienske landshold?", pool: ["Totti","De Rossi","Florenzi","Pellegrini"], correct: "Pellegrini" },
+  { q: "Hvilken en af disse Roma legender havde kælenavnet Il Principe?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Giannini" },
+  { q: "Hvilken en af disse Roma legender har ikke spillet for det italienske landshold?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Di Bartolomei" },
+  { q: "Hvilken en af disse Roma legender havde kælenavnet Capitan Futuro?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "De Rossi" },
+  { q: "Hvilken en af disse Roma legender havde kælenavnet Er Pupone?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Totti" },
+  { q: "Hvilken en af disse Roma legender anses for at være Roms 8. konge?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Totti" },
+];
+
+// ── LA DOLCE VITA: Kvalitet over kvantitet (gid=1050084139) ──
+const KVALITET = [
+  { q: "Du har lyst til lidt vin. Hvad vælger du?", a1: "En god flaske vin til 150 kr.", a2: "To mindre gode flasker vin til 150 kr?", correct: "En god flaske vin til 150 kr.", svarTekst: "Sæt nu kvalitet over kvantitet!" },
+  { q: "Du har lyst til en rigtig kop kaffe. Hvad vælger du?", a1: "En americano", a2: "En kopkaffe fra filterbryg eller stempekande", correct: "En kopkaffe fra filterbryg eller stempekande", svarTekst: "Americano er jo en udvandet espresso. Vælg derfor en kaffe der er brygget efter formålet." },
+  { q: "Du skal have en italiensk is. Vil du have den i?", a1: "Et bærer", a2: "En vaffel", correct: "Et bærer", svarTekst: "En vaffel kan gå an, men bærer er at foretrække" },
+  { q: "Du skal købe olienolie. Hvad køber du?", a1: "En rigtig god olien olie til salater og en mindre god til madlavning og marinader", a2: "En ikke for dyr en, som man kan bruge til lidt af hvert", correct: "En rigtig god olien olie til salater og en mindre god til madlavning og marinader", svarTekst: "Her taber du på alle fronter. Gå ikke på kompromis — køb efter formålet." },
+  { q: "Du skal se Derby del Capitale. Hvem holder du med?", a1: "Roma", a2: "Lazio", correct: "Roma", svarTekst: "Er du dum eller hvad?" },
+  { q: "Du skal købe ind til en pastaret. Hvilken type parmesanost vælger du?", a1: "En blok parmesanost", a2: "Revet parmesan i en pose", correct: "En blok parmesanost", svarTekst: "Kan du vitterlig godt lide at spise lugten af bræk?" },
+  { q: "Du skal handle ind. Hvad vælger du?", a1: "At gå i et supermarkedet og vælge ud fra hvad der ser godt ud", a2: "At bruge et online supermarked og vælge ud fra billederne", correct: "At gå i et supermarkedet og vælge ud fra hvad der ser godt ud", svarTekst: "Sæt nu lidt ære i hvad du indtager og vælg selv gode råvare. Mad holder dig i liv, så hvorfor skal det ikke være af højeste kvalitet." },
+  { q: "Du er i Italien og skal have en kaffe. Stående ved baren eller siddende?", a1: "Stående ved baren", a2: "På et lille cafebord", correct: "Stående ved baren", svarTekst: "Nå men så du kan godt lide at betale overpris for at ligne en turist der ikke fatter en hat af livet" },
+  { q: "Du skal have pizza. Hvor mange ingredienser skal der være på den?", a1: "Maks fire - less is more!", a2: "Over fire - jo flere jo bedre", correct: "Maks fire - less is more!", svarTekst: "Lad du bare de enkelt råvare tale for dem selv. De kan bære det" },
+];
+
+// ══════════════════════════════════════════
+//  QUIZ ENGINE
+// ══════════════════════════════════════════
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function pick(arr, n) { return shuffle(arr).slice(0, n); }
+function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function fillTemplate(tpl) {
+  return tpl
+    .replace('[aktør]', rand(AKTØRER))
+    .replace('[begivenhed]', rand(BEGIVENHEDER));
+}
+
+// Build question set: 1 pasta, 1 football, 1 dolce vita
+function buildQuestions() {
+  const questions = [];
+
+  // ── Q1: Pasta ──────────────────────────────────
+  // Randomly pick between Ingredienser or De fire
+  if (Math.random() < 0.5) {
+    const q = rand(PASTA_INGREDIENSER);
+    const opts = shuffle([
+      { text: q.a1, isCorrect: q.a1 === q.correct },
+      { text: q.a2, isCorrect: q.a2 === q.correct },
+    ]);
+    questions.push({
+      category: "🍝 Pasta",
+      type: "ingredienser",
+      question: q.q,
+      options: opts,
+      correctAnswer: q.correct,
+      svarTekst: q.svarTekst,
+      countsForPass: true,
+      passOnWrong: false, // wrong = show tekst then fail if counts
+    });
+  } else {
+    // De fire — 3 random Roman pastas (wrong answers) + 1 random non-Roman pasta (correct answer)
+    const threeRoman = pick(PASTA_FIRE.romanPastas, 3);
+    const correctItem = rand(PASTA_FIRE.nonRomanPastas);
+    const opts = shuffle([
+      ...threeRoman.map(p => ({ text: p.text, isCorrect: false, svar: p.svar, isRoman: true })),
+      { text: correctItem.text, isCorrect: true, svar: correctItem.svar, isRoman: false },
+    ]);
+    questions.push({
+      category: "🍝 Pasta",
+      type: "fire",
+      question: PASTA_FIRE.q,
+      options: opts,
+      correctAnswer: correctItem.text,
+      svarTekst: null,
+      countsForPass: true,
+      passOnWrong: false,
+    });
+  }
+
+  // ── Q2: Football ──────────────────────────────
+  // Randomly pick Hvor var Joe or Roma Legender
+  if (Math.random() < 0.5) {
+    const q = rand(HVOR_VAR_JOE);
+    const opts = shuffle([
+      { text: q.a1, isCorrect: q.a1 === q.correct },
+      { text: q.a2, isCorrect: q.a2 === q.correct },
+    ]);
+    questions.push({
+      category: "⚽ Fodbold",
+      type: "joeQuestion",
+      question: q.q,
+      options: opts,
+      correctAnswer: q.correct,
+      svarTekst: null,
+      countsForPass: false, // Hvor var Joe doesn't count!
+      passOnWrong: true,
+      funOnly: true,
+    });
+  } else {
+    const q = rand(ROMA_LEGENDER);
+    const others = q.pool.filter(x => x !== q.correct);
+    const threeOthers = pick(others, 3);
+    const opts = shuffle([
+      ...threeOthers.map(t => ({ text: t, isCorrect: false })),
+      { text: q.correct, isCorrect: true },
+    ]);
+    questions.push({
+      category: "⚽ Fodbold",
+      type: "legender",
+      question: q.q,
+      options: opts,
+      correctAnswer: q.correct,
+      svarTekst: null,
+      countsForPass: true,
+      passOnWrong: false,
+    });
+  }
+
+  // ── Q3: La Dolce Vita ──────────────────────────
+  const q = rand(KVALITET);
+  const opts = shuffle([
+    { text: q.a1, isCorrect: q.a1 === q.correct },
+    { text: q.a2, isCorrect: q.a2 === q.correct },
+  ]);
+  questions.push({
+    category: "☀️ La Dolce Vita",
+    type: "kvalitet",
+    question: q.q,
+    options: opts,
+    correctAnswer: q.correct,
+    svarTekst: q.svarTekst,
+    countsForPass: true,
+    passOnWrong: false,
+  });
+
+  return questions;
+}
+
+// ── State ──
+let questions = [];
+let currentQ = 0;
+let wrongCount = 0;
+let timerInterval = null;
+
+function showStage(id) {
+  document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz() {
+  questions = buildQuestions();
+  currentQ = 0;
+  wrongCount = 0;
+  showStage('stage-question');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[currentQ];
+
+  // Subtitle
+  document.getElementById('q-subtitle').textContent = `Spørgsmål ${currentQ + 1} af 3`;
+
+  // Progress dots
+  for (let i = 0; i < 3; i++) {
+    const dot = document.getElementById(`dot-${i}`);
+    dot.className = 'progress-dot';
+    if (i < currentQ) dot.classList.add('done');
+    else if (i === currentQ) dot.classList.add('current');
+  }
+
+  // Category & question — never reveal fun-only status
+  document.getElementById('q-category').textContent = q.category;
+  document.getElementById('q-text').textContent = q.question;
+
+  // Answers
+  const container = document.getElementById('q-answers');
+  container.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn';
+    btn.textContent = opt.text;
+    btn.onclick = () => handleAnswer(i);
+    container.appendChild(btn);
+  });
+
+  // Reset feedback
+  const fb = document.getElementById('q-feedback');
+  fb.className = 'feedback-box';
+  fb.textContent = '';
+  document.getElementById('continue-btn').className = 'continue-btn';
+}
+
+function handleAnswer(optionIndex) {
+  const q = questions[currentQ];
+  const selected = q.options[optionIndex];
+  const buttons = document.querySelectorAll('.answer-btn');
+  const fb = document.getElementById('q-feedback');
+  const cont = document.getElementById('continue-btn');
+
+  // Disable all buttons
+  buttons.forEach(b => b.disabled = true);
+
+  // Fodbold (fun only): always continues, no reveal, no feedback
+  if (q.funOnly) {
+    cont.className = 'continue-btn visible';
+    return;
+  }
+
+  if (selected.isCorrect) {
+    // Correct — picked the non-Roman pasta
+    fb.className = 'feedback-box correct-fb visible';
+    if (q.type === 'fire') {
+      fb.textContent = selected.svar || "✓";
+    } else {
+      fb.textContent = "✓";
+    }
+  } else {
+    buttons[optionIndex].classList.add('wrong');
+    if (q.countsForPass) wrongCount++;
+
+    let svarTekst = q.svarTekst || null;
+    let isNearMiss = false;
+
+    if (q.type === 'fire') {
+      // svar and isRoman are stored directly on the option
+      svarTekst = selected.svar || null;
+      isNearMiss = selected.isRoman === true;
+    }
+
+    fb.className = `feedback-box ${isNearMiss ? 'nearmiss-fb' : 'wrong-fb'} visible`;
+    fb.textContent = svarTekst || '';
+  }
+
+  cont.className = 'continue-btn visible';
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= 3) {
+    endQuiz();
+  } else {
+    renderQuestion();
+  }
+}
+
+function endQuiz() {
+  // Only pasta and la dolce vita count — fodbold has countsForPass:false
+  if (wrongCount === 0) {
+    document.getElementById('success-text').textContent = fillTemplate(SUCCESS_TEMPLATE);
+    showStage('stage-success');
+  } else {
+    document.getElementById('fail-text').textContent = fillTemplate(FAIL_TEMPLATE);
+    showStage('stage-fail');
+    // Random wait between 2 seconds and 5 minutes — hidden from user
+    const randomSeconds = Math.floor(Math.random() * (300 - 2 + 1)) + 2;
+    startTimer(randomSeconds);
+  }
+}
+
+function startTimer(seconds) {
+  const retryBtn = document.getElementById('retry-btn');
+  const display = document.getElementById('timer-display');
+  display.style.display = 'none'; // always hidden
+
+  if (debugMode) {
+    retryBtn.disabled = false;
+    retryBtn.textContent = 'Forsøg igen →';
+    return;
+  }
+
+  retryBtn.disabled = true;
+  setTimeout(() => {
+    retryBtn.disabled = false;
+    retryBtn.textContent = 'Forsøg igen →';
+  }, seconds * 1000);
+}
+
+function retryQuiz() {
+  clearInterval(timerInterval);
+  startQuiz();
+}
+
+// ══════════════════════════════════════════
+//  DEBUG MODE — press D to toggle
+// ══════════════════════════════════════════
+let debugMode = false;
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'd' || e.key === 'D') {
+    debugMode = !debugMode;
+    document.getElementById('debug-panel').classList.toggle('visible', debugMode);
+    document.getElementById('debug-badge').classList.toggle('visible', debugMode);
+    document.body.classList.toggle('debug-open', debugMode);
+    if (debugMode) renderDebugPanel();
+  }
+});
+
+function renderDebugPanel() {
+  const container = document.getElementById('debug-content');
+
+  // ── Colour legend ──
+  let html = `
+    <div class="debug-section-title">Farvekodet svar feedback</div>
+    <div class="swatch-row">
+      <span class="swatch" style="background:#eaf3de;color:#3a6622;border:1px solid #7aad5a">✓ Korrekt</span>
+      <span class="swatch" style="background:#fde8c8;color:#6b3a0f;border:1px solid #e8a043">✗ Forkert</span>
+      <span class="swatch" style="background:#cde8f7;color:#1a4a6b;border:1px solid #5aaad4">~ Næsten (romersk pasta)</span>
+    </div>
+  `;
+
+  // ── Intro / outro texts ──
+  html += `
+    <div class="debug-section">
+      <div class="debug-section-title">Introtekst</div>
+      <div class="val">${INTRO_TEXT}</div>
+      <div class="debug-section-title" style="margin-top:0.75rem">Outrotekst — rigtigt svar</div>
+      <div class="val">${SUCCESS_TEMPLATE}</div>
+      <div class="debug-section-title" style="margin-top:0.75rem">Outrotekst — forkert svar</div>
+      <div class="val">${FAIL_TEMPLATE}</div>
+      <div class="debug-section-title" style="margin-top:0.75rem">Aktører</div>
+      <div class="val">${AKTØRER.join(', ')}</div>
+      <div class="debug-section-title" style="margin-top:0.75rem">Begivenheder</div>
+      ${BEGIVENHEDER.map(b => `<div class="val">· ${b}</div>`).join('')}
+    </div>
+  `;
+
+  if (questions.length === 0) {
+    html += `<div style="color:#888;font-style:italic">Start quizzen for at se spørgsmålene.</div>`;
+    container.innerHTML = html;
+    return;
+  }
+
+  // ── Questions ──
+  html += `<div class="debug-section-title">Spørgsmål i denne runde</div>`;
+
+  questions.forEach((q, i) => {
+    html += `<div class="debug-q">`;
+    html += `<div><span class="val-correct">Q${i+1}</span> <span style="color:#c9922a">${q.category}</span> <span class="label" style="display:inline">[${q.type}${q.countsForPass ? '' : ' — tæller ikke'}]</span></div>`;
+    html += `<div><span class="label">Spørgsmål:</span> <span class="val">${q.question}</span></div>`;
+
+    if (q.type === 'fire') {
+      const correctOpt = q.options.find(o => o.isCorrect);
+      const romanOpts = q.options.filter(o => o.isRoman);
+      html += `<div><span class="label">Korrekt svar (ikke-romersk):</span> <span class="val-correct">${correctOpt?.text}</span></div>`;
+      html += `<div><span class="label">Feedback ved korrekt:</span> <span class="val">${correctOpt?.svar}</span></div>`;
+      html += `<div><span class="label">Nær-miss (romerske pastaer vist):</span></div>`;
+      romanOpts.forEach(o => {
+        html += `<div style="margin-left:0.75rem"><span class="val-nearmiss">${o.text}</span> → <span class="val">${o.svar}</span></div>`;
+      });
+    } else {
+      q.options.forEach(opt => {
+        const cls = opt.isCorrect ? 'val-correct' : 'val-wrong';
+        const label = opt.isCorrect ? '✓ Korrekt' : '✗ Forkert';
+        html += `<div><span class="${cls}">${label}:</span> <span class="val">${opt.text}</span></div>`;
+      });
+      if (q.svarTekst) {
+        html += `<div><span class="label">Forkert svar tekst:</span> <span style="color:#fde8c8">${q.svarTekst}</span></div>`;
+      }
+    }
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+// Patch startQuiz to refresh debug panel
+function startQuiz() {
+  questions = buildQuestions();
+  currentQ = 0;
+  wrongCount = 0;
+  showStage('stage-question');
+  renderQuestion();
+  if (debugMode) renderDebugPanel();
+}
+
+// ── Init ──
+document.getElementById('intro-text').textContent = INTRO_TEXT;
+</script>
+</body>
+</html>

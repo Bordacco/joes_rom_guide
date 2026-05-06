@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joes Romguide — Korrekturlæsning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --parchment: #ede4cc;
+    --dark: #2a1f0e;
+    --terracotta: #b5451b;
+    --gold: #c9922a;
+    --faded: #7a6a52;
+    --border: #c8b89a;
+    --green: #3a5c3a;
+    --card: #faf6ee;
+
+    /* Answer colour codes — must match index.html exactly */
+    --correct-bg: #eaf3de;
+    --correct-border: #7aad5a;
+    --correct-text: #3a6622;
+    --wrong-bg: #fde8c8;
+    --wrong-border: #e8a043;
+    --wrong-text: #6b3a0f;
+    --nearmiss-bg: #cde8f7;
+    --nearmiss-border: #5aaad4;
+    --nearmiss-text: #1a4a6b;
+    --feedback-wrong-bg: linear-gradient(135deg, #fff4e0 0%, #fde8c8 100%);
+    --feedback-nearmiss-bg: linear-gradient(135deg, #e8f4fd 0%, #cde8f7 100%);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    text-align: center;
+    padding: 2rem 0 1.5rem;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+  }
+  .page-header h1 em { color: var(--terracotta); font-style: italic; }
+  .page-header .meta {
+    color: var(--faded);
+    font-style: italic;
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+  }
+
+  /* ── NAV ── */
+  .toc {
+    background: var(--dark);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .toc a {
+    color: var(--parchment);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    padding: 0.2rem 0;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s;
+  }
+  .toc a:hover { color: var(--gold); }
+
+  /* ── SECTIONS ── */
+  .section { max-width: 900px; margin: 0 auto 3rem; }
+  .section + .section { border-top: 1px solid var(--border); padding-top: 2.5rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.3rem;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: var(--dark);
+  }
+
+  /* ── TEXT BLOCKS ── */
+  .text-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.9;
+  }
+  .text-block .block-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--faded);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .text-block .variable {
+    display: inline-block;
+    background: #ffe8c0;
+    border: 1px solid var(--gold);
+    color: #7a4800;
+    font-size: 0.82rem;
+    padding: 0.05rem 0.4rem;
+    border-radius: 2px;
+    font-style: normal;
+  }
+
+  /* ── VARIABLE LISTS ── */
+  .var-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .var-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+  }
+  .var-box .var-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--faded);
+    margin-bottom: 0.4rem;
+  }
+  .var-box li {
+    font-size: 0.9rem;
+    color: var(--dark);
+    list-style: none;
+    padding: 0.15rem 0;
+    border-bottom: 1px solid #ede4cc;
+  }
+  .var-box li:last-child { border-bottom: none; }
+
+  /* ── COLOUR LEGEND ── */
+  .colour-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .colour-swatch {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1rem;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .swatch-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── QUESTION CARDS ── */
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+  }
+  .q-card-header {
+    background: var(--dark);
+    color: var(--parchment);
+    padding: 0.6rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .q-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+    font-style: italic;
+  }
+  .q-category-badge {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.15rem 0.5rem;
+    color: rgba(255,255,255,0.8);
+  }
+  .q-type-note {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
+    margin-left: auto;
+  }
+  .q-card-body { padding: 1.25rem 1.5rem; }
+
+  .q-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--dark);
+    margin-bottom: 1.1rem;
+    line-height: 1.5;
+  }
+
+  /* ── ANSWER OPTIONS ── */
+  .options-grid { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+  .option.correct {
+    background: var(--correct-bg);
+    border-color: var(--correct-border);
+    color: var(--correct-text);
+  }
+  .option.wrong {
+    background: var(--wrong-bg);
+    border-color: var(--wrong-border);
+    color: var(--wrong-text);
+  }
+  .option.nearmiss {
+    background: var(--nearmiss-bg);
+    border-color: var(--nearmiss-border);
+    color: var(--nearmiss-text);
+  }
+  .option-icon { font-size: 0.9rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .option-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-left: auto;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── FEEDBACK PREVIEW ── */
+  .feedback-preview {
+    margin-top: 0.75rem;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    position: relative;
+  }
+  .feedback-preview::after {
+    content: '';
+    display: block;
+    height: 2px;
+    margin-top: 0.75rem;
+  }
+  .feedback-preview.fb-wrong {
+    background: linear-gradient(135deg, #fff4e0 0%, #fde8c8 100%);
+    color: #6b3a0f;
+    box-shadow: 0 2px 8px rgba(197,120,30,0.15);
+  }
+  .feedback-preview.fb-wrong::after { background: linear-gradient(to right, #e8a043, transparent); }
+  .feedback-preview.fb-nearmiss {
+    background: linear-gradient(135deg, #e8f4fd 0%, #cde8f7 100%);
+    color: #1a4a6b;
+    box-shadow: 0 2px 8px rgba(30,100,180,0.12);
+  }
+  .feedback-preview.fb-nearmiss::after { background: linear-gradient(to right, #5aaad4, transparent); }
+  .feedback-preview.fb-correct {
+    background: #f4faed;
+    border-left: 4px solid #7aad5a;
+    color: #3a6622;
+    font-style: italic;
+  }
+
+  .feedback-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faded);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* ── POOL LIST (Roma Legender) ── */
+  .pool-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+  .pool-item {
+    font-size: 0.82rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--border);
+    background: var(--parchment);
+    color: var(--faded);
+  }
+  .pool-item.is-correct {
+    background: var(--correct-bg);
+    border-color: var(--correct-border);
+    color: var(--correct-text);
+    font-weight: 600;
+  }
+
+  /* ── DIVIDER ── */
+  .cat-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0 1.25rem;
+  }
+  .cat-divider::before, .cat-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+  .cat-divider span {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--terracotta);
+    white-space: nowrap;
+  }
+
+  .note {
+    font-size: 0.82rem;
+    color: var(--faded);
+    font-style: italic;
+    padding: 0.5rem 0.75rem;
+    border-left: 2px solid var(--border);
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .var-grid { grid-template-columns: 1fr; }
+    .colour-legend { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div style="color:var(--terracotta);font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.3rem">Korrekturlæsning</div>
+  <h1><em>Joes</em> Romguide — Adgangsprøven</h1>
+  <p class="meta">Komplet oversigt over alle tekster, spørgsmål, svar og farvekoder · Til intern gennemgang</p>
+</div>
+
+<nav class="toc">
+  <a href="#intro-outro">Intro & Outro</a>
+  <a href="#colours">Farvekoder</a>
+  <a href="#pasta">Pasta</a>
+  <a href="#fodbold">Fodbold</a>
+  <a href="#dolcevita">La Dolce Vita</a>
+</nav>
+
+<!-- ══════════════════════════
+     INTRO & OUTRO
+══════════════════════════ -->
+<div class="section" id="intro-outro">
+  <div class="section-label">Tekster</div>
+  <h2>Intro & Outro</h2>
+
+  <div class="text-block">
+    <span class="block-label">Introtekst — vises før testen</span>
+    Inden du får adgang til Romguiden, skal du svare rigtigt på tre spørgsmål for at bevise din værdighed. Du vil blive quizzet i kategorierne pasta, fodbold og La Dolce Vita. Husk, at svarene testen er det tætteste, som subjektive holdninger kan komme på en objektiv sandhed.
+  </div>
+
+  <div class="text-block">
+    <span class="block-label">Outrotekst — ved rigtige svar (adgang givet)</span>
+    Daje! <span class="variable">[aktør]</span> har fundet dig værdig. Du har nu adgang til Romguiden.
+  </div>
+
+  <div class="text-block">
+    <span class="block-label">Outrotekst — ved forkerte svar (adgang nægtet)</span>
+    <span class="variable">[aktør]</span> har talt, og du er ikke værdig til at få adgang til Romguiden. Du er derfor dømt til at vente <span class="variable">[begivenhed]</span>, inden du kan prøve igen. Heldigvis er italienere ikke så gode til at overholde tiden, så du kan forsøge igen om lidt.
+  </div>
+
+  <div class="var-grid">
+    <div class="var-box">
+      <div class="var-title">Mulige værdier for [aktør] — vælges tilfældigt</div>
+      <ul>
+        <li>Konsulerne</li>
+        <li>Det første Triumvirat</li>
+        <li>Det andet Triumvirat</li>
+        <li>Senatet</li>
+        <li>Tribunalet</li>
+        <li>Vestalinderne</li>
+      </ul>
+    </div>
+    <div class="var-box">
+      <div class="var-title">Mulige værdier for [begivenhed] — vælges tilfældigt</div>
+      <ul>
+        <li>til Italien kvalificerer sig til VM igen</li>
+        <li>lige så længe som det tager at få noget godkendt i det italienske bureaukrati</li>
+        <li>lige så længe som det tager få dig ud af en elevator som sidder fast i Italien</li>
+        <li>indtil Roma finder en værdig arvtager til 10 tallet på trøjen</li>
+        <li>til trafikken på Il raccordo er begynder at køre igen</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     COLOUR CODES
+══════════════════════════ -->
+<div class="section" id="colours">
+  <div class="section-label">Visuel guide</div>
+  <h2>Farvekoder for svar</h2>
+  <p style="color:var(--faded);font-style:italic;margin-bottom:1.25rem;font-size:0.95rem;">Sådan ser knapperne ud når man vælger et svar — og sådan ser feedback-boksene ud.</p>
+
+  <div class="colour-legend">
+    <div class="colour-swatch" style="background:var(--correct-bg);border:1px solid var(--correct-border);color:var(--correct-text)">
+      <div class="swatch-dot" style="background:var(--correct-border)"></div>
+      ✓ Korrekt svar
+    </div>
+    <div class="colour-swatch" style="background:var(--wrong-bg);border:1px solid var(--wrong-border);color:var(--wrong-text)">
+      <div class="swatch-dot" style="background:var(--wrong-border)"></div>
+      ✗ Forkert svar
+    </div>
+    <div class="colour-swatch" style="background:var(--nearmiss-bg);border:1px solid var(--nearmiss-border);color:var(--nearmiss-text)">
+      <div class="swatch-dot" style="background:var(--nearmiss-border)"></div>
+      ~ Næsten (kun de fire romerske pasta)
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:1rem;">
+    <div>
+      <div class="feedback-label">Feedback — korrekt svar</div>
+      <div class="feedback-preview fb-correct">✓</div>
+    </div>
+    <div>
+      <div class="feedback-label">Feedback — forkert svar</div>
+      <div class="feedback-preview fb-wrong">Her vises den tilhørende svartekst fra arket.</div>
+    </div>
+    <div>
+      <div class="feedback-label">Feedback — næsten (romersk pasta)</div>
+      <div class="feedback-preview fb-nearmiss">Carbonara er faktisk en af de fire klassiske!</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     PASTA
+══════════════════════════ -->
+<div class="section" id="pasta">
+  <div class="section-label">Kategori 1 — Tæller mod adgang</div>
+  <h2>🍝 Pasta</h2>
+  <p class="note">Ét spørgsmål vælges tilfældigt fra enten <strong>Pastaspørgsmål Ingredienser</strong> eller <strong>De fire romerske pastaretter</strong>. Begge er vist nedenfor.</p>
+
+  <!-- INGREDIENSER -->
+  <div class="cat-divider"><span>Pastaspørgsmål Ingredienser</span></div>
+  <p class="note">Alle spørgsmål er Ja/Nej. Det rigtige svar er altid Nej. Svarteksten vises kun ved forkert svar — ikke ved korrekt.</p>
+
+  <!-- Q1 -->
+  <div class="q-card">
+    <div class="q-card-header">
+      <span class="q-number">Spørgsmål 1</span>
+      <span class="q-category-badge">Pasta · Ingredienser</span>
+      <span class="q-type-note">Ja/Nej</span>
+    </div>
+    <div class="q-card-body">
+      <div class="q-text">Skal der fløde i cabonara?</div>
+      <div class="options-grid">
+        <div class="option wrong"><span class="option-icon">✗</span>Ja<span class="option-label">Forkert</span></div>
+        <div class="option correct"><span class="option-icon">✓</span>Nej<span class="option-label">Korrekt</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Nej selvfølgelig skal der ikke fløde i cabonara, men der findes mange andre lækre pastaretter med fløde i fx Tagliatelle al salmone e panna</div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card">
+    <div class="q-card-header">
+      <span class="q-number">Spørgsmål 2</span>
+      <span class="q-category-badge">Pasta · Ingredienser</span>
+      <span class="q-type-note">Ja/Nej</span>
+    </div>
+    <div class="q-card-body">
+      <div class="q-text">Skal der ærter i cabonara?</div>
+      <div class="options-grid">
+        <div class="option wrong"><span class="option-icon">✗</span>Ja<span class="option-label">Forkert</span></div>
+        <div class="option correct"><span class="option-icon">✓</span>Nej<span class="option-label">Korrekt</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Nej selvfølgelig skal der ikke ærter i cabonara, men der findes mange andre lækre pastaretter med ærter i fx Pasta e piselli alla Napolitana</div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card">
+    <div class="q-card-header">
+      <span class="q-number">Spørgsmål 3</span>
+      <span class="q-category-badge">Pasta · Ingredienser</span>
+      <span class="q-type-note">Ja/Nej</span>
+    </div>
+    <div class="q-card-body">
+      <div class="q-text">Skal der persille på cabonara?</div>
+      <div class="options-grid">
+        <div class="option wrong"><span class="option-icon">✗</span>Ja<span class="option-label">Forkert</span></div>
+        <div class="option correct"><span class="option-icon">✓</span>Nej<span class="option-label">Korrekt</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Nej selvfølgelig skal der ikke persille på cabonara, men hvis du absolut skal drysse persille ud over din pasta vil jeg anbefale at gøre det over en lækker omgang aglio, olio e peperoncino.</div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card">
+    <div class="q-card-header">
+      <span class="q-number">Spørgsmål 4</span>
+      <span class="q-category-badge">Pasta · Ingredienser</span>
+      <span class="q-type-note">Ja/Nej</span>
+    </div>
+    <div class="q-card-body">
+      <div class="q-text">Skal der panchetta i cabonara?</div>
+      <div class="options-grid">
+        <div class="option wrong"><span class="option-icon">✗</span>Ja<span class="option-label">Forkert</span></div>
+        <div class="option correct"><span class="option-icon">✓</span>Nej<span class="option-label">Korrekt</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Nej det skal der ikke, men det kan gå an, hvis du ikke kan finde guanciale.</div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card">
+    <div class="q-card-header">
+      <span class="q-number">Spørgsmål 5</span>
+      <span class="q-category-badge">Pasta · Ingredienser</span>
+      <span class="q-type-note">Ja/Nej</span>
+    </div>
+    <div class="q-card-body">
+      <div class="q-text">Skal der bacon i cabornara?</div>
+      <div class="options-grid">
+        <div class="option wrong"><span class="option-icon">✗</span>Ja<span class="option-label">Forkert</span></div>
+        <div class="option correct"><span class="option-icon">✓</span>Nej<span class="option-label">Korrekt</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Nej det skal der ikke, men hvis det kan gå an i aller yderste nødstilfælde, hvis du ikke kan finde panchetta eller guanciale.</div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card">
+    <div class="q-card-header">
+      <span class="q-number">Spørgsmål 6</span>
+      <span class="q-category-badge">Pasta · Ingredienser</span>
+      <span class="q-type-note">Ja/Nej</span>
+    </div>
+    <div class="q-card-body">
+      <div class="q-text">Skal der hvidløg i amatriciana?</div>
+      <div class="options-grid">
+        <div class="option wrong"><span class="option-icon">✗</span>Ja<span class="option-label">Forkert</span></div>
+        <div class="option correct"><span class="option-icon">✓</span>Nej<span class="option-label">Korrekt</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Nej det skal der ikke, med mindre du sætte al din ære og integritet over styr og starte en national shit storm, som ender med, at Amatrices borgermester sender dig en skrivelse med den rigtige opskrift. Og nej ærligt Amatrice har været nok igennem siden jordskælvet.</div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card">
+    <div class="q-card-header">
+      <span class="q-number">Spørgsmål 7</span>
+      <span class="q-category-badge">Pasta · Ingredienser</span>
+      <span class="q-type-note">Ja/Nej</span>
+    </div>
+    <div class="q-card-body">
+      <div class="q-text">Kan man bruge spaghetti til amatriciana?</div>
+      <div class="options-grid">
+        <div class="option wrong"><span class="option-icon">✗</span>Ja<span class="option-label">Forkert</span></div>
+        <div class="option correct"><span class="option-icon">✓</span>Nej<span class="option-label">Korrekt</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Nej det skal man ikke, men det kan gå an, hvis du ikke har bugatini</div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card">
+    <div class="q-card-header">
+      <span class="q-number">Spørgsmål 8</span>
+      <span class="q-category-badge">Pasta · Ingredienser</span>
+      <span class="q-type-note">Ja/Nej</span>
+    </div>
+    <div class="q-card-body">
+      <div class="q-text">Kan man bruge tagliatelle til carbonara?</div>
+      <div class="options-grid">
+        <div class="option wrong"><span class="option-icon">✗</span>Ja<span class="option-label">Forkert</span></div>
+        <div class="option correct"><span class="option-icon">✓</span>Nej<span class="option-label">Korrekt</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Nej det kan man ikke, og det giver slet ikke mening at bruge en bløg æggebaseret pastatype til en blød æggebaseret pastasauce.</div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card">
+    <div class="q-card-header">
+      <span class="q-number">Spørgsmål 9</span>
+      <span class="q-category-badge">Pasta · Ingredienser</span>
+      <span class="q-type-note">Ja/Nej</span>
+    </div>
+    <div class="q-card-body">
+      <div class="q-text">Består en bolognese af løg, hvidløg og oksekød?</div>
+      <div class="options-grid">
+        <div class="option wrong"><span class="option-icon">✗</span>Ja<span class="option-label">Forkert</span></div>
+        <div class="option correct"><span class="option-icon">✓</span>Nej<span class="option-label">Korrekt</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Nej det gør det ikke, og der burde blive rejst en rigsretssag mod Mette Frederiksen for at være så skråsikker over opskriften.</div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card">
+    <div class="q-card-header">
+      <span class="q-number">Spørgsmål 10</span>
+      <span class="q-category-badge">Pasta · Ingredienser</span>
+      <span class="q-type-note">Ja/Nej</span>
+    </div>
+    <div class="q-card-body">
+      <div class="q-text">Skal der kulør i en bolognese?</div>
+      <div class="options-grid">
+        <div class="option wrong"><span class="option-icon">✗</span>Ja<span class="option-label">Forkert</span></div>
+        <div class="option correct"><span class="option-icon">✓</span>Nej<span class="option-label">Korrekt</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Nej for så bliver det en kødsovs, og det er en helt anden ret.</div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="q-card">
+    <div class="q-card-header">
+      <span class="q-number">Spørgsmål 11</span>
+      <span class="q-category-badge">Pasta · Ingredienser</span>
+      <span class="q-type-note">Ja/Nej</span>
+    </div>
+    <div class="q-card-body">
+      <div class="q-text">Skal der cocktailpølser i en bolognese?</div>
+      <div class="options-grid">
+        <div class="option wrong"><span class="option-icon">✗</span>Ja<span class="option-label">Forkert</span></div>
+        <div class="option correct"><span class="option-icon">✓</span>Nej<span class="option-label">Korrekt</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Nej!</div>
+    </div>
+  </div>
+
+  <!-- DE FIRE ROMERSKE -->
+  <div class="cat-divider"><span>De fire romerske pastaretter</span></div>
+  <p class="note">Viser 4 muligheder: 3 tilfældige af de 4 romerske pastaer (forkert — de hører til!) + 1 tilfældig ikke-romersk pasta (korrekt — den hører ikke til). Svarteksten vises altid uanset om svaret er korrekt eller næsten.</p>
+
+  <div class="q-card">
+    <div class="q-card-header">
+      <span class="q-number">Spørgsmål</span>
+      <span class="q-category-badge">Pasta · De fire romerske</span>
+      <span class="q-type-note">4 valgmuligheder</span>
+    </div>
+    <div class="q-card-body">
+      <div class="q-text">Hvilken af disse fire pastaretter hører ikke til blandt de fire klassiske pastaretter?</div>
+
+      <p style="font-size:0.8rem;color:var(--faded);font-style:italic;margin-bottom:0.75rem">De fire klassiske (3 af disse vises som muligheder — de er FORKERT at vælge, da de hører til):</p>
+      <div class="options-grid" style="margin-bottom:1rem">
+        <div class="option nearmiss"><span class="option-icon">~</span>Carbonara<span class="option-label">Næsten — hører faktisk til</span></div>
+        <div class="option nearmiss"><span class="option-icon">~</span>Gricia<span class="option-label">Næsten — hører faktisk til</span></div>
+        <div class="option nearmiss"><span class="option-icon">~</span>Cacio e pepe<span class="option-label">Næsten — hører faktisk til</span></div>
+        <div class="option nearmiss"><span class="option-icon">~</span>Amatriciana<span class="option-label">Næsten — hører faktisk til</span></div>
+      </div>
+
+      <p style="font-size:0.8rem;color:var(--faded);font-style:italic;margin-bottom:0.5rem">Feedback ved næsten-svar (en tilfældig af disse fire vises ikke og bruges som tilhørende svartekst for de tre der vises):</p>
+      <div class="feedback-preview fb-nearmiss" style="margin-bottom:0.75rem">Evviva! / Dai! / Grande! / Forza! — én af disse vises tilfældigt</div>
+
+      <p style="font-size:0.8rem;color:var(--faded);font-style:italic;margin-bottom:0.75rem">1 tilfældig ikke-romersk pasta vises som den korrekte mulighed:</p>
+
+      <div class="q-card" style="border:none;border-left:3px solid var(--gold);margin-bottom:0">
+        <div class="q-card-body" style="padding:0.75rem">
+          <table style="width:100%;border-collapse:collapse;font-size:0.88rem">
+            <thead>
+              <tr style="background:var(--parchment)">
+                <th style="padding:0.4rem 0.6rem;text-align:left;border:1px solid var(--border);font-weight:600">Korrekt svar (ikke-romersk)</th>
+                <th style="padding:0.4rem 0.6rem;text-align:left;border:1px solid var(--border);font-weight:600">Svartekst ved korrekt valg</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:0.4rem 0.6rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Pasta alla Zozzona</td><td style="padding:0.4rem 0.6rem;border:1px solid var(--border)">Nej, men den er fra Rom, så prøv den, hvis du er meget sulten og klar på en kamp for at spise op.</td></tr>
+              <tr><td style="padding:0.4rem 0.6rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Rigatoni con la Pajata</td><td style="padding:0.4rem 0.6rem;border:1px solid var(--border)">Nej, men den er fra Rom, så prøv den hvis du gerne vil bryde en mental barierer</td></tr>
+              <tr><td style="padding:0.4rem 0.6rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Penne all'Arabiata</td><td style="padding:0.4rem 0.6rem;border:1px solid var(--border)">Nej, men den er fra Rom, så prøv den, hvis du gerne vil have lidt varme i varmen.</td></tr>
+              <tr><td style="padding:0.4rem 0.6rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Tagliatelle al Ragu Bolognese</td><td style="padding:0.4rem 0.6rem;border:1px solid var(--border)">Nej og som navnet afslører er den fra Bologna. Så prøv den i Bologna, hvor du ikke behøves at sige bolognese.</td></tr>
+              <tr><td style="padding:0.4rem 0.6rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Lasange alla Bolognese</td><td style="padding:0.4rem 0.6rem;border:1px solid var(--border)">Nej og som navnet afslører er den fra Bologna. Så prøv den i Bologna, hvor du ikke behøves at sige bolognese.</td></tr>
+              <tr><td style="padding:0.4rem 0.6rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Trofie al Pesto Genovese</td><td style="padding:0.4rem 0.6rem;border:1px solid var(--border)">Nej og som navnet afslører er den fra Genoa. Så prøv den i Genoa, hvor du ikke behøves at sige genovese.</td></tr>
+              <tr><td style="padding:0.4rem 0.6rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Spaghetti alle Vongole</td><td style="padding:0.4rem 0.6rem;border:1px solid var(--border)">Nej, men det er en lækker ret så prøv den, hvis du er tæt på Napoli eller havet.</td></tr>
+              <tr><td style="padding:0.4rem 0.6rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Spaghetti alla Putanesca</td><td style="padding:0.4rem 0.6rem;border:1px solid var(--border)">Nej, men det er en lækker ret så prøv den, hvis du er tæt på Napoli.</td></tr>
+              <tr><td style="padding:0.4rem 0.6rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Pasta alla Norma</td><td style="padding:0.4rem 0.6rem;border:1px solid var(--border)">Nej, men det er en lækker ret så prøv den, hvis du er på Sicilien.</td></tr>
+              <tr><td style="padding:0.4rem 0.6rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Fettuchini Alfredo</td><td style="padding:0.4rem 0.6rem;border:1px solid var(--border)">Nej, det er en eller anden americansk bastard.</td></tr>
+              <tr><td style="padding:0.4rem 0.6rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Pasta alla Trapanese</td><td style="padding:0.4rem 0.6rem;border:1px solid var(--border)">Nej og som navnet afslører er den fra Trapani. Så prøv den i Trapani.</td></tr>
+              <tr><td style="padding:0.4rem 0.6rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Ziti alla Genovese</td><td style="padding:0.4rem 0.6rem;border:1px solid var(--border)">Nej og lad dig ikke nare af navnet. Den er ikke som navnet indikerer fra Genoa, men faktisk fra Napoli, så prøv den der.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     FODBOLD
+══════════════════════════ -->
+<div class="section" id="fodbold">
+  <div class="section-label">Kategori 2 — Tæller IKKE mod adgang</div>
+  <h2>⚽ Fodbold</h2>
+  <p class="note">Ét spørgsmål vælges tilfældigt fra enten <strong>Hvor var Joe</strong> eller <strong>Roma Legender</strong>. Fodboldspørgsmålet tæller ikke mod adgang — svaret ignoreres stille, og quizzen fortsætter.</p>
+
+  <div class="cat-divider"><span>Hvor var Joe</span></div>
+  <p class="note">2 svarmuligheder. Resultatet ignoreres — ingen svartekst, ingen farvemarkering af forkert. Quizzen fortsætter uanset svar.</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:0.88rem;margin-bottom:1.5rem">
+    <thead>
+      <tr style="background:var(--parchment)">
+        <th style="padding:0.5rem 0.75rem;text-align:left;border:1px solid var(--border)">Spørgsmål</th>
+        <th style="padding:0.5rem 0.75rem;text-align:left;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Rigtigt svar</th>
+        <th style="padding:0.5rem 0.75rem;text-align:left;border:1px solid var(--border)">Andet svar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Italien vandt VM i 2006?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">På en tilfældig bar i Silkeborg</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Sammen med sin far og andre tilfældige italienere</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Totti scorede på et straffespark i det sidste minut i ottendedelsfinalen mod Australien ved VM 2006?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Omringet af australiere ved skatescenen på Roskilde Festival</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">I sin lejlighed på Islandsbrygge med gymnasievennerne</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Danmark slog Holland på straffe i EM-semifinalen i 1992?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">I lejligheden på Niels Ebbesensvej...</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">På spejderlejr</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Roma slog Silkeborg i UEFA Cuppen i 1998?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">På Silkeborg Stadion</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hjemme hos forældrene...</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Roma vandt Serie A i 2000/2001?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">På en tilfældig bar i Ostia</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">På det Olympiske Stadion i Rom</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Roma vandt Conference League i 2021/2022?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">På Léanowski</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">På det Olympiske Stadion i Rom</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Roma tabte Europa League-finalen i 2022/2023?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">På Léanowski</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">På Torvet</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Italien vandt EM i 2020 (afholdt 2021)?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">På Torvet</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">På Pizzeria La Fioritta...</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Italien tabte EM-finalen i 2000?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">I Islamabad med en masse tilfældige piloter</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">På karatelejr</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Italien tabte EM-finalen i 2012?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">På Pizzeria La Fioritta...</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">På Roskilde Festival</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Italien tabte VM-finalen i 1994?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">I seng</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Sammen med familien på Frederiksberg</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Danmark røg ud til England efter et skandaløst straffespark til EM i 2020 (afholdt 2021)?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">I sommerhus med gode venner</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Til storskærmsarrangement på Ofelia Plads</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvor var Joe, da Italien røg ud til Sydkorea ved VM i 2002 efter en skandaløs dommeroptræden?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">På café Bankerot</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">I skole</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cat-divider"><span>Roma Legender</span></div>
+  <p class="note">4 svarmuligheder: det rigtige svar vises altid + 3 tilfældige fra puljen. Svartekst vises ikke (ingen svartekst defineret). Tæller heller ikke mod adgang.</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:0.88rem">
+    <thead>
+      <tr style="background:var(--parchment)">
+        <th style="padding:0.5rem 0.75rem;text-align:left;border:1px solid var(--border)">Spørgsmål</th>
+        <th style="padding:0.5rem 0.75rem;text-align:left;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Korrekt svar</th>
+        <th style="padding:0.5rem 0.75rem;text-align:left;border:1px solid var(--border)">Pulje af forkerte muligheder</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvilken en af disse Roma legender er ikke født i Rom?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Conti</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Totti, De Rossi, Giannini, Florenzi, Pellegrini, Di Bartolomei</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvilket kælenavn havde den brasilianske forsvarsspiller Aldair?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Pluto</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Topolino (Mickey Mouse), Pippo (Fedtmule), Paperino (Anders And)</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvilken en af disse Roma anfører har ikke vundet et trofæ med det Italienske landshold?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Pellegrini</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Totti, De Rossi, Florenzi</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvilken en af disse Roma legender havde kælenavnet Il Principe?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Giannini</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Totti, De Rossi, Conti, Florenzi, Pellegrini, Di Bartolomei</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvilken en af disse Roma legender har ikke spillet for det italienske landshold?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Di Bartolomei</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Totti, De Rossi, Giannini, Conti, Florenzi, Pellegrini</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvilken en af disse Roma legender havde kælenavnet Capitan Futuro?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">De Rossi</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Totti, Giannini, Conti, Florenzi, Pellegrini, Di Bartolomei</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvilken en af disse Roma legender havde kælenavnet Er Pupone?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Totti</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">De Rossi, Giannini, Conti, Florenzi, Pellegrini, Di Bartolomei</td></tr>
+      <tr><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">Hvilken en af disse Roma legender anses for at være Roms 8. konge?</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border);background:var(--correct-bg);color:var(--correct-text)">Totti</td><td style="padding:0.4rem 0.75rem;border:1px solid var(--border)">De Rossi, Giannini, Conti, Florenzi, Pellegrini, Di Bartolomei</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════
+     LA DOLCE VITA
+══════════════════════════ -->
+<div class="section" id="dolcevita">
+  <div class="section-label">Kategori 3 — Tæller mod adgang</div>
+  <h2>☀️ La Dolce Vita</h2>
+  <p class="note">Ét tilfældigt spørgsmål fra <strong>Kvalitet over kvantitet</strong>. Alle er 2-valgs spørgsmål. Svartekst vises kun ved forkert svar.</p>
+
+  <div class="q-card">
+    <div class="q-card-header"><span class="q-number">Spørgsmål 1</span><span class="q-category-badge">La Dolce Vita</span></div>
+    <div class="q-card-body">
+      <div class="q-text">Du har lyst til lidt vin. Hvad vælger du?</div>
+      <div class="options-grid">
+        <div class="option correct"><span class="option-icon">✓</span>En god flaske vin til 150 kr.<span class="option-label">Korrekt</span></div>
+        <div class="option wrong"><span class="option-icon">✗</span>To mindre gode flasker vin til 150 kr?<span class="option-label">Forkert</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Sæt nu kvalitet over kvantitet!</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-card-header"><span class="q-number">Spørgsmål 2</span><span class="q-category-badge">La Dolce Vita</span></div>
+    <div class="q-card-body">
+      <div class="q-text">Du har lyst til en rigtig kop kaffe. Hvad vælger du?</div>
+      <div class="options-grid">
+        <div class="option wrong"><span class="option-icon">✗</span>En americano<span class="option-label">Forkert</span></div>
+        <div class="option correct"><span class="option-icon">✓</span>En kopkaffe fra filterbryg eller stempekande<span class="option-label">Korrekt</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Americano er jo en udvandet espresso. Vælg derfor en kaffe der er brygget efter formålet.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-card-header"><span class="q-number">Spørgsmål 3</span><span class="q-category-badge">La Dolce Vita</span></div>
+    <div class="q-card-body">
+      <div class="q-text">Du skal have en italiensk is. Vil du have den i?</div>
+      <div class="options-grid">
+        <div class="option correct"><span class="option-icon">✓</span>Et bærer<span class="option-label">Korrekt</span></div>
+        <div class="option wrong"><span class="option-icon">✗</span>En vaffel<span class="option-label">Forkert</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">En vaffel kan gå an, men bærer er at foretrække</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-card-header"><span class="q-number">Spørgsmål 4</span><span class="q-category-badge">La Dolce Vita</span></div>
+    <div class="q-card-body">
+      <div class="q-text">Du skal købe olienolie. Hvad køber du?</div>
+      <div class="options-grid">
+        <div class="option correct"><span class="option-icon">✓</span>En rigtig god olien olie til salater og en mindre god til madlavning og marinader<span class="option-label">Korrekt</span></div>
+        <div class="option wrong"><span class="option-icon">✗</span>En ikke for dyr en, som man kan bruge til lidt af hvert<span class="option-label">Forkert</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Her taber du på alle fronter. Gå ikke på kompromis — køb efter formålet.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-card-header"><span class="q-number">Spørgsmål 5</span><span class="q-category-badge">La Dolce Vita</span></div>
+    <div class="q-card-body">
+      <div class="q-text">Du skal se Derby del Capitale. Hvem holder du med?</div>
+      <div class="options-grid">
+        <div class="option correct"><span class="option-icon">✓</span>Roma<span class="option-label">Korrekt</span></div>
+        <div class="option wrong"><span class="option-icon">✗</span>Lazio<span class="option-label">Forkert</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Er du dum eller hvad?</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-card-header"><span class="q-number">Spørgsmål 6</span><span class="q-category-badge">La Dolce Vita</span></div>
+    <div class="q-card-body">
+      <div class="q-text">Du skal købe ind til en pastaret. Hvilken type parmesanost vælger du?</div>
+      <div class="options-grid">
+        <div class="option correct"><span class="option-icon">✓</span>En blok parmesanost<span class="option-label">Korrekt</span></div>
+        <div class="option wrong"><span class="option-icon">✗</span>Revet parmesan i en pose<span class="option-label">Forkert</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Kan du vitterlig godt lide at spise lugten af bræk?</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-card-header"><span class="q-number">Spørgsmål 7</span><span class="q-category-badge">La Dolce Vita</span></div>
+    <div class="q-card-body">
+      <div class="q-text">Du skal handle ind. Hvad vælger du?</div>
+      <div class="options-grid">
+        <div class="option correct"><span class="option-icon">✓</span>At gå i et supermarkedet og vælge ud fra hvad der ser godt ud<span class="option-label">Korrekt</span></div>
+        <div class="option wrong"><span class="option-icon">✗</span>At bruge et online supermarked og vælge ud fra billederne<span class="option-label">Forkert</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Sæt nu lidt ære i hvad du indtager og vælg selv gode råvare. Mad holder dig i liv, så hvorfor skal det ikke være af højeste kvalitet.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-card-header"><span class="q-number">Spørgsmål 8</span><span class="q-category-badge">La Dolce Vita</span></div>
+    <div class="q-card-body">
+      <div class="q-text">Du er i Italien og skal have en kaffe. Stående ved baren eller siddende?</div>
+      <div class="options-grid">
+        <div class="option correct"><span class="option-icon">✓</span>Stående ved baren<span class="option-label">Korrekt</span></div>
+        <div class="option wrong"><span class="option-icon">✗</span>På et lille cafebord<span class="option-label">Forkert</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Nå men så du kan godt lide at betale overpris for at ligne en turist der ikke fatter en hat af livet</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-card-header"><span class="q-number">Spørgsmål 9</span><span class="q-category-badge">La Dolce Vita</span></div>
+    <div class="q-card-body">
+      <div class="q-text">Du skal have pizza. Hvor mange ingredienser skal der være på den?</div>
+      <div class="options-grid">
+        <div class="option correct"><span class="option-icon">✓</span>Maks fire - less is more!<span class="option-label">Korrekt</span></div>
+        <div class="option wrong"><span class="option-icon">✗</span>Over fire - jo flere jo bedre<span class="option-label">Forkert</span></div>
+      </div>
+      <span class="feedback-label">Svartekst ved forkert svar:</span>
+      <div class="feedback-preview fb-wrong">Lad du bare de enkelt råvare tale for dem selv. De kan bære det</div>
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center;color:var(--faded);font-style:italic;font-size:0.85rem;padding:2rem 0;border-top:1px solid var(--border);max-width:900px;margin:0 auto">
+  Korrekturlæsningsdokument for Joes Romguide · Hold dette dokument privat
+</div>
+
+</body>
+</html>
