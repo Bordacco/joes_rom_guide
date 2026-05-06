@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Joes Romguide — Adgangsprøve</title>
+<title>Joes Rom-guide — Adgangsprøve</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -463,7 +463,7 @@
 ══════════════════════════════════════════ -->
 <div class="stage active" id="stage-intro">
   <div class="ornament">✦ ✦ ✦</div>
-  <h1><em>Joes</em><br>Romguide</h1>
+  <h1><em>Joes</em><br>Rom-guide</h1>
   <div class="rule"><span>✦</span></div>
   <div class="card">
     <p class="intro-body" id="intro-text"></p>
@@ -544,30 +544,29 @@
 //  DATA FROM SPREADSHEETS
 // ══════════════════════════════════════════
 
-const INTRO_TEXT = "Inden du får adgang til Romguiden, skal du svare rigtigt på tre spørgsmål for at bevise din værdighed. Du vil blive quizzet i kategorierne pasta, fodbold og La Dolce Vita. Husk, at svarene testen er det tætteste, som subjektive holdninger kan komme på en objektiv sandhed.";
+const INTRO_TEXT = "Inden du får adgang til Rom-guiden, skal du svare rigtigt på tre spørgsmål for at bevise din værdighed. Du vil blive quizzet i kategorierne pasta, fodbold og La Dolce Vita. For at hjælpe dig lidt på vej får du denne ledetråd. Svarene er det tætteste, som subjektive holdninger kan komme på en objektiv sandhed. Med det i baghoved er du klar til at krydse Rubicon og vise din værdighed.";
 
-const SUCCESS_TEMPLATE = "Daje! [aktør] har fundet dig værdig. Du har nu adgang til Romguiden.";
-const FAIL_TEMPLATE = "[aktør] har talt, og du er ikke værdig til at få adgang til Romguiden. Du er derfor dømt til at vente [begivenhed], inden du kan prøve igen. Heldigvis er italienere ikke så gode til at overholde tiden, så du kan forsøge igen om lidt.";
+const SUCCESS_TEMPLATE = "Terningen er kastet og [aktør] har talt. Du har fundet dig værdig. Du har nu adgang til Rom-guiden.";
+const FAIL_TEMPLATE = "Terningen er kastet og [aktør] har talt. Du er ikke værdig til at få adgang til Rom-guiden. Du er derfor dømt til at vente [begivenhed], inden du kan prøve igen. Heldigvis er italienere ikke så gode til at overholde tiden, så du kan måske forsøge igen om lidt.";
 
-const AKTØRER = ["Konsulerne", "Det første Triumvirat", "Det andet Triumvirat", "Senatet", "Tribunalet", "Vestalinderne"];
+const AKTØRER = ["Konsulerne", "Det første Triumvirat", "Det andet Triumvirat", "Senatet", "Tribunalet", "Vestalinderne", "Prætorianergarden", "Pontifikalkollegiet", "Censorerne", "Ædilerne", "Augurerne"];
 const BEGIVENHEDER = [
   "til Italien kvalificerer sig til VM igen",
-  "lige så længe som det tager at få noget godkendt i det italienske bureaukrati",
-  "lige så længe som det tager få dig ud af en elevator som sidder fast i Italien",
-  "indtil Roma finder en værdig arvtager til 10 tallet på trøjen",
-  "til trafikken på Il raccordo er begynder at køre igen"
+  "lige så længe som det tager at få en godkendelse i det italienske bureaukrati",
+  "indtil Roma finder en værdig arvtager til 10-tallet",
+  "til trafikken på Il Raccordo begynder at køre igen"
 ];
 
 const PASTA_INGREDIENSER = [
-  { q: "Skal der fløde i cabonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej selvfølgelig skal der ikke fløde i cabonara, men der findes mange andre lækre pastaretter med fløde i fx Tagliatelle al salmone e panna" },
-  { q: "Skal der ærter i cabonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej selvfølgelig skal der ikke ærter i cabonara, men der findes mange andre lækre pastaretter med ærter i fx Pasta e piselli alla Napolitana" },
-  { q: "Skal der persille på cabonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej selvfølgelig skal der ikke persille på cabonara, men hvis du absolut skal drysse persille ud over din pasta vil jeg anbefale at gøre det over en lækker omgang aglio, olio e peperoncino." },
-  { q: "Skal der panchetta i cabonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det skal der ikke, men det kan gå an, hvis du ikke kan finde guanciale." },
-  { q: "Skal der bacon i cabornara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det skal der ikke, men hvis det kan gå an i aller yderste nødstilfælde, hvis du ikke kan finde panchetta eller guanciale." },
-  { q: "Skal der hvidløg i amatriciana?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det skal der ikke, med mindre du sætte al din ære og integritet over styr og starte en national shit storm, som ender med, at Amatrices borgermester sender dig en skrivelse med den rigtige opskrift. Og nej ærligt Amatrice har været nok igennem siden jordskælvet." },
-  { q: "Kan man bruge spaghetti til amatriciana?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det skal man ikke, men det kan gå an, hvis du ikke har bugatini" },
-  { q: "Kan man bruge tagliatelle til carbonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det kan man ikke, og det giver slet ikke mening at bruge en bløg æggebaseret pastatype til en blød æggebaseret pastasauce." },
-  { q: "Består en bolognese af løg, hvidløg og oksekød?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det gør det ikke, og der burde blive rejst en rigsretssag mod Mette Frederiksen for at være så skråsikker over opskriften." },
+  { q: "Skal der fløde i carbonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej selvfølgelig skal der ikke fløde i carbonara, men der findes mange andre lækre pastaretter med fløde i fx Tagliatelle al salmone e panna." },
+  { q: "Skal der ærter i carbonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej selvfølgelig skal der ikke ærter i carbonara, men der findes mange andre lækre pastaretter med ærter i fx Pasta e piselli alla Napolitana." },
+  { q: "Skal der persille på carbonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej selvfølgelig skal der ikke persille på carbonara, men hvis du insisterer på at drysse persille ud over din pasta, så vil jeg anbefale at gøre det over en lækker omgang aglio, olio e peperoncino." },
+  { q: "Skal der pancetta i carbonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det skal der ikke, men det kan gå an, hvis du ikke kan finde guanciale." },
+  { q: "Skal der bacon i carbonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det skal der ikke, men det kan gå an i yderste nødstilfælde, hvis du hverken kan finde pancetta eller guanciale." },
+  { q: "Skal der hvidløg i amatriciana?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det skal der ikke... med mindre du vil sætte al din ære og integritet over styr og starte en national shit storm, som ender med, at Amatrices borgermester sender dig en skrivelse med den rigtige opskrift... og helt ærligt, så Amatrice har været nok igennem siden jordskælvet." },
+  { q: "Kan man bruge spaghetti til amatriciana?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det skal man ikke, men det kan gå an, hvis du ikke har bucatini." },
+  { q: "Kan man bruge tagliatelle til carbonara?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det kan man ikke, for det giver slet ikke mening at bruge en blød æggebaseret pastatype til en blød æggebaseret pastasauce." },
+  { q: "Består en bolognese kun af tomat, løg, hvidløg og oksekød?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej det gør det ikke, og i øvrigt mener jeg, at der burde blive rejst en rigsretssag mod Mette Frederiksen for at være så skråsikker og påstå det." },
   { q: "Skal der kulør i en bolognese?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej for så bliver det en kødsovs, og det er en helt anden ret." },
   { q: "Skal der cocktailpølser i en bolognese?", a1: "Ja", a2: "Nej", correct: "Nej", svarTekst: "Nej!" },
 ];
@@ -583,25 +582,25 @@ const PASTA_FIRE = {
   q: "Hvilken af disse fire pastaretter hører ikke til blandt de fire klassiske pastaretter?",
   // Roman pastas — wrong answers to the question, with near-miss feedback
   romanPastas: [
-    { text: "Carbonara",    svar: "Evviva!" },
-    { text: "Gricia",       svar: "Dai!" },
-    { text: "Cacio e pepe", svar: "Grande!" },
-    { text: "Amatriciana",  svar: "Forza!" },
+    { text: "Carbonara",    svar: "Evviva! Du valgte en af de fire klassiske romerske pastaretter, men det var ikke det rigtige svar på spørgsmålet. Din straf er at trøstespise en god omgang carbonara, når du er i Rom." },
+    { text: "Gricia",       svar: "Dai! Du valgte en af de fire klassiske romerske pastaretter, men det var ikke det rigtige svar på spørgsmålet. Din straf er at trøstespise en god omgang gricia, når du er i Rom." },
+    { text: "Cacio e pepe", svar: "Grande! Du valgte en af de fire klassiske romerske pastaretter, men det var ikke det rigtige svar på spørgsmålet. Din straf er at trøstespise en god omgang cacio e pepe, når du er i Rom." },
+    { text: "Amatriciana",  svar: "Forza! Du valgte en af de fire klassiske romerske pastaretter, men det var ikke det rigtige svar på spørgsmålet. Din straf er at trøstespise en god omgang amatriciana, når du er i Rom." },
   ],
   // Non-Roman pastas — these ARE the correct answer, each with its own feedback
   nonRomanPastas: [
-    { text: "Pasta alla Zozzona",           svar: "Nej, men den er fra Rom, så prøv den, hvis du er meget sulten og klar på en kamp for at spise op." },
-    { text: "Rigatoni con la Pajata",        svar: "Nej, men den er fra Rom, så prøv den hvis du gerne vil bryde en mental barierer" },
-    { text: "Penne all'Arabiata",            svar: "Nej, men den er fra Rom, så prøv den, hvis du gerne vil have lidt varme i varmen." },
-    { text: "Tagliatelle al Ragu Bolognese", svar: "Nej og som navnet afslører er den fra Bologna. Så prøv den i Bologna, hvor du ikke behøves at sige bolognese." },
-    { text: "Lasange alla Bolognese",        svar: "Nej og som navnet afslører er den fra Bologna. Så prøv den i Bologna, hvor du ikke behøves at sige bolognese." },
-    { text: "Trofie al Pesto Genovese",      svar: "Nej og som navnet afslører er den fra Genoa. Så prøv den i Genoa, hvor du ikke behøves at sige genovese." },
-    { text: "Spaghetti alle Vongole",        svar: "Nej, men det er en lækker ret så prøv den, hvis du er tæt på Napoli eller havet." },
-    { text: "Spaghetti alla Putanesca",      svar: "Nej, men det er en lækker ret så prøv den, hvis du er tæt på Napoli." },
-    { text: "Pasta alla Norma",              svar: "Nej, men det er en lækker ret så prøv den, hvis du er på Sicilien." },
-    { text: "Fettuchini Alfredo",            svar: "Nej, det er en eller anden americansk bastard." },
-    { text: "Pasta alla Trapanese",          svar: "Nej og som navnet afslører er den fra Trapani. Så prøv den i Trapani." },
-    { text: "Ziti alla Genovese",            svar: "Nej og lad dig ikke nare af navnet. Den er ikke som navnet indikerer fra Genoa, men faktisk fra Napoli, så prøv den der." },
+    { text: "Pasta alla Zozzona",           svar: "Korrekt, men den er fra Rom, så prøv den, hvis du er meget sulten og klar til en kamp for at spise op." },
+    { text: "Rigatoni con la Pajata",        svar: "Korrekt, men den er fra Rom, så prøv den hvis du gerne vil bryde en mental barriere." },
+    { text: "Penne all'Arabiata",            svar: "Korrekt, men den er fra Rom, så prøv den, hvis du gerne vil have lidt varme i varmen." },
+    { text: "Tagliatelle al Ragu Bolognese", svar: "Korrekt og som navnet afslører er den fra Bologna. Så prøv den i Bologna, hvor du ikke behøver at sige bolognese." },
+    { text: "Lasagne alla Bolognese",        svar: "Korrekt og som navnet afslører er den fra Bologna. Så prøv den i Bologna, hvor du ikke behøver at sige bolognese." },
+    { text: "Trofie al Pesto Genovese",      svar: "Korrekt og som navnet afslører er den fra Genoa. Så prøv den i Genoa, hvor du ikke behøver at sige genovese." },
+    { text: "Spaghetti alle Vongole",        svar: "Korrekt, men det er en lækker ret så prøv den, hvis du er tæt på Napoli eller havet." },
+    { text: "Spaghetti alla Putanesca",      svar: "Korrekt, men det er en lækker ret så prøv den, hvis du er tæt på Napoli." },
+    { text: "Pasta alla Norma",              svar: "Korrekt, men det er en lækker ret så prøv den, hvis du er på Sicilien." },
+    { text: "Fettuchini Alfredo",            svar: "Korrekt, det er en eller anden americansk bastard." },
+    { text: "Pasta alla Trapanese",          svar: "Korrekt og som navnet afslører er den fra Trapani. Så prøv den i Trapani." },
+    { text: "Ziti alla Genovese",            svar: "Korrekt og lad dig ikke nare af navnet. Den er ikke som navnet indikerer fra Genoa, men faktisk fra Napoli, så prøv den der." },
   ]
 };
 
@@ -610,14 +609,14 @@ const PASTA_FIRE = {
 const HVOR_VAR_JOE = [
   { q: "Hvor var Joe, da Italien vandt VM i 2006?", a1: "På en tilfældig bar i Silkeborg", a2: "Sammen med sin far og andre tilfældige italienere", correct: "På en tilfældig bar i Silkeborg" },
   { q: "Hvor var Joe, da Totti scorede på et straffespark i det sidste minut i ottendedelsfinalen mod Australien ved VM 2006?", a1: "Omringet af australiere ved skatescenen på Roskilde Festival", a2: "I sin lejlighed på Islandsbrygge med gymnasievennerne", correct: "Omringet af australiere ved skatescenen på Roskilde Festival" },
-  { q: "Hvor var Joe, da Danmark slog Holland på straffe i EM-semifinalen i 1992?", a1: "I lejligheden på Niels Ebbesensvej, hvor den hollandske gæst Kyhn fik et astmaanfald, da Van Basten brændte straffesparket.", a2: "På spejderlejr", correct: "I lejligheden på Niels Ebbesensvej, hvor den hollandske gæst Kyhn fik et astmaanfald, da Van Basten brændte straffesparket." },
+  { q: "Hvor var Joe, da Danmark slog Holland på straffe i EM-semifinalen i 1992?", a1: "I lejligheden på Frederiksberg, hvor den hollandske gæst Kyhn fik et astmaanfald, da Van Basten brændte straffe.", a2: "På spejderlejr", correct: "I lejligheden på Frederiksberg, hvor den hollandske gæst Kyhn fik et astmaanfald, da Van Basten brændte straffe." },
   { q: "Hvor var Joe, da Roma slog Silkeborg i UEFA Cuppen i 1998?", a1: "På Silkeborg Stadion", a2: "Hjemme hos forældrene, fordi skolen ikke ville give fri, så han kunne nå fra Frederiksberg til Silkeborg inden kampstart", correct: "På Silkeborg Stadion" },
   { q: "Hvor var Joe, da Roma vandt Serie A i 2000/2001?", a1: "På en tilfældig bar i Ostia", a2: "På det Olympiske Stadion i Rom", correct: "På en tilfældig bar i Ostia" },
   { q: "Hvor var Joe, da Roma vandt Conference League i 2021/2022?", a1: "På Léanowski", a2: "På det Olympiske Stadion i Rom", correct: "På Léanowski" },
   { q: "Hvor var Joe, da Roma tabte Europa League-finalen i 2022/2023?", a1: "På Léanowski", a2: "På Torvet", correct: "På Léanowski" },
-  { q: "Hvor var Joe, da Italien vandt EM i 2020 (afholdt 2021)?", a1: "På Torvet", a2: "På Pizzeria La Fioritta med hans far og en masse tilfældige italienere", correct: "På Torvet" },
+  { q: "Hvor var Joe, da Italien vandt EM i 2020 (afholdt 2021)?", a1: "På Torvet", a2: "På Pizzeria La Fioritta med en masse tilfældige italienere", correct: "På Torvet" },
   { q: "Hvor var Joe, da Italien tabte EM-finalen i 2000?", a1: "I Islamabad med en masse tilfældige piloter", a2: "På karatelejr", correct: "I Islamabad med en masse tilfældige piloter" },
-  { q: "Hvor var Joe, da Italien tabte EM-finalen i 2012?", a1: "På Pizzeria La Fioritta med hans far og en masse tilfældige italienere", a2: "På Roskilde Festival", correct: "På Pizzeria La Fioritta med hans far og en masse tilfældige italienere" },
+  { q: "Hvor var Joe, da Italien tabte EM-finalen i 2012?", a1: "På Pizzeria La Fioritta med en masse tilfældige italienere", a2: "På Roskilde Festival", correct: "På Pizzeria La Fioritta med en masse tilfældige italienere" },
   { q: "Hvor var Joe, da Italien tabte VM-finalen i 1994?", a1: "I seng", a2: "Sammen med familien på Frederiksberg", correct: "I seng" },
   { q: "Hvor var Joe, da Danmark røg ud til England efter et skandaløst straffespark til EM i 2020 (afholdt 2021)?", a1: "I sommerhus med gode venner", a2: "Til storskærmsarrangement på Ofelia Plads", correct: "I sommerhus med gode venner" },
   { q: "Hvor var Joe, da Italien røg ud til Sydkorea ved VM i 2002 efter en skandaløs dommeroptræden?", a1: "På café Bankerot", a2: "I skole", correct: "På café Bankerot" },
@@ -626,27 +625,27 @@ const HVOR_VAR_JOE = [
 // ── FOOTBALL: Roma Legender (gid=372313112) ──
 // 4 options: random 3 from pool + correct answer always included
 const ROMA_LEGENDER = [
-  { q: "Hvilken en af disse Roma legender er ikke født i Rom", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Conti" },
-  { q: "Hvilket kælenavn havde den brasilianske forsvarsspiller Aldair", pool: ["Pluto","Topolino (Mickey Mouse)","Pippo (Fedtmule)","Paperino (Anders And)"], correct: "Pluto" },
-  { q: "Hvilken en af disse Roma anfører har ikke vundet et trofæ med det Italienske landshold?", pool: ["Totti","De Rossi","Florenzi","Pellegrini"], correct: "Pellegrini" },
-  { q: "Hvilken en af disse Roma legender havde kælenavnet Il Principe?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Giannini" },
-  { q: "Hvilken en af disse Roma legender har ikke spillet for det italienske landshold?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Di Bartolomei" },
-  { q: "Hvilken en af disse Roma legender havde kælenavnet Capitan Futuro?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "De Rossi" },
-  { q: "Hvilken en af disse Roma legender havde kælenavnet Er Pupone?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Totti" },
-  { q: "Hvilken en af disse Roma legender anses for at være Roms 8. konge?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Totti" },
+  { q: "Hvilken af disse Romalegender er ikke født i Rom", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Conti" },
+  { q: "Hvilket kælenavn havde den brasilianske forsvarsspiller Aldair", pool: ["Pluto","Pippo","Paperino","Pipetto"], correct: "Pluto" },
+  { q: "Hvilken af disse Roma anfører har ikke vundet et trofæ med det Italienske landshold?", pool: ["Totti","De Rossi","Florenzi","Pellegrini"], correct: "Pellegrini" },
+  { q: "Hvilken af disse Romalegender havde kælenavnet Il Principe?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Giannini" },
+  { q: "Hvilken af disse Romalegender har ikke spillet for det italienske landshold?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Di Bartolomei" },
+  { q: "Hvilken af disse Romalegender havde kælenavnet Capitan Futuro?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "De Rossi" },
+  { q: "Hvilken af disse Romalegender havde kælenavnet Er Pupone?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Totti" },
+  { q: "Hvilken af disse Romalegender anses for at være Roms 8. konge?", pool: ["Totti","De Rossi","Giannini","Conti","Florenzi","Pellegrini","Di Bartolomei"], correct: "Totti" },
 ];
 
 // ── LA DOLCE VITA: Kvalitet over kvantitet (gid=1050084139) ──
 const KVALITET = [
   { q: "Du har lyst til lidt vin. Hvad vælger du?", a1: "En god flaske vin til 150 kr.", a2: "To mindre gode flasker vin til 150 kr?", correct: "En god flaske vin til 150 kr.", svarTekst: "Sæt nu kvalitet over kvantitet!" },
-  { q: "Du har lyst til en rigtig kop kaffe. Hvad vælger du?", a1: "En americano", a2: "En kopkaffe fra filterbryg eller stempekande", correct: "En kopkaffe fra filterbryg eller stempekande", svarTekst: "Americano er jo en udvandet espresso. Vælg derfor en kaffe der er brygget efter formålet." },
-  { q: "Du skal have en italiensk is. Vil du have den i?", a1: "Et bærer", a2: "En vaffel", correct: "Et bærer", svarTekst: "En vaffel kan gå an, men bærer er at foretrække" },
-  { q: "Du skal købe olienolie. Hvad køber du?", a1: "En rigtig god olien olie til salater og en mindre god til madlavning og marinader", a2: "En ikke for dyr en, som man kan bruge til lidt af hvert", correct: "En rigtig god olien olie til salater og en mindre god til madlavning og marinader", svarTekst: "Her taber du på alle fronter. Gå ikke på kompromis — køb efter formålet." },
+  { q: "Du har lyst til en stor kop kaffe. Hvad vælger du?", a1: "En americano", a2: "En kop kaffe fra filterbryg eller stempelkande", correct: "En kop kaffe fra filterbryg eller stempelkande", svarTekst: "Americano er jo en udvandet espresso. Vælg derfor en kaffe der er brygget efter formålet." },
+  { q: "Du skal have en italiensk is. Vil du have den i?", a1: "Et bæger", a2: "En vaffel", correct: "Et bæger", svarTekst: "En vaffel kan gå an, men bæger er at foretrække" },
+  { q: "Du skal købe olivenolie. Hvad køber du?", a1: "En rigtig god olivenolie til salater og en mindre god til madlavning og marinader", a2: "En der ikke er for dyr, som man kan bruge til lidt af hvert", correct: "En rigtig god olivenolie til salater og en mindre god til madlavning og marinader", svarTekst: "Her taber du på alle fronter. Gå ikke på kompromis — køb efter formålet." },
   { q: "Du skal se Derby del Capitale. Hvem holder du med?", a1: "Roma", a2: "Lazio", correct: "Roma", svarTekst: "Er du dum eller hvad?" },
   { q: "Du skal købe ind til en pastaret. Hvilken type parmesanost vælger du?", a1: "En blok parmesanost", a2: "Revet parmesan i en pose", correct: "En blok parmesanost", svarTekst: "Kan du vitterlig godt lide at spise lugten af bræk?" },
-  { q: "Du skal handle ind. Hvad vælger du?", a1: "At gå i et supermarkedet og vælge ud fra hvad der ser godt ud", a2: "At bruge et online supermarked og vælge ud fra billederne", correct: "At gå i et supermarkedet og vælge ud fra hvad der ser godt ud", svarTekst: "Sæt nu lidt ære i hvad du indtager og vælg selv gode råvare. Mad holder dig i liv, så hvorfor skal det ikke være af højeste kvalitet." },
-  { q: "Du er i Italien og skal have en kaffe. Stående ved baren eller siddende?", a1: "Stående ved baren", a2: "På et lille cafebord", correct: "Stående ved baren", svarTekst: "Nå men så du kan godt lide at betale overpris for at ligne en turist der ikke fatter en hat af livet" },
-  { q: "Du skal have pizza. Hvor mange ingredienser skal der være på den?", a1: "Maks fire - less is more!", a2: "Over fire - jo flere jo bedre", correct: "Maks fire - less is more!", svarTekst: "Lad du bare de enkelt råvare tale for dem selv. De kan bære det" },
+  { q: "Du skal handle ind. Hvad vælger du?", a1: "At gå i et supermarked og vælge ud fra hvad der ser godt ud", a2: "At bruge et online supermarked og vælge ud fra billederne", correct: "At gå i et supermarked og vælge ud fra hvad der ser godt ud", svarTekst: "Sæt nu lidt ære i hvad du indtager og vælg selv gode råvarer. Mad holder dig i live, så hvorfor skal det ikke være af højeste kvalitet." },
+  { q: "Du er i Italien og skal have en kaffe. Hvor drikker du den?", a1: "Stående ved baren", a2: "På et lille cafebord", correct: "Stående ved baren", svarTekst: "Så du kan åbenbart godt lide at betale overpris for at ligne en turist der ikke fatter en hat af livet" },
+  { q: "Du skal have pizza. Hvor mange ingredienser skal der være på den?", a1: "Maks fire - less is more!", a2: "Over fire - jo flere jo bedre", correct: "Maks fire - less is more!", svarTekst: "Lad du bare de enkelte råvare tale for dem selv. De kan bære det." },
 ];
 
 // ══════════════════════════════════════════
@@ -835,19 +834,18 @@ function handleAnswer(optionIndex) {
   // Disable all buttons
   buttons.forEach(b => b.disabled = true);
 
-  // Fodbold (fun only): always continues, no reveal, no feedback
+  // Fodbold (fun only): show colour but never counts towards pass
   if (q.funOnly) {
+    buttons[optionIndex].classList.add(selected.isCorrect ? 'correct' : 'wrong');
     cont.className = 'continue-btn visible';
     return;
   }
 
   if (selected.isCorrect) {
-    // Correct — picked the non-Roman pasta
-    fb.className = 'feedback-box correct-fb visible';
+    buttons[optionIndex].classList.add('correct');
     if (q.type === 'fire') {
-      fb.textContent = selected.svar || "✓";
-    } else {
-      fb.textContent = "✓";
+      fb.className = 'feedback-box correct-fb visible';
+      fb.textContent = selected.svar || '';
     }
   } else {
     buttons[optionIndex].classList.add('wrong');
@@ -862,8 +860,10 @@ function handleAnswer(optionIndex) {
       isNearMiss = selected.isRoman === true;
     }
 
-    fb.className = `feedback-box ${isNearMiss ? 'nearmiss-fb' : 'wrong-fb'} visible`;
-    fb.textContent = svarTekst || '';
+    if (svarTekst) {
+      fb.className = `feedback-box ${isNearMiss ? 'nearmiss-fb' : 'wrong-fb'} visible`;
+      fb.textContent = svarTekst;
+    }
   }
 
   cont.className = 'continue-btn visible';
@@ -1009,7 +1009,10 @@ function startQuiz() {
 }
 
 // ── Init ──
-document.getElementById('intro-text').textContent = INTRO_TEXT;
+document.getElementById('intro-text').innerHTML =
+  'Inden du får adgang til Rom-guiden, skal du svare rigtigt på tre spørgsmål for at bevise din værdighed. Du vil blive quizzet i kategorierne pasta, fodbold og La Dolce Vita. For at hjælpe dig lidt på vej får du denne ledetråd:' +
+  '<br><br><em style="color:var(--terracotta);font-size:1.08em">Svarene er det tætteste, som subjektive holdninger kan komme på en objektiv sandhed.</em><br><br>' +
+  'Med det i baghoved er du klar til at krydse Rubicon og vise din værdighed.';
 </script>
 </body>
 </html>

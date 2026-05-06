@@ -1,0 +1,390 @@
+JOES ROMGUIDE — INDHOLD TIL GENNEMGANG
+========================================
+Rediger teksten herunder direkte i Notepad eller Word.
+Når du er færdig, gem filen og fortæl Claude — så opdaterer han HTML-filen.
+Ret kun selve teksten. Hold strukturen (fx "Spørgsmål:", "Korrekt svar:" osv.) intakt.
+========================================
+
+
+
+
+════════════════════════════════════════
+INTRO & OUTRO
+════════════════════════════════════════
+
+INTROTEKST (vises før testen):
+Inden du får adgang til Rom-guiden, skal du svare rigtigt på tre spørgsmål for at bevise din værdighed. Du vil blive quizzet i kategorierne pasta, fodbold og La Dolce Vita. For at hjælpe dig lidt på vej får du denne ledetråd. Svarene er det tætteste, som subjektive holdninger kan komme på en objektiv sandhed.
+Med det i baghoved er du klar til at krydse Rubicon og vise din værdighed. 
+
+---
+
+OUTROTEKST — ved rigtige svar (adgang givet):
+Daje! [aktør] har fundet dig værdig. Du har nu adgang til Rom-guiden.
+
+---
+
+OUTROTEKST — ved forkerte svar (adgang nægtet):
+[aktør] har talt, og du er ikke værdig til at få adgang til Rom-guiden. Du er derfor dømt til at vente [begivenhed], inden du kan prøve igen. Heldigvis er italienere ikke så gode til at overholde tiden, så du kan måske forsøge igen om lidt.
+
+---
+
+MULIGE VÆRDIER FOR [aktør] — vælges tilfældigt:
+- Konsulerne
+- Det første Triumvirat
+- Det andet Triumvirat
+- Senatet
+- Tribunalet
+- Vestalinderne
+- Prætorianergarden
+- Pontifikalkollegiet
+- Censorerne
+- Ædilerne 
+- Augurerne 
+  
+MULIGE VÆRDIER FOR [begivenhed] — vælges tilfældigt:
+- til Italien kvalificerer sig til VM igen
+- lige så længe som det tager at få en godkendelse i det italienske bureaukrati
+- indtil Roma finder en værdig arvtager til 10-tallet
+- til trafikken på Il Raccordo begynder at køre igen
+
+
+════════════════════════════════════════
+PASTA — INGREDIENSER
+(Ja/Nej spørgsmål — korrekt svar er altid Nej)
+(Svartekst vises KUN når brugeren svarer Ja)
+════════════════════════════════════════
+
+SPØRGSMÅL 1:
+Spørgsmål:              Skal der fløde i carbonara?
+Svartekst (forkert):    Nej selvfølgelig skal der ikke fløde i carbonara, men der findes mange andre lækre pastaretter med fløde i fx Tagliatelle al salmone e panna.
+
+---
+
+SPØRGSMÅL 2:
+Spørgsmål:              Skal der ærter i carbonara?
+Svartekst (forkert):    Nej selvfølgelig skal der ikke ærter i carbonara, men der findes mange andre lækre pastaretter med ærter i fx Pasta e piselli alla Napolitana.
+
+---
+
+SPØRGSMÅL 3:
+Spørgsmål:              Skal der persille på carbonara?
+Svartekst (forkert):    Nej selvfølgelig skal der ikke persille på carbonara, men hvis du insisterer på at drysse persille ud over din pasta, så vil jeg anbefale at gøre det over en lækker omgang aglio, olio e peperoncino.
+
+---
+
+SPØRGSMÅL 4:
+Spørgsmål:              Skal der pancetta i carbonara?
+Svartekst (forkert):    Nej det skal der ikke, men det kan gå an, hvis du ikke kan finde guanciale.
+
+---
+
+SPØRGSMÅL 5:
+Spørgsmål:              Skal der bacon i carbonara?
+Svartekst (forkert):    Nej det skal der ikke, men det kan gå an i yderste nødstilfælde, hvis du hverken kan finde pancetta eller guanciale.
+
+---
+
+SPØRGSMÅL 6:
+Spørgsmål:              Skal der hvidløg i amatriciana?
+Svartekst (forkert):    Nej det skal der ikke... med mindre du vil sætte al din ære og integritet over styr og starte en national shit storm, som ender med, at Amatrices borgermester sender dig en skrivelse med den rigtige opskrift... og helt ærligt, så Amatrice har været nok igennem siden jordskælvet.
+
+---
+
+SPØRGSMÅL 7:
+Spørgsmål:              Kan man bruge spaghetti til amatriciana?
+Svartekst (forkert):    Nej det skal man ikke, men det kan gå an, hvis du ikke har bucatini.
+
+---
+
+SPØRGSMÅL 8:
+Spørgsmål:              Kan man bruge tagliatelle til carbonara?
+Svartekst (forkert):    Nej det kan man ikke, for det giver slet ikke mening at bruge en blød æggebaseret pastatype til en blød æggebaseret pastasauce.
+
+---
+
+SPØRGSMÅL 9:
+Spørgsmål:              Består en bolognese af kun af tomat, løg, hvidløg og oksekød?
+Svartekst (forkert):    Nej det gør det ikke, og i øvrigt mener jeg, at der burde blive rejst en rigsretssag mod Mette Frederiksen for at være så skråsikker og påstå det.
+
+---
+
+SPØRGSMÅL 10:
+Spørgsmål:              Skal der kulør i en bolognese?
+Svartekst (forkert):    Nej for så bliver det en kødsovs, og det er en helt anden ret.
+
+---
+
+SPØRGSMÅL 11:
+Spørgsmål:              Skal der cocktailpølser i en bolognese?
+Svartekst (forkert):    Nej!
+
+
+
+
+════════════════════════════════════════
+PASTA — DE FIRE ROMERSKE PASTARETTER
+(De fire klassiske vises som "næsten"-muligheder)
+(Feedback ved næsten-svar vises tilfældigt: Evviva! / Dai! / Grande! / Forza!)
+════════════════════════════════════════
+
+Spørgsmål: Hvilken af disse fire pastaretter hører ikke til blandt de fire klassiske pastaretter?
+
+DE FIRE KLASSISKE (disse er "næsten"-svar — de hører faktisk til):
+- Carbonara
+- Gricia
+- Cacio e pepe
+- Amatriciana
+
+IKKE-ROMERSKE PASTARETTER og deres svartekster (ét vælges tilfældigt som korrekt svar):
+
+Pasta alla Zozzona
+Svartekst: Nej, men den er fra Rom, så prøv den, hvis du er meget sulten og klar til en kamp for at spise op.
+
+Rigatoni con la Pajata
+Svartekst: Nej, men den er fra Rom, så prøv den hvis du gerne vil bryde en mental barriere
+
+Penne all'Arabiata
+Svartekst: Nej, men den er fra Rom, så prøv den, hvis du gerne vil have lidt varme i varmen.
+
+Tagliatelle al Ragu Bolognese
+Svartekst: Nej og som navnet afslører er den fra Bologna. Så prøv den i Bologna, hvor du ikke behøves at sige bolognese.
+
+Lasagne alla Bolognese
+Svartekst: Nej og som navnet afslører er den fra Bologna. Så prøv den i Bologna, hvor du ikke behøves at sige bolognese.
+
+Trofie al Pesto Genovese
+Svartekst: Nej og som navnet afslører er den fra Genoa. Så prøv den i Genoa, hvor du ikke behøves at sige genovese.
+
+Spaghetti alle Vongole
+Svartekst: Nej, men det er en lækker ret så prøv den, hvis du er tæt på Napoli eller havet.
+
+Spaghetti alla Putanesca
+Svartekst: Nej, men det er en lækker ret så prøv den, hvis du er tæt på Napoli.
+
+Pasta alla Norma
+Svartekst: Nej, men det er en lækker ret så prøv den, hvis du er på Sicilien.
+
+Fettuchini Alfredo
+Svartekst: Nej, det er en eller anden americansk bastard.
+
+Pasta alla Trapanese
+Svartekst: Nej og som navnet afslører er den fra Trapani. Så prøv den i Trapani.
+
+Ziti alla Genovese
+Svartekst: Nej og lad dig ikke nare af navnet. Den er ikke som navnet indikerer fra Genoa, men faktisk fra Napoli, så prøv den der.
+
+
+
+
+════════════════════════════════════════
+FODBOLD — HVOR VAR JOE
+(Tæller IKKE mod adgang — svaret ignoreres stille)
+════════════════════════════════════════
+
+SPØRGSMÅL: Hvor var Joe, da Italien vandt VM i 2006?
+Rigtigt svar:   På en tilfældig bar i Silkeborg.
+Andet svar:     Sammen med sin far og andre tilfældige italienere.
+
+---
+
+SPØRGSMÅL: Hvor var Joe, da Totti scorede på et straffespark i det sidste minut i ottendedelsfinalen mod Australien ved VM 2006?
+Rigtigt svar:   Omringet af australiere ved skatescenen på Roskilde Festival.
+Andet svar:     I sin lejlighed på Islandsbrygge med gymnasievennerne.
+
+---
+
+SPØRGSMÅL: Hvor var Joe, da Danmark slog Holland på straffe i EM-semifinalen i 1992?
+Rigtigt svar:   I lejligheden på Frederiksberg, hvor den hollandske gæst Kyhn fik et astmaanfald, da Van Basten brændte straffe.
+Andet svar:     På spejderlejr.
+
+---
+
+SPØRGSMÅL: Hvor var Joe, da Roma slog Silkeborg i UEFA Cuppen i 1998?
+Rigtigt svar:   På Silkeborg Stadion.
+Andet svar:     Hjemme hos forældrene...
+
+---
+
+SPØRGSMÅL: Hvor var Joe, da Roma vandt Serie A i 2000/2001?
+Rigtigt svar:   På en tilfældig bar i Ostia.
+Andet svar:     På det Olympiske Stadion i Rom.
+
+---
+
+SPØRGSMÅL: Hvor var Joe, da Roma vandt Conference League i 2021/2022?
+Rigtigt svar:   På Léanowski.
+Andet svar:     På det Olympiske Stadion i Rom.
+
+---
+
+SPØRGSMÅL: Hvor var Joe, da Roma tabte Europa League-finalen i 2022/2023?
+Rigtigt svar:   På Léanowski.
+Andet svar:     På Torvet.
+
+---
+
+SPØRGSMÅL: Hvor var Joe, da Italien vandt EM i 2020 (afholdt 2021)?
+Rigtigt svar:   På Torvet.
+Andet svar:     På Pizzeria La Fioritta med en masse tilfældige italienere
+
+---
+
+SPØRGSMÅL: Hvor var Joe, da Italien tabte EM-finalen i 2000?
+Rigtigt svar:   I Islamabad med en masse tilfældige piloter.
+Andet svar:     På karatelejr.
+
+---
+
+SPØRGSMÅL: Hvor var Joe, da Italien tabte EM-finalen i 2012?
+Rigtigt svar:   På Pizzeria La Fioritta med en masse tilfældige italienere
+Andet svar:     På Roskilde Festival.
+
+---
+
+SPØRGSMÅL: Hvor var Joe, da Italien tabte VM-finalen i 1994?
+Rigtigt svar:   I seng.
+Andet svar:     Sammen med familien på Frederiksberg.
+
+---
+
+SPØRGSMÅL: Hvor var Joe, da Danmark røg ud til England efter et skandaløst straffespark til EM i 2020 (afholdt 2021)?
+Rigtigt svar:   I sommerhus med gode venner.
+Andet svar:     Til storskærmsarrangement på Ofelia Plads.
+
+---
+
+SPØRGSMÅL: Hvor var Joe, da Italien røg ud til Sydkorea ved VM i 2002 efter en skandaløs dommeroptræden?
+Rigtigt svar:   På café Bankerot.
+Andet svar:     I skole.
+
+
+
+
+════════════════════════════════════════
+FODBOLD — ROMALEGENDER
+(Tæller IKKE mod adgang — ingen svartekst)
+════════════════════════════════════════
+
+SPØRGSMÅL: Hvilken af disse Romalegender er ikke født i Rom?
+Korrekt svar:               Conti
+Pulje af forkerte svar:     Totti, De Rossi, Giannini, Florenzi, Pellegrini, Di Bartolomei
+
+---
+
+SPØRGSMÅL: Hvilket kælenavn havde den brasilianske forsvarsspiller Aldair?
+Korrekt svar:               Pluto
+Pulje af forkerte svar:     Pippo, Paperino, Pipetto
+
+---
+
+SPØRGSMÅL: Hvilken af disse Roma anfører har ikke vundet et trofæ med det Italienske landshold?
+Korrekt svar:               Pellegrini
+Pulje af forkerte svar:     Totti, De Rossi, Florenzi
+
+---
+
+SPØRGSMÅL: Hvilken af disse Romalegender havde kælenavnet Il Principe?
+Korrekt svar:               Giannini
+Pulje af forkerte svar:     Totti, De Rossi, Conti, Florenzi, Pellegrini, Di Bartolomei
+
+---
+
+SPØRGSMÅL: Hvilken af disse Romalegender har ikke spillet for det italienske landshold?
+Korrekt svar:               Di Bartolomei
+Pulje af forkerte svar:     Totti, De Rossi, Giannini, Conti, Florenzi, Pellegrini
+
+---
+
+SPØRGSMÅL: Hvilken af disse Romalegender havde kælenavnet Capitan Futuro?
+Korrekt svar:               De Rossi
+Pulje af forkerte svar:     Totti, Giannini, Conti, Florenzi, Pellegrini, Di Bartolomei
+
+---
+
+SPØRGSMÅL: Hvilken af disse Romalegender havde kælenavnet Er Pupone?
+Korrekt svar:               Totti
+Pulje af forkerte svar:     De Rossi, Giannini, Conti, Florenzi, Pellegrini, Di Bartolomei
+
+---
+
+SPØRGSMÅL: Hvilken af disse Romalegender anses for at være Roms 8. konge?
+Korrekt svar:               Totti
+Pulje af forkerte svar:     De Rossi, Giannini, Conti, Florenzi, Pellegrini, Di Bartolomei
+
+
+
+
+════════════════════════════════════════
+LA DOLCE VITA
+(2-valgs spørgsmål — svartekst vises KUN ved forkert svar)
+════════════════════════════════════════
+
+SPØRGSMÅL 1:
+Spørgsmål:              Du har lyst til lidt vin. Hvad vælger du?
+Korrekt svar:           En god flaske vin til 150 kr.
+Forkert svar:           To mindre gode flasker vin til 150 kr.
+Svartekst (forkert):    Sæt nu kvalitet over kvantitet!
+
+---
+
+SPØRGSMÅL 2:
+Spørgsmål:              Du har lyst til en stor kop kaffe. Hvad vælger du?
+Korrekt svar:           En kop kaffe fra filterbryg eller stempelkande.
+Forkert svar:           En americano.
+Svartekst (forkert):    Americano er jo en udvandet espresso. Vælg derfor en kaffe der er brygget efter formålet.
+
+---
+
+SPØRGSMÅL 3:
+Spørgsmål:              Du skal have en italiensk is. Vil du have den i?
+Korrekt svar:           Et bæger.
+Forkert svar:           En vaffel.
+Svartekst (forkert):    En vaffel kan gå an, men bæger er at foretrække.
+
+---
+
+SPØRGSMÅL 4:
+Spørgsmål:              Du skal købe olivenolie. Hvad køber du?
+Korrekt svar:           En rigtig god olivenolie til salater og en mindre god til madlavning og marinader.
+Forkert svar:           En der ikke er for dyr, som man kan bruge til lidt af hvert.
+Svartekst (forkert):    Her taber du på alle fronter. Gå ikke på kompromis — køb efter formålet.
+
+---
+
+SPØRGSMÅL 5:
+Spørgsmål:              Du skal se Derby del Capitale. Hvem holder du med?
+Korrekt svar:           Roma.
+Forkert svar:           Lazio.
+Svartekst (forkert):    Er du dum eller hvad?
+
+---
+
+SPØRGSMÅL 6:
+Spørgsmål:              Du skal købe ind til en pastaret. Hvilken type parmesanost vælger du?
+Korrekt svar:           En blok parmesanost.
+Forkert svar:           Revet parmesan i en pose.
+Svartekst (forkert):    Kan du vitterlig godt lide at spise lugten af bræk?
+
+---
+
+SPØRGSMÅL 7:
+Spørgsmål:              Du skal handle ind. Hvad vælger du?
+Korrekt svar:           At gå i et supermarked og vælge ud fra hvad der ser godt ud.
+Forkert svar:           At bruge et online supermarked og vælge ud fra billederne.
+Svartekst (forkert):    Sæt nu lidt ære i hvad du indtager og vælg selv gode råvarer. Mad holder dig i live, så hvorfor skal det ikke være af højeste kvalitet.
+
+---
+
+SPØRGSMÅL 8:
+Spørgsmål:              Du er i Italien og skal have en kaffe. Hvor drikker du den?
+Korrekt svar:           Stående ved baren.
+Forkert svar:           På et lille cafebord.
+Svartekst (forkert):    Så du kan åbenbart godt lide at betale overpris for at ligne en turist der ikke fatter en hat af livet.
+
+---
+
+SPØRGSMÅL 9:
+Spørgsmål:              Du skal have pizza. Hvor mange ingredienser skal der være på den?
+Korrekt svar:           Maks fire - less is more!
+Forkert svar:           Over fire - jo flere jo bedre
+Svartekst (forkert):    Lad du bare de enkelte råvare tale for dem selv. De kan bære det.

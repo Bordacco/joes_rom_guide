@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Google_Drive__create_file",
+      "Bash(start \"\" \"c:\\\\Users\\\\mats_\\\\OneDrive\\\\Documents\\\\Rom guide\\\\joes_rom_guide\\\\index.html\")",
+      "mcp__claude_ai_Google_Drive__read_file_content",
+      "WebFetch(domain:docs.google.com)",
+      "WebFetch(domain:doc-10-bg-sheets.googleusercontent.com)",
+      "Bash(curl -sL \"https://docs.google.com/spreadsheets/d/1D_TDUhckh0MsIl08Y_eOhYJ3JXW9Y0Z1GeviqRDoHww/export?format=csv&gid=2111234926\")",
+      "PowerShell($response = Invoke-WebRequest -Uri \"https://docs.google.com/spreadsheets/d/1D_TDUhckh0MsIl08Y_eOhYJ3JXW9Y0Z1GeviqRDoHww/export?format=csv&gid=2111234926\" -UseBasicParsing -MaximumRedirection 5; $response.Content)",
+      "PowerShell($response = Invoke-WebRequest -Uri \"https://docs.google.com/spreadsheets/d/1D_TDUhckh0MsIl08Y_eOhYJ3JXW9Y0Z1GeviqRDoHww/export?format=csv&gid=2111234926\" -UseBasicParsing -MaximumRedirection 5; [System.Text.Encoding]::UTF8.GetString\\($response.RawContentStream.ToArray\\(\\)\\))"
+    ]
+  }
+}
