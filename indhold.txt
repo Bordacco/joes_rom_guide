@@ -46,6 +46,7 @@ MULIGE VÆRDIER FOR [begivenhed] — vælges tilfældigt:
 - lige så længe som det tager at få en godkendelse i det italienske bureaukrati
 - indtil Roma finder en værdig arvtager til 10-tallet
 - til trafikken på Il Raccordo begynder at køre igen
+- et sted mellem 12 sekunder og 80 år
 
 
 ════════════════════════════════════════

@@ -454,6 +454,7 @@
     margin-left: 1rem;
   }
   .debug-skip-btn.visible { display: inline-block; }
+  .btn-locked { opacity: 0.45; cursor: not-allowed; }
 </style>
 </head>
 <body>
@@ -525,9 +526,11 @@
   <div class="rule"><span>✦</span></div>
   <div class="card">
     <p class="outcome-text" id="fail-text"></p>
-    <div class="timer-display" id="timer-display">2:00</div>
-    <div style="text-align:center;">
-      <button class="btn-primary" id="retry-btn" onclick="retryQuiz()" disabled>Forsøg igen →</button>
+    <div class="timer-label" style="text-align:center;margin-top:1.5rem">Estimeret ventetid inden næste forsøg:</div>
+    <div class="timer-display" id="timer-display"></div>
+    <div class="timer-label" style="text-align:center;font-size:0.75rem;margin-top:-0.5rem">* Baseret på romersk tidsregning</div>
+    <div style="text-align:center;margin-top:1.5rem">
+      <button class="btn-primary btn-locked" id="retry-btn" onclick="retryQuiz()">Forsøg igen →</button>
     </div>
   </div>
 </div>
@@ -546,7 +549,7 @@
 
 const INTRO_TEXT = "Inden du får adgang til Rom-guiden, skal du svare rigtigt på tre spørgsmål for at bevise din værdighed. Du vil blive quizzet i kategorierne pasta, fodbold og La Dolce Vita. For at hjælpe dig lidt på vej får du denne ledetråd. Svarene er det tætteste, som subjektive holdninger kan komme på en objektiv sandhed. Med det i baghoved er du klar til at krydse Rubicon og vise din værdighed.";
 
-const SUCCESS_TEMPLATE = "Terningen er kastet og [aktør] har talt. Du har fundet dig værdig. Du har nu adgang til Rom-guiden.";
+const SUCCESS_TEMPLATE = "Terningen er kastet og [aktør] har talt. De har fundet dig værdig. Du har nu adgang til Rom-guiden.";
 const FAIL_TEMPLATE = "Terningen er kastet og [aktør] har talt. Du er ikke værdig til at få adgang til Rom-guiden. Du er derfor dømt til at vente [begivenhed], inden du kan prøve igen. Heldigvis er italienere ikke så gode til at overholde tiden, så du kan måske forsøge igen om lidt.";
 
 const AKTØRER = ["Konsulerne", "Det første Triumvirat", "Det andet Triumvirat", "Senatet", "Tribunalet", "Vestalinderne", "Prætorianergarden", "Pontifikalkollegiet", "Censorerne", "Ædilerne", "Augurerne"];
@@ -554,7 +557,8 @@ const BEGIVENHEDER = [
   "til Italien kvalificerer sig til VM igen",
   "lige så længe som det tager at få en godkendelse i det italienske bureaukrati",
   "indtil Roma finder en værdig arvtager til 10-tallet",
-  "til trafikken på Il Raccordo begynder at køre igen"
+  "til trafikken på Il Raccordo begynder at køre igen",
+  "et sted mellem 12 sekunder og 80 år"
 ];
 
 const PASTA_INGREDIENSER = [
@@ -774,6 +778,48 @@ let questions = [];
 let currentQ = 0;
 let wrongCount = 0;
 let timerInterval = null;
+let fakeTimerInterval = null;
+let canRetry = true;
+
+function randomFakeTime() {
+  function ri(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+  function toRoman(num) {
+    const vals = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+    const syms = ['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'];
+    let result = '';
+    for (let i = 0; i < vals.length; i++) {
+      while (num >= vals[i]) { result += syms[i]; num -= vals[i]; }
+    }
+    return result;
+  }
+  const options = [
+    () => `${ri(12, 59)} sekunder`,
+    () => `${ri(1, 59)} minutter`,
+    () => `${ri(1, 3)} timer og ${ri(1, 59)} minutter`,
+    () => `${ri(1, 6)} dage`,
+    () => `${ri(1, 6)} dage og ${ri(1, 23)} timer`,
+    () => `${ri(2, 11)} måneder`,
+    () => `${ri(1, 4)} år og ${ri(1, 11)} måneder`,
+    () => `${ri(5, 20)} år`,
+    () => `${ri(21, 50)} år`,
+    () => `${ri(51, 80)} år`,
+    () => `${ri(15, 80)} år og ${ri(1, 11)} måneder`,
+  ];
+  let timeStr = options[Math.floor(Math.random() * options.length)]();
+  if (Math.random() < 0.25) {
+    timeStr = timeStr.replace(/\d+/g, n => toRoman(parseInt(n)));
+  }
+  return timeStr;
+}
+
+function startFakeTimer() {
+  const display = document.getElementById('timer-display');
+  display.style.display = 'block';
+  display.textContent = randomFakeTime();
+  fakeTimerInterval = setInterval(() => {
+    display.textContent = randomFakeTime();
+  }, 5000);
+}
 
 function showStage(id) {
   document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
@@ -894,24 +940,29 @@ function endQuiz() {
 
 function startTimer(seconds) {
   const retryBtn = document.getElementById('retry-btn');
-  const display = document.getElementById('timer-display');
-  display.style.display = 'none'; // always hidden
+  canRetry = false;
+  retryBtn.classList.add('btn-locked');
 
   if (debugMode) {
-    retryBtn.disabled = false;
-    retryBtn.textContent = 'Forsøg igen →';
+    canRetry = true;
+    retryBtn.classList.remove('btn-locked');
     return;
   }
 
-  retryBtn.disabled = true;
+  startFakeTimer();
   setTimeout(() => {
-    retryBtn.disabled = false;
-    retryBtn.textContent = 'Forsøg igen →';
+    canRetry = true;
+    retryBtn.classList.remove('btn-locked');
   }, seconds * 1000);
 }
 
 function retryQuiz() {
-  clearInterval(timerInterval);
+  if (!canRetry) {
+    document.getElementById('timer-display').textContent = randomFakeTime();
+    return;
+  }
+  clearInterval(fakeTimerInterval);
+  fakeTimerInterval = null;
   startQuiz();
 }
 
