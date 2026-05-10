@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joes Rom-guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+:root {
+  --cream: #f5f0e8;
+  --parchment: #ede4cc;
+  --dark: #2a1f0e;
+  --terra: #b5451b;
+  --rust: #8b3a1a;
+  --gold: #c9922a;
+  --faded: #7a6a52;
+  --border: #c8b89a;
+  --card: #faf6ee;
+  --green: #3a5c3a;
+  --blue: #4a6080;
+  --sidebar: 260px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  background:var(--cream);
+  color:var(--dark);
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:17px;
+  line-height:1.7;
+}
+
+/* ── SITE HEADER ── */
+.site-header{
+  background:var(--dark);
+  color:var(--parchment);
+  padding:.9rem 2rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:500;
+}
+.site-header a.back{
+  color:var(--border);
+  text-decoration:none;
+  font-size:.8rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.site-header a.back:hover{color:#fff}
+.site-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.35rem;
+  font-style:italic;
+  color:var(--parchment);
+  letter-spacing:.02em;
+}
+.map-toggle-btn{
+  background:none;
+  border:1px solid var(--border);
+  color:var(--border);
+  font-family:'Cormorant Garamond',serif;
+  font-size:.8rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:.35rem .9rem;
+  cursor:pointer;
+  transition:all .2s;
+}
+.map-toggle-btn:hover,.map-toggle-btn.active{
+  background:var(--terra);
+  border-color:var(--terra);
+  color:#fff;
+}
+
+/* ── FILTER NAV ── */
+.filter-nav{
+  background:var(--parchment);
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:47px;
+  z-index:499;
+  padding:.6rem 2rem;
+}
+.filter-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4rem;
+  align-items:center;
+}
+.filter-row + .filter-row{
+  margin-top:.45rem;
+  padding-top:.45rem;
+  border-top:1px solid var(--border);
+}
+.filter-label{
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--faded);
+  margin-right:.3rem;
+  white-space:nowrap;
+}
+.chip{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.82rem;
+  letter-spacing:.08em;
+  padding:.25rem .8rem;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--faded);
+  cursor:pointer;
+  transition:all .15s;
+  white-space:nowrap;
+}
+.chip:hover{border-color:var(--terra);color:var(--terra)}
+.chip.active{background:var(--terra);border-color:var(--terra);color:#fff}
+.chip.active-kitchen{background:var(--gold);border-color:var(--gold);color:#fff}
+
+/* ── MAP ── */
+#map-section{
+  display:none;
+  height:420px;
+  position:relative;
+}
+#map-section.open{display:block}
+#map{height:100%;width:100%}
+.map-filters{
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:1000;
+  display:flex;
+  gap:.4rem;
+  flex-wrap:wrap;
+  justify-content:center;
+  pointer-events:none;
+}
+.map-filter-btn{
+  pointer-events:all;
+  font-family:'Cormorant Garamond',serif;
+  font-size:.78rem;
+  letter-spacing:.1em;
+  padding:.28rem .75rem;
+  border:none;
+  cursor:pointer;
+  transition:opacity .15s;
+  opacity:.85;
+}
+.map-filter-btn:hover{opacity:1}
+.mfb-all{background:var(--dark);color:var(--parchment)}
+.mfb-food{background:var(--terra);color:#fff}
+.mfb-church{background:var(--blue);color:#fff}
+.mfb-museum{background:var(--gold);color:#fff}
+.mfb-gem{background:var(--green);color:#fff}
+.map-filter-btn.dim{opacity:.35}
+
+/* ── MAIN LAYOUT ── */
+.main{
+  max-width:1100px;
+  margin:0 auto;
+  padding:3rem 2rem 6rem;
+}
+
+/* ── INTRO ── */
+.guide-intro{
+  max-width:680px;
+  margin:0 auto 4rem;
+  text-align:center;
+}
+.guide-intro h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.4rem,6vw,4rem);
+  font-weight:700;
+  line-height:.95;
+  margin-bottom:.5rem;
+}
+.guide-intro h1 em{font-style:italic;color:var(--terra)}
+.ornament{color:var(--terra);letter-spacing:.4em;font-size:1.1rem;margin:.75rem 0}
+.guide-intro p{font-size:1.05rem;color:var(--faded);line-height:1.9}
+.guide-intro p + p{margin-top:1rem}
+
+/* ── NEIGHBORHOOD SECTION ── */
+.neighborhood{
+  margin-bottom:5rem;
+  scroll-margin-top:100px;
+}
+.neighborhood.hidden{display:none}
+.neighborhood-header{
+  border-top:2px solid var(--dark);
+  padding-top:1.25rem;
+  margin-bottom:.75rem;
+  display:flex;
+  align-items:baseline;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+.neighborhood-name{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:700;
+  line-height:1;
+}
+.neighborhood-name em{color:var(--terra);font-style:italic}
+.neighborhood-subtitle{
+  font-style:italic;
+  color:var(--faded);
+  font-size:.95rem;
+}
+.neighborhood-intro{
+  max-width:680px;
+  font-size:1rem;
+  color:var(--faded);
+  line-height:1.85;
+  margin-bottom:2rem;
+}
+
+/* ── CARDS GRID ── */
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1.5rem;
+}
+
+/* ── RESTAURANT CARD ── */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:1.5rem;
+  display:flex;
+  flex-direction:column;
+  transition:box-shadow .2s;
+}
+.card:hover{box-shadow:0 4px 20px rgba(42,31,14,.08)}
+.card.hidden{display:none}
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:.5rem;
+  margin-bottom:.75rem;
+}
+.card-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;
+  font-weight:700;
+  line-height:1.2;
+}
+.card-badges{
+  display:flex;
+  flex-direction:column;
+  gap:.3rem;
+  align-items:flex-end;
+  flex-shrink:0;
+}
+.badge{
+  font-size:.68rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:.15rem .55rem;
+  border:1px solid currentColor;
+  white-space:nowrap;
+}
+.badge-kitchen{color:var(--terra)}
+.badge-gem{color:var(--green);border-color:var(--green);background:rgba(58,92,58,.07)}
+.badge-to-eat{color:var(--faded);border-style:dashed}
+
+.card-desc{
+  font-size:.95rem;
+  line-height:1.75;
+  color:var(--dark);
+  flex:1;
+  margin-bottom:1rem;
+}
+
+.card-meta{
+  border-top:1px solid var(--border);
+  padding-top:.85rem;
+  display:flex;
+  flex-direction:column;
+  gap:.45rem;
+}
+.meta-row{
+  display:flex;
+  align-items:flex-start;
+  gap:.5rem;
+  font-size:.85rem;
+  color:var(--faded);
+  line-height:1.4;
+}
+.meta-icon{
+  flex-shrink:0;
+  width:16px;
+  text-align:center;
+  margin-top:.1rem;
+  font-size:.9rem;
+}
+.meta-row strong{color:var(--dark);font-weight:600}
+
+.booking-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+  font-size:.75rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:.2rem .6rem;
+  border-radius:1px;
+}
+.book-online{background:#e8f4fd;color:#1a4a6b}
+.book-phone{background:#f0ece4;color:var(--faded)}
+.book-email{background:#f0ece4;color:var(--faded)}
+.book-walkin{background:#edf5e8;color:var(--green)}
+
+/* ── TO-EAT LIST ── */
+.to-eat-section{
+  margin-top:2rem;
+  border:1px dashed var(--border);
+  padding:1.25rem 1.5rem;
+}
+.to-eat-toggle{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  list-style:none;
+}
+.to-eat-toggle::marker{display:none}
+.to-eat-title{
+  font-family:'Playfair Display',serif;
+  font-size:.95rem;
+  font-style:italic;
+  color:var(--faded);
+}
+.to-eat-arrow{color:var(--border);transition:transform .2s}
+details[open] .to-eat-arrow{transform:rotate(180deg)}
+.to-eat-list{
+  margin-top:1rem;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:.35rem;
+}
+.to-eat-list li{
+  font-size:.9rem;
+  color:var(--faded);
+  padding-left:1rem;
+  position:relative;
+}
+.to-eat-list li::before{
+  content:'→';
+  position:absolute;
+  left:0;
+  color:var(--border);
+}
+
+/* ── SIGHT CARD ── */
+.sight-card{
+  background:transparent;
+  border-left:3px solid var(--border);
+  padding:.85rem 1.25rem;
+  margin-bottom:.75rem;
+  transition:border-color .2s;
+}
+.sight-card:hover{border-left-color:var(--terra)}
+.sight-card.hidden{display:none}
+.sight-card.type-church{border-left-color:rgba(74,96,128,.4)}
+.sight-card.type-church:hover{border-left-color:var(--blue)}
+.sight-card.type-museum{border-left-color:rgba(201,146,42,.4)}
+.sight-card.type-museum:hover{border-left-color:var(--gold)}
+.sight-card.type-gem{border-left-color:rgba(58,92,58,.4)}
+.sight-card.type-gem:hover{border-left-color:var(--green)}
+.sight-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;
+  font-weight:700;
+  margin-bottom:.3rem;
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+}
+.sight-type-dot{
+  width:8px;height:8px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+.dot-church{background:var(--blue)}
+.dot-museum{background:var(--gold)}
+.dot-gem{background:var(--green)}
+.dot-other{background:var(--border)}
+.sight-desc{font-size:.92rem;color:var(--faded);line-height:1.75}
+
+/* ── SIGHTS SECTION ── */
+.sights-section{
+  margin-bottom:5rem;
+  scroll-margin-top:100px;
+}
+.sights-section.hidden{display:none}
+.sights-header{
+  border-top:2px solid var(--dark);
+  padding-top:1.25rem;
+  margin-bottom:.75rem;
+}
+.sights-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 3rem;
+}
+.sight-legend{
+  display:flex;
+  gap:1.5rem;
+  flex-wrap:wrap;
+  margin-bottom:1.5rem;
+  font-size:.82rem;
+  color:var(--faded);
+}
+.legend-item{display:flex;align-items:center;gap:.4rem}
+
+/* ── MARKETS ── */
+.markets-section{
+  margin-bottom:5rem;
+  scroll-margin-top:100px;
+}
+.markets-section.hidden{display:none}
+.market-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1rem;
+  margin-top:1.5rem;
+}
+.market-item{
+  border:1px solid var(--border);
+  padding:1rem 1.25rem;
+  background:var(--card);
+}
+.market-name{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;
+  font-weight:700;
+  margin-bottom:.3rem;
+}
+.market-desc{font-size:.88rem;color:var(--faded);line-height:1.65}
+
+/* ── KITCHEN VIEW HEADER ── */
+.kitchen-view-header{
+  display:none;
+  margin-bottom:2rem;
+  padding:1rem 1.5rem;
+  background:var(--parchment);
+  border-left:4px solid var(--gold);
+}
+.kitchen-view-header.visible{display:block}
+.kitchen-view-header h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;
+  font-style:italic;
+}
+.kitchen-view-header p{font-size:.9rem;color:var(--faded);margin-top:.25rem}
+
+/* ── RULE ── */
+.rule{display:flex;align-items:center;gap:1rem;margin:1.5rem 0}
+.rule::before,.rule::after{content:'';flex:1;height:1px;background:var(--border)}
+.rule span{color:var(--terra);font-size:.9rem}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .site-header{padding:.7rem 1rem}
+  .filter-nav{padding:.5rem 1rem}
+  .main{padding:2rem 1rem 4rem}
+  .cards-grid{grid-template-columns:1fr}
+  .sights-grid{grid-template-columns:1fr}
+  .site-title{font-size:1.1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header class="site-header">
+  <a href="index.html" class="back">← Adgangsprøven</a>
+  <div class="site-title"><em>Joes</em> Rom-guide</div>
+  <button class="map-toggle-btn" id="mapToggleBtn" onclick="toggleMap()">Kort ↓</button>
+</header>
+
+<!-- ══════════════════ FILTER NAV ══════════════════ -->
+<nav class="filter-nav">
+  <div class="filter-row">
+    <span class="filter-label">Kvarter</span>
+    <button class="chip active" data-n="all" onclick="filterNeighborhood(this)">Alle</button>
+    <button class="chip" data-n="centro" onclick="filterNeighborhood(this)">Centrum</button>
+    <button class="chip" data-n="monti" onclick="filterNeighborhood(this)">Monti</button>
+    <button class="chip" data-n="trastevere" onclick="filterNeighborhood(this)">Trastevere</button>
+    <button class="chip" data-n="testaccio" onclick="filterNeighborhood(this)">Testaccio</button>
+    <button class="chip" data-n="garbatella" onclick="filterNeighborhood(this)">Garbatella</button>
+    <button class="chip" data-n="sanlorenzo" onclick="filterNeighborhood(this)">San Lorenzo</button>
+    <button class="chip" data-n="sights" onclick="filterNeighborhood(this)">Seværdigheder</button>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Køkken</span>
+    <button class="chip active" data-k="all" onclick="filterKitchen(this)">Alle</button>
+    <button class="chip" data-k="romano-trad" onclick="filterKitchen(this)">Romersk</button>
+    <button class="chip" data-k="romano-fine" onclick="filterKitchen(this)">Romersk – finere</button>
+    <button class="chip" data-k="fisk" onclick="filterKitchen(this)">Fisk</button>
+    <button class="chip" data-k="vinbar" onclick="filterKitchen(this)">Vinbar</button>
+    <button class="chip" data-k="pizza" onclick="filterKitchen(this)">Pizza</button>
+    <button class="chip" data-k="snack" onclick="filterKitchen(this)">Snack &amp; Panini</button>
+    <button class="chip" data-k="jodisk" onclick="filterKitchen(this)">Jødisk</button>
+    <button class="chip" data-k="blandet" onclick="filterKitchen(this)">Blandet italiensk</button>
+  </div>
+</nav>
+
+<!-- ══════════════════ MAP ══════════════════ -->
+<section id="map-section">
+  <div id="map"></div>
+  <div class="map-filters">
+    <button class="map-filter-btn mfb-all active" onclick="mapFilter('all',this)">Alle</button>
+    <button class="map-filter-btn mfb-food" onclick="mapFilter('food',this)">🍽 Restauranter</button>
+    <button class="map-filter-btn mfb-church" onclick="mapFilter('church',this)">⛪ Kirker</button>
+    <button class="map-filter-btn mfb-museum" onclick="mapFilter('museum',this)">🏛 Museer</button>
+    <button class="map-filter-btn mfb-gem" onclick="mapFilter('gem',this)">💎 Skjulte skatte</button>
+  </div>
+</section>
+
+<!-- ══════════════════ MAIN CONTENT ══════════════════ -->
+<main class="main">
+
+  <!-- INTRO -->
+  <section class="guide-intro">
+    <h1><em>Joes</em><br>Rom-guide</h1>
+    <div class="ornament">✦ ✦ ✦</div>
+    <p>Velkommen til min Rom-guide. Jeg siger altid, at man ikke kan besøge Rom på sine egne præmisser. Man kan sætte en kurs for sit besøg, men ender ofte der, hvor strømmen bringer en hen. Rom er uforudsigelig — og det giver den en vis autenticitet på trods af, at det er en af de mest turistede byer i verden.</p>
+    <p>Guiden er ikke for dem som ønsker at planlægge alt ned i mindste detalje. Brug den til at sætte kursen, men husk at nyde rejsen, når Rom tager én et andet sted hen.</p>
+    <p style="font-size:.88rem;color:var(--border);margin-top:1.5rem;font-style:italic">Det eneste Joe beder om til gengæld er et kilo hele kaffebønner fra Er Caffettiere.</p>
+  </section>
+
+  <!-- Kitchen view header (shown when a kitchen filter is active) -->
+  <div class="kitchen-view-header" id="kitchenViewHeader">
+    <h2 id="kitchenViewTitle"></h2>
+    <p id="kitchenViewSub"></p>
+  </div>
+
+  <!-- ═══════════════════════════════
+       DET HISTORISKE CENTRUM
+  ═══════════════════════════════ -->
+  <section class="neighborhood" id="n-centro" data-neighborhood="centro">
+    <div class="neighborhood-header">
+      <h2 class="neighborhood-name">Det historiske <em>centrum</em></h2>
+    </div>
+    <p class="neighborhood-intro">Pantheon, Piazza Navona, Campo dei Fiori og den jødiske ghetto. Touristernes Rom — men med de rigtige adresser finder du steder, der stadig tilhører romerne.</p>
+    <div class="cards-grid" id="cards-centro"></div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       MONTI
+  ═══════════════════════════════ -->
+  <section class="neighborhood" id="n-monti" data-neighborhood="monti">
+    <div class="neighborhood-header">
+      <h2 class="neighborhood-name"><em>Monti</em></h2>
+    </div>
+    <p class="neighborhood-intro">Roms hippeste kvarter, men med bevaret sjæl. Smalle brolagte gader, uafhængige butikker og vinbarer, hvor den lokale toner frem mellem turisterne.</p>
+    <div class="cards-grid" id="cards-monti"></div>
+    <details class="to-eat-section">
+      <summary class="to-eat-toggle">
+        <span class="to-eat-title">På Joes liste — endnu ikke besøgt</span>
+        <span class="to-eat-arrow">↓</span>
+      </summary>
+      <ul class="to-eat-list">
+        <li>Osteria Al Vicolo 9</li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- ═══════════════════════════════
+       TRASTEVERE
+  ═══════════════════════════════ -->
+  <section class="neighborhood" id="n-trastevere" data-neighborhood="trastevere">
+    <div class="neighborhood-header">
+      <h2 class="neighborhood-name"><em>Trastevere</em></h2>
+    </div>
+    <p class="neighborhood-intro">Fantastisk karismatisk, men efterhånden overrendt. Joe anbefaler en morgengåtur og at spise i kvarterets mindre populære ende. Restauranterne herunder ligger der, hvor man stadig kan ånde.</p>
+    <div class="cards-grid" id="cards-trastevere"></div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       TESTACCIO
+  ═══════════════════════════════ -->
+  <section class="neighborhood" id="n-testaccio" data-neighborhood="testaccio">
+    <div class="neighborhood-header">
+      <h2 class="neighborhood-name"><em>Testaccio</em></h2>
+    </div>
+    <p class="neighborhood-intro">Flere og flere opdager Testaccio — og med god grund. Kvarteret er ikke overrendt, og om aftenen er det et populært sted at gå i byen. Joe er stadig ved at udforske det, så der er mange steder på listen.</p>
+    <div class="cards-grid" id="cards-testaccio"></div>
+    <details class="to-eat-section">
+      <summary class="to-eat-toggle">
+        <span class="to-eat-title">På Joes liste — endnu ikke besøgt</span>
+        <span class="to-eat-arrow">↓</span>
+      </summary>
+      <ul class="to-eat-list">
+        <li>Ristorante Pecorino</li>
+        <li>Da Oio a casa mia Roma Testaccio</li>
+        <li>Piatto Romano</li>
+        <li>Agustarello A Testaccio</li>
+        <li>Taverna Volpetti</li>
+        <li>Da Bucatino</li>
+        <li>Pizzeria Remo A Testaccio</li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- ═══════════════════════════════
+       GARBATELLA
+  ═══════════════════════════════ -->
+  <section class="neighborhood" id="n-garbatella" data-neighborhood="garbatella">
+    <div class="neighborhood-header">
+      <h2 class="neighborhood-name"><em>Garbatella</em></h2>
+    </div>
+    <p class="neighborhood-intro">Et unikt kvarter i sin særegne barocchetto-arkitektur — huse i klynger om små gårde og pladser. Godt til den, der vil have et afbræk fra centrum. Joe anbefaler at ankomme om eftermiddagen, tage en gåtur, få aperitivo på en af pladserne og slutte med middag.</p>
+    <div class="cards-grid" id="cards-garbatella"></div>
+    <details class="to-eat-section">
+      <summary class="to-eat-toggle">
+        <span class="to-eat-title">På Joes liste — endnu ikke besøgt</span>
+        <span class="to-eat-arrow">↓</span>
+      </summary>
+      <ul class="to-eat-list">
+        <li>L'Isola dei Sard'i due (fisk)</li>
+        <li>Ristorante Il Girasole dal 1981</li>
+        <li>L'Acino brillo</li>
+        <li>Casetta Rossa</li>
+        <li>La Botega di Merlino</li>
+        <li>Stellina Garbatella</li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- ═══════════════════════════════
+       SAN LORENZO
+  ═══════════════════════════════ -->
+  <section class="neighborhood" id="n-sanlorenzo" data-neighborhood="sanlorenzo">
+    <div class="neighborhood-header">
+      <h2 class="neighborhood-name"><em>San Lorenzo</em></h2>
+    </div>
+    <p class="neighborhood-intro">Dynamisk, ungt og hipt kvarter lidt fra centrum. Her hænger de unge. Arkitektonisk slår det ikke benene væk, men autenticiteten er til stede — og pizzaerne er i verdensklasse.</p>
+    <div class="cards-grid" id="cards-sanlorenzo"></div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       SEVÆRDIGHEDER
+  ═══════════════════════════════ -->
+  <section class="sights-section" id="n-sights">
+    <div class="sights-header">
+      <h2 class="neighborhood-name">Skjulte skatte &amp; <em>seværdigheder</em></h2>
+    </div>
+    <p class="neighborhood-intro" style="max-width:680px;margin-bottom:1.5rem">Alternative seværdigheder for dem, der har set Colosseum og Vatikanet. Joe har gjort benarbejdet — her er de steder, der giver noget tilbage.</p>
+
+    <div class="sight-legend">
+      <span class="legend-item"><span class="sight-type-dot dot-museum"></span> Museum / galleri</span>
+      <span class="legend-item"><span class="sight-type-dot dot-church"></span> Kirke</span>
+      <span class="legend-item"><span class="sight-type-dot dot-gem"></span> Skjult skat</span>
+    </div>
+
+    <div class="sights-grid" id="sights-grid"></div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       MARKEDER
+  ═══════════════════════════════ -->
+  <section class="markets-section" id="n-markets">
+    <div class="sights-header">
+      <h2 class="neighborhood-name"><em>Markeder</em></h2>
+    </div>
+    <p class="neighborhood-intro" style="max-width:680px;margin-bottom:0">En fantastisk måde at opleve det rigtige Rom. Fælles for dem alle: åben om morgenen og lukker ca. kl. 12–13. Pas på lommetyve.</p>
+    <div class="market-list">
+      <div class="market-item">
+        <div class="market-name">Campo di Fiore</div>
+        <div class="market-desc">Hyggeligt madmarked midt i centrum. <strong>Man–Lør</strong>, morgen til ca. 13.</div>
+      </div>
+      <div class="market-item">
+        <div class="market-name">Via Sannio</div>
+        <div class="market-desc">Tøjmarked nær San Giovanni-metro. Bedste sted til billigt tøj — brugt og nyt. Husk at prutte. <strong>Man–Lør</strong>.</div>
+      </div>
+      <div class="market-item">
+        <div class="market-name">Mercato Testaccio</div>
+        <div class="market-desc">Mad og loppemarket under samme tag. Kombiner med frokost i kvarteret. <strong>Tir–Søn</strong>.</div>
+      </div>
+      <div class="market-item">
+        <div class="market-name">Porta Portese</div>
+        <div class="market-desc">Roms største marked — her kan man finde alt. En oplevelse i sig selv. Perfekt til en Porchetta-sandwich. <strong>Kun søndage</strong>. Kombiner med gåtur i Trastevere bagefter.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════════════════ LEAFLET ══════════════════ -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ═══════════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════════
+
+const RESTAURANTS = [
+  // ── CENTRO ──
+  {
+    id:'armando', neighborhood:'centro', name:'Armando al Pantheon',
+    kitchen:'romano-fine', kitchenLabel:'Romersk — finere',
+    address:'Salita de Crecenzi 31 (ved Pantheon)',
+    lat:41.8989, lng:12.4764,
+    desc:'Flot og charmerende restaurant der serverer typisk romersk mad med et strejf af klasse. I den dyre ende — men maden er også derefter. Vil du se, hvad romerne kan, når de gear en tand op, er dette stedet.',
+    lunch:'Man–Lør', dinner:'Man–Fre',
+    booking:'phone', bookingUrl:null, gem:false
+  },
+  {
+    id:'baguetteria', neighborhood:'centro', name:'Baguetteria del Fico',
+    kitchen:'snack', kitchenLabel:'Snack & Panini',
+    address:'Via della Fossa 12 (nær Piazza Navona)',
+    lat:41.8993, lng:12.4722,
+    desc:'Suverænt lille sandwichsted i en oase på en stille gade nær Navona. Fast udvalg + byg-selv. Tag en specialøl eller et glas vin og nyd det langt fra turistræset. Bagefter: kaffe på Bar del Fico rundt om hjørnet ved figentræet.',
+    lunch:'Man–Søn', dinner:'Man–Søn',
+    booking:'walkin', bookingUrl:null, gem:true
+  },
+  {
+    id:'corsi', neighborhood:'centro', name:'Enoteca Corsi',
+    kitchen:'vinbar', kitchenLabel:'Vinbar m. mad',
+    address:'Via del Gesù 87/88 (nær Piazza Venezia)',
+    lat:41.8959, lng:12.4798,
+    desc:'Gammel vinbutik med indlejret restaurant. Insistér på at sidde i lokalet med vine fra gulv til loft — det er rammen, der gør stedet. Man vælger frit fra hylderne. Familiedrevet, typisk romersk, høj kvalitet. Holder også kokkekurser (book via hjemmeside).',
+    lunch:'Man–Lør', dinner:null,
+    booking:'email', bookingUrl:'www.3inchfat.com', gem:false
+  },
+  {
+    id:'assunta', neighborhood:'centro', name:'Assunta Madre',
+    kitchen:'fisk', kitchenLabel:'Fisk',
+    address:'Via Giulia 14 (nær Campo dei Fiori)',
+    lat:41.8967, lng:12.4713,
+    desc:'Super lækker fiskerestaurant. Man vælges sin fisk fra isen ved indgangen — konceptet er at fremhæve fisken uden dikkedarer. Lidt i den dyre ende, men råvarerne er i orden.',
+    lunch:'Tir–Søn', dinner:'Tir–Søn',
+    booking:'phone', bookingUrl:null, gem:false
+  },
+  {
+    id:'memmo', neighborhood:'centro', name:'Osteria de Memmo',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Via dei Soldati 22/23 (ved Piazza Navona)',
+    lat:41.9000, lng:12.4728,
+    desc:'Klassisk romersk trattoria. Særligt kendt for deres Amatriciana — svinekæbe i tomatsauce som den skal være. Fantastisk udvalg af antipasti, som man heller ikke skal snyde sig selv for.',
+    lunch:'Man–Lør', dinner:'Man–Lør',
+    booking:'phone', bookingUrl:null, gem:false
+  },
+  {
+    id:'roscioli', neighborhood:'centro', name:'Roscioli',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Via dei Guibbonnari 21/22 (nær Campo dei Fiori)',
+    lat:41.8946, lng:12.4717,
+    desc:'Et af de mest hypede steder på den romerske madscene. Joe anbefaler antipasti, salumi og oste frem for pastaretterne — skinkerne og pølserne er af særlig høj kvalitet. Pastaen er dyrere end gennemsnittet uden nødvendigvis at være bedre. Undgå bord ved indgangen eller i baren.',
+    lunch:'Man–Lør', dinner:'Man–Lør',
+    booking:'online', bookingUrl:'https://www.ristorantesalumeriaroscioli.com', gem:false
+  },
+  {
+    id:'nonnabetta', neighborhood:'centro', name:'Nonna Betta',
+    kitchen:'jodisk', kitchenLabel:'Jødisk-romersk',
+    address:'Via del Portico d\'Ottavia 16 (den jødiske ghetto)',
+    lat:41.8924, lng:12.4779,
+    desc:'Institution for det jødisk-romerske køkken. Den jødiske artiskok skal prøves. Begge køkkener — klassisk romersk og jødisk-romersk — er cucina povera: billige råvarer, der smager fantastisk. Sæt dig indenfor, ikke på gaden.',
+    lunch:'Ons–Man', dinner:'Ons–Man',
+    booking:'phone', bookingUrl:null, gem:false
+  },
+  {
+    id:'soramargherita', neighborhood:'centro', name:'Sora Margherita',
+    kitchen:'jodisk', kitchenLabel:'Jødisk-romersk',
+    address:'Piazza delle Cinque Scole 30 (den jødiske ghetto)',
+    lat:41.8921, lng:12.4774,
+    desc:'Hyggelig lille jødisk familierestaurant. Her sidder man tæt og mærker tempoet, energien og passionen. Menuen ændres dagligt og står på italiensk — tjenerne hjælper, men taler hurtigt. Beslut jer hurtigt. Stemningen er forrygende og autentisk.',
+    lunch:'Man–Lør', dinner:null,
+    booking:'walkin', bookingUrl:null, gem:true
+  },
+  {
+    id:'lilli', neighborhood:'centro', name:'Trattoria Lilli',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Via Tor di Nona 23 (nær Piazza Navona)',
+    lat:41.9003, lng:12.4715,
+    desc:'Traditionelt romersk trattoria lidt off the beaten track. Ikke overrendt af turister — lokale frekventerer det muligvis pga. den halvskjulte placering. Maden var ok ved begge af Joes besøg, men aldrig helt oppe at ringe. Giv det en chance til frokost, hvis I er i nærheden.',
+    lunch:'Man–Lør', dinner:'Man–Lør',
+    booking:'walkin', bookingUrl:null, gem:false
+  },
+  {
+    id:'anticoforno', neighborhood:'centro', name:'Antico Forno Roscioli',
+    kitchen:'snack', kitchenLabel:'Snack & Pizza slice',
+    address:'Via dei Chiavari 34 (nær Campo dei Fiori)',
+    lat:41.8952, lng:12.4722,
+    desc:'Rigtig godt sted til et pizzastykke. Gå op til disken, peg på de pizzaer du vil have, få det skåret og betal ved kassen. God og simpel pizza.',
+    lunch:'Man–Lør', dinner:null,
+    booking:'walkin', bookingUrl:null, gem:false
+  },
+  {
+    id:'fornocampo', neighborhood:'centro', name:'Forno Campo de\' Fiori',
+    kitchen:'snack', kitchenLabel:'Snack & Pizza slice',
+    address:'Piazza Campo de\' Fiori 22',
+    lat:41.8942, lng:12.4723,
+    desc:'Supertilgængeligt lille pizzasted med slices. Kortere kø end Antico Forno Roscioli, men tæt på. Simple og gode pizzaer.',
+    lunch:'Man–Lør', dinner:null,
+    booking:'walkin', bookingUrl:null, gem:false
+  },
+
+  // ── MONTI ──
+  {
+    id:'tavernafori', neighborhood:'monti', name:'La Taverna dei Fori Imperiali',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Via della Madonna dei Monti 9',
+    lat:41.8940, lng:12.4897,
+    desc:'God restaurant med fokus på det romerske køkken. Klassiske retter + dagens specialiteter. Hyggeligt og afslappet uden fine fornemmelser.',
+    lunch:'Tir–Søn', dinner:'Tir–Søn',
+    booking:'phone', bookingUrl:null, gem:false
+  },
+  {
+    id:'trescaline', neighborhood:'monti', name:'Ai Tre Scaline',
+    kitchen:'vinbar', kitchenLabel:'Vinbar m. mad',
+    address:'Via Panisperna 251',
+    lat:41.8978, lng:12.4911,
+    desc:'Fornuftig og charmerende lille vinbar. Tag herhen for stemningen og vinen — indenfor er der liv, udenfor kan man nyde Via Panispernas charme. Udendørsbordene er hurtigt taget, så vær der, når de åbner. Ellers: vent med et glas vin ved baren.',
+    lunch:'Man–Lør', dinner:'Man–Lør',
+    booking:'walkin', bookingUrl:null, gem:false
+  },
+  {
+    id:'barrique', neighborhood:'monti', name:'La Barrique',
+    kitchen:'vinbar', kitchenLabel:'Vinbar m. mad',
+    address:'Via del Boschetto 41B',
+    lat:41.8945, lng:12.4897,
+    desc:'Dejlig vinbar med cool, uformel indretning og lækker baggrundsmusik. Maden er god og simpel. Man kan vælge vine fra kortet eller tage en flaske ned fra hylderne. Det er den personlige og uhøjtidelige service, der gør stedet. Tag herhen for et afbræk fra det klassiske romerske køkken.',
+    lunch:'Man–Lør', dinner:'Man–Lør',
+    booking:'walkin', bookingUrl:null, gem:false
+  },
+  {
+    id:'trattoriamonti', neighborhood:'monti', name:'Trattoria Monti',
+    kitchen:'blandet', kitchenLabel:'Blandet italiensk',
+    address:'Via di S. Vito 13 (mellem Monti og Piazza Vittorio)',
+    lat:41.8930, lng:12.4980,
+    desc:'Rigtig fin og hyggelig restaurant med super god mad. Køkkenet fokuserer ikke på én region, men på at få det bedste ud af råvarerne. Mamma styrer stadig køkkenet. Menuen er lille — det er en undskyldning for at vende tilbage. Svært at få bord uden reservation; telefonen besvares ikke altid, men det er besværet værd.',
+    lunch:'Tir–Søn', dinner:'Tir–Søn',
+    booking:'phone', bookingUrl:null, gem:false
+  },
+  {
+    id:'ziarosetta', neighborhood:'monti', name:'Zia Rosetta',
+    kitchen:'snack', kitchenLabel:'Snack & Panini',
+    address:'Via Urbana 54',
+    lat:41.8954, lng:12.4905,
+    desc:'Sandwich i den traditionelle romerske Rosetta-bolle — den der ligner et skildpadeskjold. Mange varianter. Tag den normale størrelse, ikke de hippieficerede. Tag en øl, nyd sandwichen på Piazza degli Zingari, hent is hos Fatamorgana og slut med kaffe på Er Caffettiere — alt på samme plads.',
+    lunch:'Man–Lør', dinner:null,
+    booking:'walkin', bookingUrl:null, gem:false
+  },
+  {
+    id:'hostariaromana', neighborhood:'monti', name:'Hostaria Romana',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Via del Boccaccio 1 (nær Monti/Trevi)',
+    lat:41.9005, lng:12.4866,
+    desc:'Hyggelig og autentisk restaurant lidt gemt væk fra de mest turistede områder. Mange italienere spiser her. Maden er god.',
+    lunch:'Man–Lør', dinner:'Man–Lør',
+    booking:'walkin', bookingUrl:null, gem:false
+  },
+
+  // ── TRASTEVERE ──
+  {
+    id:'dateo', neighborhood:'trastevere', name:'Da Teo',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Piazza del Ponziani 7',
+    lat:41.8873, lng:12.4695,
+    desc:'Rigtig fornuftigt trattoria med typisk romersk mad. Travlt sted — vær forberedt på lidt ventetid. Joe fik en rigtig god carbonara her (lidt for meget olie, men stadig).',
+    lunch:null, dinner:'Man–Lør',
+    booking:'online', bookingUrl:'https://www.ristorantedateo.it', gem:false
+  },
+  {
+    id:'checo', neighborhood:'trastevere', name:'Checo Er Caretierre',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Via Benedetta 10, Trastevere',
+    lat:41.8881, lng:12.4719,
+    desc:'Hyggelig restaurant der lever lidt i fordums storhed — men stadig frekventeret af lokale. Simpelt menukort med kun romerske retter + frisk fisk, man frit vælger fra. Sublime antipasti — næsten nok i sig selv. Prøv deres Polpette (meatballs), der er fuldstændig fantastiske. Restauranten er lidt mere uformel end deres Hostaria.',
+    lunch:'Tir–Søn', dinner:'Tir–Søn',
+    booking:'phone', bookingUrl:null, gem:false
+  },
+  {
+    id:'dacarlone', neighborhood:'trastevere', name:'Da Carlone',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Via della Luce 5, Trastevere',
+    lat:41.8868, lng:12.4680,
+    desc:'Rigtig godt og hyggeligt trattoria med gode romerske retter. Portionerne er latterligt store — vær to til tre om en portion. Send Joe et billede, når du rammer Carbonara-muren. Han samler på dem.',
+    lunch:'Tir–Søn', dinner:'Tir–Søn',
+    booking:'phone', bookingUrl:null, gem:false
+  },
+  {
+    id:'lemaninpasta', neighborhood:'trastevere', name:'Le Mani in Pasta',
+    kitchen:'fisk', kitchenLabel:'Fisk',
+    address:'Via dei Genovesi 37, Trastevere',
+    lat:41.8866, lng:12.4711,
+    desc:'Specialiserer sig i fisk men tilbyder også klassisk romersk. Ligger i den stille ende af Trastevere. Godt mix af turister og lokale. Småt og livligt — ikke stedet for dem, der vil have madro og albuerum. Pas på kiloprisen på hele fisk, det løber op.',
+    lunch:'Tir–Søn', dinner:'Tir–Søn',
+    booking:'phone', bookingUrl:null, gem:true
+  },
+
+  // ── TESTACCIO ──
+  {
+    id:'felicie', neighborhood:'testaccio', name:'Felicie a Testaccio',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Via Mastro Giorgio 29, Testaccio',
+    lat:41.8820, lng:12.4772,
+    desc:'En institution i Testaccio — og på trods af turisterne frekventerer romerne den stadig. Joe fik en af de bedste romerske artiskokker nogensinde her: blød som smør og smagfuld. Kendte for deres Cacio e Pepe, som de blander ved bordet som en lille gimmick.',
+    lunch:'Man–Lør', dinner:'Man–Lør',
+    booking:'online', bookingUrl:'https://www.feliceatestaccio.it', gem:false
+  },
+  {
+    id:'perilli', neighborhood:'testaccio', name:'Trattoria Perilli',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Via Marmorata 39, Testaccio',
+    lat:41.8817, lng:12.4758,
+    desc:'Endnu en institution i Testaccio med klassisk romersk mad. Man går ikke galt i byen her — et oplagt sted at spise mindst én af de fire klassiske romerske pastaretter.',
+    lunch:'Tor–Tir', dinner:'Tor–Tir',
+    booking:'phone', bookingUrl:null, gem:false
+  },
+  {
+    id:'flavio', neighborhood:'testaccio', name:'Flavio al Velavevodetto',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Via di Monte Testaccio 97',
+    lat:41.8803, lng:12.4773,
+    desc:'Et af de mere charmerende steder — restauranten er bogstaveligt talt bygget ind i potteskårshøjen, og det kan man se i baglokalet. Bundsolid mad og fed atmosfære.',
+    lunch:'Man–Lør', dinner:'Man–Lør',
+    booking:'online', bookingUrl:'https://www.ilvelavevodetto.it', gem:false
+  },
+  {
+    id:'checchino', neighborhood:'testaccio', name:'Checchino dal 1887',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Via di Monte Testaccio 30',
+    lat:41.8808, lng:12.4776,
+    desc:'En af de ældste og mest traditionsbundne romerske restauranter. Maden er god og simpel. Joe blev særlig grebet af stemningen: et enkelt lokale, alle gæster samlet, og tjenere i formelle uniformer med en særegen stil.',
+    lunch:'Tir–Lør', dinner:'Tir–Lør',
+    booking:'online', bookingUrl:'https://www.checchino-dal-1887.com', gem:false
+  },
+  {
+    id:'mercatotestaccio', neighborhood:'testaccio', name:'Mercato di Testaccio',
+    kitchen:'snack', kitchenLabel:'Madboder',
+    address:'Via Beniamino Franklin, Testaccio',
+    lat:41.8828, lng:12.4753,
+    desc:'Mad- og loppemarked. Mange gode madboder — svært at vælge. Joe springer Mordi e Vai over pga. turisthoben og den ulidelige kø. Tip: sæt jer ved et af bordene i midten og hent mad på skift. En kæmpe oplevelse.',
+    lunch:'Tir–Søn', dinner:null,
+    booking:'walkin', bookingUrl:null, gem:false
+  },
+
+  // ── GARBATELLA ──
+  {
+    id:'tantopemanga', neighborhood:'garbatella', name:'Tanto Pe Manga',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Via Giovanni Branca 29, Garbatella',
+    lat:41.8687, lng:12.4841,
+    desc:'Super hyggelig restaurant, hvor man spiser godt. Kan sidde indenfor i de hyggelige lokaler eller udenfor og nyde roen.',
+    lunch:'Tir–Søn', dinner:'Tir–Søn',
+    booking:'phone', bookingUrl:null, gem:true
+  },
+  {
+    id:'ristoroangeli', neighborhood:'garbatella', name:'Ristoro degli Angeli',
+    kitchen:'romano-fine', kitchenLabel:'Romersk — finere',
+    address:'Via Luigi Orlando 2, Garbatella',
+    lat:41.8676, lng:12.4829,
+    desc:'Super god restaurant der kombinerer det traditionelle romerske køkken med egne kreationer i romersk stil. Simpelt og godt. Joe fik friturestegte zucchiniblomster og en drømmende osterigatonara, som han stadig drømmer om.',
+    lunch:'Tir–Søn', dinner:'Tir–Søn',
+    booking:'phone', bookingUrl:null, gem:true
+  },
+
+  // ── SAN LORENZO ──
+  {
+    id:'formulauno', neighborhood:'sanlorenzo', name:'Formula Uno',
+    kitchen:'pizza', kitchenLabel:'Pizza',
+    address:'Via degli Equi 13, San Lorenzo',
+    lat:41.8974, lng:12.5122,
+    desc:'Det bedste og mest oplevelsesrige pizzeria Joe har besøgt. Ferrari-plakater over det hele og et hærget look, der viser sig at have masser af charme. Tjenerne kan virke arrogante — men de bærer 11 pizzaer på en gang. Bestil suppli og fiori di zucca og vin dem. Hold jer til øl, ikke vinen. Billige, gode pizzaer i et meget autentisk miljø.',
+    lunch:null, dinner:'Man–Lør',
+    booking:'walkin', bookingUrl:null, gem:true
+  },
+  {
+    id:'pinsaebuoi', neighborhood:'sanlorenzo', name:'Pinsa e Buoi',
+    kitchen:'romano-fine', kitchenLabel:'Romersk — finere',
+    address:'Viale Scalo San Lorenzo 15/17',
+    lat:41.8964, lng:12.5144,
+    desc:'Virkelig lækker restaurant, der gør lidt ekstra ud af retterne. Italiensk mad man genkender — men tilberedt lidt anderledes. Lidt i den dyre ende, men bestemt alle pengene værd. Charmerende lokaler og god service. Et af de bedste steder Joe har spist. Prøv Carpaccio eller Ragu al Chianti.',
+    lunch:'Tir–Søn', dinner:'Tir–Søn',
+    booking:'phone', bookingUrl:null, gem:false
+  },
+  {
+    id:'pommidoro', neighborhood:'sanlorenzo', name:'Il Pommidoro',
+    kitchen:'romano-trad', kitchenLabel:'Romersk — traditionelt',
+    address:'Piazza dei Sanniti 44, San Lorenzo',
+    lat:41.8977, lng:12.5134,
+    desc:'God romersk restaurant med spændende menu. Et af de få steder, man kan få pajata — pastaret med tarm fra spædlam. Også et oplagt sted for Bistecca alla Fiorentina, den store grillede T-bone steak, der deles af minimum to.',
+    lunch:'Tir–Søn', dinner:'Tir–Søn',
+    booking:'phone', bookingUrl:null, gem:false
+  }
+];
+
+const SIGHTS = [
+  { id:'barberini', name:'Palazzo Barberini', type:'museum', lat:41.9019, lng:12.4906,
+    desc:'Stor kunstsamling i en storslået barokpalæ. Fantastiske malerier af Caravaggio og Bernini. Sæt dig i strandstolen og beundre Pietro Cortonas loftsmesterværk i den store sal. Et godt alternativ til de mere kendte museer.' },
+  { id:'doriapamphilji', name:'Palazzo Doria Pamphilji', type:'museum', lat:41.8984, lng:12.4810,
+    desc:'Overvældende stor privat kunstsamling. Vægge plastered med malerier — find Velázquez\' realistiske portræt af Innocent X og sæt det op mod Berninis glorificerende buste lige ved siden af. Caravaggiosamlingen giver indblik i, hvordan hans stil udviklede sig.' },
+  { id:'farnese', name:'Palazzo Farnesina', type:'museum', lat:41.8993, lng:12.4683,
+    desc:'Kunstmuseum med Rafaels og hans elevers fantastiske loftsmalerier. Læs op på Amor og Psyke samt Galatéa-ekspeditionen inden besøget. Man kommer hurtigt igennem, men det er en god oplevelse.' },
+  { id:'spada', name:'Galleria Spada', type:'museum', lat:41.8942, lng:12.4720,
+    desc:'Fire rum plastret til med malerier — men til at overskue. Højdepunktet er Borrominis optiske illusion i haven: en 9 meter lang gang der ser ud som om den er 35 meter lang. Ikke gå glip af den.' , gem:true },
+  { id:'capitoline', name:'Musei Capitoline', type:'museum', lat:41.8932, lng:12.4836,
+    desc:'Verdens første offentlige museum. Skulpturer, malerier og artefakter fra Antikken til Barokken. Den originale hunulv med Romolus og Remus er her. Men den smukkeste udsigt ud over Forum Romanum er et besøg værd i sig selv.' },
+  { id:'borghese', name:'Galleria Borghese', type:'museum', lat:41.9143, lng:12.4922,
+    desc:'Det mest imponerende museum Joe nogensinde har besøgt. Berninis skulpturer i stueplanet er enestående. Anden sal: Caravaggios malerier er et ekstra kig værd. To timer til rådighed — man kan sagtens nå det hele. Husk at reservere på forhånd.' },
+  { id:'ostiaantica', name:'Ostia Antica', type:'museum', lat:41.7553, lng:12.2908,
+    desc:'Romerrigets gamle havneby — utrolig godt bevaret. Oplevelsen af at gå rundt i en rigtig romersk by. Godt alternativ til Pompei uden den lange rejse sydpå. Ca. 30 min. fra centrum. Tjek åbningstider.' },
+  { id:'viccapraio', name:'Vicus Capraius', type:'museum', lat:41.9006, lng:12.4823,
+    desc:'Underjordisk vandreservoir bygget oven på gamle romerske villaer ved Trevi-fontænen. Tager kun et kvarter. Joe advarede: "Det var en stor skuffelse — lad være med at besøge det, medmindre du keder dig ekstremt meget."' },
+  { id:'stefanorotondo', name:'Basilica di Santo Stefano il Rotondo', type:'church', lat:41.8851, lng:12.4983,
+    desc:'Sandsynligvis Roms eneste rundkirke — en afveksling i sig selv. Vægmalerierne forestiller forskellige martyrers død på detaljeret og makaber vis. Man går derfra med en mærkelig fornemmelse. Ligger off the beaten track mellem Colosseum og Circo Massimo.', gem:true },
+  { id:'sanluigi', name:'San Luigi dei Francesi', type:'church', lat:41.8997, lng:12.4745,
+    desc:'Kirken gemmer på to fantastiske Caravaggio-malerier. Perfekt lille afstikker, når man alligevel er i trekanten Navona–Pantheon–Sant\'Eustacchio.' },
+  { id:'santignazio', name:'Sant\'Ignazio di Loyola', type:'church', lat:41.8987, lng:12.4793,
+    desc:'Et langt stenkast fra Pantheon. Loftsmaleriet er en fantastisk optisk illusion. Stå på den gule plet i gulvet og kig op — lad være med at stå i kø til spejlet. Husk også "kuplen", som slet ikke er en kuppel.' },
+  { id:'minerva', name:'Santa Maria sopra Minerva', type:'church', lat:41.8980, lng:12.4770,
+    desc:'Roms eneste gotiske kirke, et stenkast fra Pantheon. Særegent blåt loft. Gemmer på en marmorplade af Bernini og en Jesustatue af Michelangelo — begge lette at overse. Husk Berninis elefant på pladsen foran.' },
+  { id:'agostino', name:'Basilica di Sant\'Agostino', type:'church', lat:41.8999, lng:12.4734,
+    desc:'Lille kirke ved Piazza Navona med et vægmaleri af Rafael og et Caravaggio-maleri. Hurtig, men givende afstikker.' },
+  { id:'sandreadellefratte', name:'Sant\'Andrea delle Fratte', type:'church', lat:41.9022, lng:12.4843,
+    desc:'En lille kirke med to marmor engle af Bernini. Stille og fin.' },
+  { id:'mariavittoria', name:'Santa Maria della Vittoria', type:'church', lat:41.9038, lng:12.4897,
+    desc:'Smukt kapel udsmykket med Bernini-skulpturer. Et af de bedste eksempler på barokkens teatralske udtryksform.' },
+  { id:'pietrovincoli', name:'San Pietro in Vincoli', type:'church', lat:41.8935, lng:12.4926,
+    desc:'Godt gemt af vejen mellem Monti og Colosseum. Michelangelos store gravmonument med en kæmpe Moses-statue. Men det er pavens alterstols arrogante attitude, der stjæler Joes opmærksomhed.', gem:true },
+  { id:'popolo', name:'Basilica di Santa Maria del Popolo', type:'church', lat:41.9108, lng:12.4761,
+    desc:'Ved Piazza del Popolo. Gemmer på et kapel af Rafael og to smukke Caravaggio-malerier.' },
+  { id:'constantine', name:'Kolossal Statue af Konstantin', type:'museum', lat:41.8933, lng:12.4836,
+    desc:'Nær Piazza del Capitolio — man har genskabt en kolos af kejser Konstantin ud fra fem originale fragmenter. Man forstår ikke, hvor stor den er, før man står ved den.', gem:true },
+  { id:'galleriasciara', name:'Galleria Sciarra', type:'gem', lat:41.8977, lng:12.4810,
+    desc:'I en lille passage gemmer der sig en smuk overdækket korridor. Et hurtigt men givende stop, hvis man er mellem Fontana di Trevi, Piazza Venezia og Pantheon.', gem:true },
+  { id:'bucochiave', name:'Buco della Serratura dell\'Ordine di Malta', type:'gem', lat:41.8823, lng:12.4791,
+    desc:'Kig gennem nøglehullet og se tre lande på én gang. Ekstraordinær udsigt — og stedet viser, hvor genial Rom kan være. Kø kan være lang. På vejen: nyd udsigten og den optiske illusion ved Giardino degli Aranci.', gem:true },
+  { id:'cimitero', name:'Cimitero Acattolico per gli Stranieri', type:'gem', lat:41.8793, lng:12.4762,
+    desc:'Den ikke-katolske kirkegård i Testaccio. Utrolig smuk — og man kan komme helt tæt på pyramiden.' }
+];
+
+// ═══════════════════════════════════════════════
+//  RENDER CARDS
+// ═══════════════════════════════════════════════
+
+const kitchenLabels = {
+  'romano-trad':'Romersk — traditionelt',
+  'romano-fine':'Romersk — finere',
+  'fisk':'Fisk',
+  'vinbar':'Vinbar m. mad',
+  'pizza':'Pizza',
+  'snack':'Snack & Panini',
+  'jodisk':'Jødisk-romersk',
+  'blandet':'Blandet italiensk'
+};
+
+function bookingBadge(r) {
+  if (r.booking === 'online') return `<span class="booking-badge book-online">🌐 Online booking</span>`;
+  if (r.booking === 'phone') return `<span class="booking-badge book-phone">📞 Telefon</span>`;
+  if (r.booking === 'email') return `<span class="booking-badge book-email">📧 E-mail</span>`;
+  return `<span class="booking-badge book-walkin">🚶 Drop-in</span>`;
+}
+
+function hoursLine(r) {
+  const parts = [];
+  if (r.lunch) parts.push(`<strong>Frokost:</strong> ${r.lunch}`);
+  if (r.dinner) parts.push(`<strong>Aftensmad:</strong> ${r.dinner}`);
+  if (!r.lunch && !r.dinner) return '';
+  return parts.join(' &nbsp;·&nbsp; ');
+}
+
+function renderCard(r) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.neighborhood = r.neighborhood;
+  card.dataset.kitchen = r.kitchen;
+  card.id = 'card-' + r.id;
+
+  const gemBadge = r.gem ? `<span class="badge badge-gem">💎 Skjult skat</span>` : '';
+  const hours = hoursLine(r);
+  const addrNote = r.bookingUrl ? ` · <a href="https://${r.bookingUrl.replace('https://','')}" target="_blank" style="color:var(--terra)">${r.bookingUrl}</a>` : '';
+
+  card.innerHTML = `
+    <div class="card-top">
+      <div class="card-name">${r.name}</div>
+      <div class="card-badges">
+        <span class="badge badge-kitchen">${r.kitchenLabel}</span>
+        ${gemBadge}
+      </div>
+    </div>
+    <p class="card-desc">${r.desc}</p>
+    <div class="card-meta">
+      <div class="meta-row">
+        <span class="meta-icon">📍</span>
+        <span>${r.address}</span>
+      </div>
+      ${hours ? `<div class="meta-row"><span class="meta-icon">🕐</span><span>${hours}</span></div>` : ''}
+      <div class="meta-row">
+        <span class="meta-icon">📋</span>
+        <span>${bookingBadge(r)}${addrNote}</span>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+function renderSights() {
+  const grid = document.getElementById('sights-grid');
+  SIGHTS.forEach(s => {
+    const el = document.createElement('div');
+    el.className = `sight-card type-${s.type}`;
+    el.id = 'sight-' + s.id;
+    el.dataset.type = s.type;
+    const dotClass = s.type === 'church' ? 'dot-church' : s.type === 'museum' ? 'dot-museum' : 'dot-gem';
+    el.innerHTML = `
+      <div class="sight-name">
+        <span class="sight-type-dot ${dotClass}"></span>
+        ${s.name}
+      </div>
+      <div class="sight-desc">${s.desc}</div>
+    `;
+    grid.appendChild(el);
+  });
+}
+
+// Initial render
+const neighborhoods = ['centro','monti','trastevere','testaccio','garbatella','sanlorenzo'];
+neighborhoods.forEach(n => {
+  const container = document.getElementById('cards-' + n);
+  RESTAURANTS.filter(r => r.neighborhood === n).forEach(r => {
+    container.appendChild(renderCard(r));
+  });
+});
+renderSights();
+
+// ═══════════════════════════════════════════════
+//  FILTER LOGIC
+// ═══════════════════════════════════════════════
+
+let activeNeighborhood = 'all';
+let activeKitchen = 'all';
+
+function filterNeighborhood(btn) {
+  activeNeighborhood = btn.dataset.n;
+  document.querySelectorAll('.filter-row:first-child .chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+  if (activeNeighborhood !== 'all' && activeNeighborhood !== 'sights') {
+    const el = document.getElementById('n-' + activeNeighborhood);
+    if (el) setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'start'}), 100);
+  }
+}
+
+function filterKitchen(btn) {
+  activeKitchen = btn.dataset.k;
+  document.querySelectorAll('.filter-row:last-child .chip').forEach(c => c.classList.remove('active','active-kitchen'));
+  if (activeKitchen !== 'all') btn.classList.add('active-kitchen');
+  else btn.classList.add('active');
+  applyFilters();
+  if (activeKitchen !== 'all') window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function applyFilters() {
+  // Kitchen view header
+  const header = document.getElementById('kitchenViewHeader');
+  if (activeKitchen !== 'all') {
+    header.classList.add('visible');
+    document.getElementById('kitchenViewTitle').textContent = kitchenLabels[activeKitchen] || activeKitchen;
+    document.getElementById('kitchenViewSub').textContent = 'Viser alle restauranter med dette køkken på tværs af kvarterer.';
+  } else {
+    header.classList.remove('visible');
+  }
+
+  // Cards
+  document.querySelectorAll('.card').forEach(card => {
+    const nMatch = activeNeighborhood === 'all' || card.dataset.neighborhood === activeNeighborhood;
+    const kMatch = activeKitchen === 'all' || card.dataset.kitchen === activeKitchen;
+    card.classList.toggle('hidden', !(nMatch && kMatch));
+  });
+
+  // Hide empty neighborhood sections
+  neighborhoods.forEach(n => {
+    const section = document.getElementById('n-' + n);
+    const showSection = (activeNeighborhood === 'all' || activeNeighborhood === n) && activeKitchen !== 'sights_only';
+    const hasVisible = section.querySelectorAll('.card:not(.hidden)').length > 0;
+    section.classList.toggle('hidden', !hasVisible || (activeNeighborhood === 'sights'));
+  });
+
+  // Sights section visibility
+  const sightsSection = document.getElementById('n-sights');
+  sightsSection.classList.toggle('hidden', activeNeighborhood !== 'all' && activeNeighborhood !== 'sights');
+
+  // Markets section visibility
+  const marketsSection = document.getElementById('n-markets');
+  marketsSection.classList.toggle('hidden', activeNeighborhood !== 'all' && activeNeighborhood !== 'sights');
+
+  // Update map if open
+  if (map) updateMapMarkers();
+}
+
+// ═══════════════════════════════════════════════
+//  MAP
+// ═══════════════════════════════════════════════
+
+let map = null;
+let markers = [];
+let activeMapFilter = 'all';
+
+function toggleMap() {
+  const section = document.getElementById('map-section');
+  const btn = document.getElementById('mapToggleBtn');
+  section.classList.toggle('open');
+  btn.classList.toggle('active');
+  btn.textContent = section.classList.contains('open') ? 'Luk kort ↑' : 'Kort ↓';
+
+  if (section.classList.contains('open') && !map) {
+    initMap();
+  }
+}
+
+function initMap() {
+  map = L.map('map').setView([41.8964, 12.4775], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom:19
+  }).addTo(map);
+  addAllMarkers();
+}
+
+const markerColors = {
+  food:{ color:'#b5451b', fill:'#d4633a' },
+  church:{ color:'#3a5068', fill:'#4a6080' },
+  museum:{ color:'#9a6e1a', fill:'#c9922a' },
+  gem:{ color:'#2a4a2a', fill:'#3a5c3a' }
+};
+
+function getMarkerType(r) {
+  if (r.kitchen) {
+    if (r.gem) return 'gem';
+    return 'food';
+  }
+  if (r.type === 'church') return 'church';
+  if (r.type === 'gem') return 'gem';
+  return 'museum';
+}
+
+function makeCircleMarker(lat, lng, type, name, desc, address) {
+  const c = markerColors[type] || markerColors.food;
+  const m = L.circleMarker([lat, lng], {
+    radius: 8,
+    color: c.color,
+    weight: 2,
+    fillColor: c.fill,
+    fillOpacity: 0.85
+  });
+  const addrLine = address ? `<div style="font-size:.8rem;color:#888;margin-top:.2rem">📍 ${address}</div>` : '';
+  m.bindPopup(`
+    <div style="font-family:'Cormorant Garamond',serif;min-width:160px">
+      <strong style="font-size:1rem">${name}</strong>
+      ${addrLine}
+      <div style="font-size:.85rem;color:#444;margin-top:.4rem;line-height:1.5">${desc.substring(0,120)}${desc.length>120?'…':''}</div>
+    </div>
+  `);
+  m._filterType = type;
+  return m;
+}
+
+function addAllMarkers() {
+  markers = [];
+  RESTAURANTS.forEach(r => {
+    const type = getMarkerType(r);
+    const m = makeCircleMarker(r.lat, r.lng, type, r.name, r.desc, r.address);
+    m.addTo(map);
+    markers.push(m);
+  });
+  SIGHTS.forEach(s => {
+    const type = s.type === 'church' ? 'church' : (s.gem || s.type === 'gem') ? 'gem' : 'museum';
+    const m = makeCircleMarker(s.lat, s.lng, type, s.name, s.desc, null);
+    m.addTo(map);
+    markers.push(m);
+  });
+}
+
+function mapFilter(type, btn) {
+  activeMapFilter = type;
+  document.querySelectorAll('.map-filter-btn').forEach(b => b.classList.remove('dim'));
+  if (type !== 'all') {
+    document.querySelectorAll('.map-filter-btn').forEach(b => {
+      if (!b.classList.contains('mfb-all') && b !== btn) b.classList.add('dim');
+    });
+  }
+  updateMapMarkers();
+}
+
+function updateMapMarkers() {
+  if (!map) return;
+  markers.forEach(m => {
+    if (activeMapFilter === 'all') {
+      if (!map.hasLayer(m)) m.addTo(map);
+    } else {
+      if (m._filterType === activeMapFilter) {
+        if (!map.hasLayer(m)) m.addTo(map);
+      } else {
+        if (map.hasLayer(m)) map.removeLayer(m);
+      }
+    }
+  });
+}
+
+// ── Init ──
+applyFilters();
+</script>
+</body>
+</html>
