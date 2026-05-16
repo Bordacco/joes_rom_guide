@@ -1,0 +1,686 @@
+JOES ROMGUIDE — RESTAURANTBESKRIVELSER
+========================================
+Rediger teksten herunder direkte i denne fil.
+Når du er færdig, gem filen og fortæl Claude — så opdaterer han guide.html.
+
+KORT TEKST:       Vises altid på kortet. 1–2 sætninger, fængende.
+LANG ANMELDELSE:  Foldes ud når brugeren klikker "Læs hele anmeldelsen".
+KØKKEN:           Bruges til filtrering. Vælg én af disse:
+                    Romersk — traditionelt
+                    Romersk — finere
+                    Fisk
+                    Vinbar m. mad
+                    Pizzarestaurant
+                    Snack, sandwich & pizza slice
+                    Jødisk-romersk
+                    Blandet italiensk
+ADRESSE:          Restaurantens adresse
+FROKOST:          Dage åbent til frokost, fx "Man–Lør" eller "Ikke tilgængeligt"
+AFTENSMAD:        Dage åbent til aftensmad, fx "Tir–Søn" eller "Ikke tilgængeligt"
+BOOKING:          Én af disse: Online booking / Telefon / E-mail / Drop-in
+BOOKING LINK:     URL eller e-mail — lad feltet stå tomt hvis ingen
+
+Ret kun selve teksterne. Hold strukturen intakt.
+========================================
+
+
+
+
+════════════════════════════════════════
+DET HISTORISKE CENTRUM
+════════════════════════════════════════
+
+
+────────────────────────────────────────
+Armando al Pantheon
+────────────────────────────────────────
+
+KØKKEN:           Romersk — finere
+ADRESSE:          Salita de Crecenzi 31 (ved Pantheon)
+FROKOST:          Man–Lør
+AFTENSMAD:        Man–Fre
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+Flot og charmerende restaurant med typiske romerske retter med 'a little touch of class'.
+
+---
+
+LANG ANMELDELSE:
+Er en flot og charmerende restaurant, som serverer typiske romerske retter med 'a little touch of class'. Stedet er i den lidt dyre ende, men maden er også derefter. Hvis I har lyst til at se, hvad romere kan gøre ved deres køkken, når de lige gearer den en tand op, så er Armando al Pantheon stedet at gå hen.
+
+
+────────────────────────────────────────
+Baguetteria del Fico
+────────────────────────────────────────
+
+KØKKEN:           Snack, sandwich & pizza slice
+ADRESSE:          Via della Fossa 12 (nær Piazza Navona)
+FROKOST:          Man–Søn
+AFTENSMAD:        Man–Søn
+BOOKING:          Drop-in
+BOOKING LINK:
+
+KORT TEKST:
+Suverænt lille sandwichsted i en oase nær Navona — afsides alt turistræset.
+
+---
+
+LANG ANMELDELSE:
+Er et suverænt lille sandwichsted på en lille gade i nærheden af Piazza Navona. Det ligger i en oase, hvor man kan nyde en god sandwich med en specialøl eller et glas vin afsides alt turistræset. De har et fast udvalg af sandwichs, men man kan også sammensætte sin egen. Det er også muligt at få en lille plate med diverse oste, grøntsager, skinker og pølser. Man kan passende skylde sandwichen ned med en kaffe eller anden aperitif på Bar del Fico, som ligger lige rundt om hjørnet ved figentræet.
+
+
+────────────────────────────────────────
+Enoteca Corsi
+────────────────────────────────────────
+
+KØKKEN:           Vinbar m. mad
+ADRESSE:          Via del Gesù 87/88 (nær Piazza Venezia)
+FROKOST:          Man–Lør
+AFTENSMAD:        Ikke tilgængeligt
+BOOKING:          E-mail
+BOOKING LINK:     www.3inchfat.com
+
+KORT TEKST:
+Vinbutik og familierestaurant — insistér på at sidde omringet af vine fra gulv til loft.
+
+---
+
+LANG ANMELDELSE:
+Er en gammel vinbutik med en indbygget restaurant. I det ene lokale er man omringet af italienske vine fra gulv til loft, hvilket danner en charmerende ramme for et godt måltid. Jeg anbefaler, at I insisterer på at sidde i dette lokale. Man kan tilmed vælge den vin, man ønsker fra en af hylderne. Restauranten er en familiedrevet restaurant, der serverer typisk romersk mad af høj kvalitet. Stedet afholder også kokkekurser, hvilket er værd at prøve, hvis man vil have en lidt anderledes oplevelse. Tjek deres hjemmeside www.3inchfat.com eller send dem en mail.
+
+
+────────────────────────────────────────
+Assunta Madre
+────────────────────────────────────────
+
+KØKKEN:           Fisk
+ADRESSE:          Via Giulia 14 (nær Campo dei Fiori)
+FROKOST:          Tir–Søn
+AFTENSMAD:        Tir–Søn
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+Super lækker fiskerestaurant — man vælger selv sin fisk fra isen ved indgangen.
+
+---
+
+LANG ANMELDELSE:
+Er en super lækker fiskerestaurant. Det første man mødes af er alle restaurantens fisk, der ligger på is ved indgangen til restauranten. Herfra vælger man også fisk, man ønsker at spise. Restauranten arbejder med et koncept, der går ud på at fremhæve fisk uden så mange dikkedarer. Det er lidt i den dyre ende, men til gengæld er maden rigtig god.
+
+
+────────────────────────────────────────
+Osteria de Memmo
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Via dei Soldati 22/23 (ved Piazza Navona)
+FROKOST:          Man–Lør
+AFTENSMAD:        Man–Lør
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+Klassisk trattoria, særligt kendt for Amatriciana og et fantastisk udvalg af antipasti.
+
+---
+
+LANG ANMELDELSE:
+Er et klassisk romersk trattoria. Stedet er især kendt for deres Amatriciana, som er en klassisk romersk pastaret med tørrede svinekæber i tomatsauce. De har desuden et fantastisk udvalg af antipasti, som man heller ikke skal snyde sig selv for.
+
+
+────────────────────────────────────────
+Roscioli
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Via dei Guibbonnari 21/22 (nær Campo dei Fiori)
+FROKOST:          Man–Lør
+AFTENSMAD:        Man–Lør
+BOOKING:          Online booking
+BOOKING LINK:     https://www.ristorantesalumeriaroscioli.com
+
+KORT TEKST:
+Et af de mest hypede steder — spis antipasti og salumi, spring pastaen over.
+
+---
+
+LANG ANMELDELSE:
+Er et af de mest hypede steder på den romerske madscene. Jeg vil anbefale at spise antipasti, salumi og oste. Pastaretterne er meget dyrere end gennemsnittet, men kvaliteten er ikke nødvendigvis bedre. Så prøv i stedet deres skinker og pølser, der er af særlig høj kvalitet, og vent med at få en romersk pastaret til du er et andet sted, hvor du får samme kvalitet til mere fornuftige priser. Vær obs på, hvor du bestiller bord henne. Jeg vil fraråde at få plads lige ved indgangen eller i baren.
+
+
+────────────────────────────────────────
+Nonna Betta
+────────────────────────────────────────
+
+KØKKEN:           Jødisk-romersk
+ADRESSE:          Via del Portico d'Ottavia 16 (den jødiske ghetto)
+FROKOST:          Ons–Man
+AFTENSMAD:        Ons–Man
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+Institution for det jødisk-romerske køkken — den jødiske artiskok skal prøves.
+
+---
+
+LANG ANMELDELSE:
+Er en institution for det jødisk-romerske køkken. Maden er habil og den jødiske artiskok skal prøves. Der er et lille overlap mellem det klassiske romerske køkken og det jødisk-romerske. Begge køkkener er cucina povera og fokuserer på at få billige råvarer til at smage fantastisk. Det kan anbefales at sætte sig ind i, hvilke retter der hører til det jødisk-romerske køkken for ikke at bestille en ret, man kan få andre steder. Det kan være fristende at sætte sig ved et af bordene på gaden, men jeg vil anbefale at sidde indenfor, hvor der er hyggeligere.
+
+
+────────────────────────────────────────
+Sora Margherita
+────────────────────────────────────────
+
+KØKKEN:           Jødisk-romersk
+ADRESSE:          Piazza delle Cinque Scole 30 (den jødiske ghetto)
+FROKOST:          Man–Lør
+AFTENSMAD:        Ikke tilgængeligt
+BOOKING:          Drop-in
+BOOKING LINK:
+
+KORT TEKST:
+Hyggelig lille jødisk familierestaurant med dagligt skiftende menu og forrygende stemning.
+
+---
+
+LANG ANMELDELSE:
+Er en hyggelig lille jødisk familierestaurant. Her sidder man tæt, så man rigtig kan mærke tempoet, energien og passionen. Menuen ændres fra dag til dag og står på italiensk. I får næppe tid til at google translate hele menuen, men I kan godt få hjælp til at oversætte. Vær dog opmærksom på, at de taler hurtigt, så tænk hurtigt og beslut jer hurtigt. Maden er lækker og stemningen er forrygende og autentisk.
+
+
+────────────────────────────────────────
+Trattoria Lilli
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Via Tor di Nona 23 (nær Piazza Navona)
+FROKOST:          Man–Lør
+AFTENSMAD:        Man–Lør
+BOOKING:          Drop-in
+BOOKING LINK:
+
+KORT TEKST:
+Traditionelt trattoria off the beaten track — lokalt præg og solidt måltid.
+
+---
+
+LANG ANMELDELSE:
+Er et traditionelt romersk trattoria. Det ligger off the beaten track og bliver ofte anbefalet som et godt sted at spise romersk. Jeg har været der to gange, og maden var ok ved begge besøg, men jeg kom aldrig helt oppe at ringe. Jeg havde dem mistænkt for at bruge Karl Johan svampe fra glas på deres bruschetta, og pastatypen var forkert til cacio e pepe — selve pastasaucen var god nok. Stedet er ikke overrendt af turister, men et sted lokale kommer, muligvis pga. dets lidt skjulte placering. Her er også mulighed for at sidde ude. Giv det en chance, hvis I er nær Piazza Navona og ikke lige har fået booket frokost.
+
+
+────────────────────────────────────────
+Antico Forno Roscioli
+────────────────────────────────────────
+
+KØKKEN:           Snack, sandwich & pizza slice
+ADRESSE:          Via dei Chiavari 34 (nær Campo dei Fiori)
+FROKOST:          Man–Lør
+AFTENSMAD:        Ikke tilgængeligt
+BOOKING:          Drop-in
+BOOKING LINK:
+
+KORT TEKST:
+Rigtig godt sted til et pizzaslice — peg på det du vil have, det skæres og du betaler ved kassen.
+
+---
+
+LANG ANMELDELSE:
+Er et rigtig godt sted at få et pizza slice. Det kan virke en smule forvirrende, men konceptet er enkelt. Man går op til disken og peger på de pizzaer man vil have et stykke af. Herefter skærer de et stykke af til dig, som du går over til kassen for at betale. Pizzaen er god og simpel.
+
+
+────────────────────────────────────────
+Forno Campo de' Fiori
+────────────────────────────────────────
+
+KØKKEN:           Snack, sandwich & pizza slice
+ADRESSE:          Piazza Campo de' Fiori 22
+FROKOST:          Man–Lør
+AFTENSMAD:        Ikke tilgængeligt
+BOOKING:          Drop-in
+BOOKING LINK:
+
+KORT TEKST:
+Super lille pizzasted med slices og kortere kø end Antico Forno Roscioli — simple og gode.
+
+---
+
+LANG ANMELDELSE:
+Er et super lille pizzasted, der serverer pizza slices. Her er køen ikke lige så lang som til Antico Forno Roscioli, men det ligger meget tæt på. Deres pizzaer er simple og gode.
+
+
+
+
+════════════════════════════════════════
+MONTI
+════════════════════════════════════════
+
+
+────────────────────────────────────────
+La Taverna dei Fori Imperiali
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Via della Madonna dei Monti 9
+FROKOST:          Tir–Søn
+AFTENSMAD:        Tir–Søn
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+God, afslappet restaurant med fokus på det romerske køkken — uden fine fornemmelser.
+
+---
+
+LANG ANMELDELSE:
+Er en god restaurant, der fokuserer på det romerske køkken. De serverer klassiske romerske retter, men byder også på dagens specialiteter. Det er et hyggeligt og afslappet sted uden fine fornemmelser.
+
+
+────────────────────────────────────────
+Ai Tre Scaline
+────────────────────────────────────────
+
+KØKKEN:           Vinbar m. mad
+ADRESSE:          Via Panisperna 251
+FROKOST:          Man–Lør
+AFTENSMAD:        Man–Lør
+BOOKING:          Drop-in
+BOOKING LINK:
+
+KORT TEKST:
+Charmerende lille vinbar med levende stemning inden- og udendørs på Via Panisperna.
+
+---
+
+LANG ANMELDELSE:
+Er en fornuftig og charmerende lille vinbar. Tag på Ai Tre Scaline for at nyde stemningen og vinen. Indenfor er der en levende stemning, og udenfor kan man nyde Via Panispernas charme. Bordene udenfor bliver hurtigt taget, så vær der, når de åbner. Hvis de ikke lige har et udendørs bord klar, kan du altid slå ventetiden ihjel med et glas vin i baren.
+
+
+────────────────────────────────────────
+La Barrique
+────────────────────────────────────────
+
+KØKKEN:           Vinbar m. mad
+ADRESSE:          Via del Boschetto 41B
+FROKOST:          Man–Lør
+AFTENSMAD:        Man–Lør
+BOOKING:          Drop-in
+BOOKING LINK:
+
+KORT TEKST:
+Dejlig vinbar med uformelt interiør.
+
+---
+
+LANG ANMELDELSE:
+En dejlig vinbar med et cool men uformelt interiør og lækker baggrundsmusik. Maden er god og simpel. Jeg fik kalvetunge med salsa verde, hvilket var helt fantastisk. Sidst jeg var der, fik jeg et ekstra glas rødvin i stedet for dessert, da jeg ikke gad gå ud i regnen. Tjeneren syntes vinen så lidt ensom ud, så han gav mig et par stykker ost til det. Det er den slags uhøjtidelige og personlige service, som gør, at jeg elsker Rom, og som bidrager til at jeg anbefaler stedet. Der er både mulighed for at vælge vine fra kortet eller bare tage en flaske ned fra hylderne. Tag derhen, hvis du ønsker et afbræk fra det klassiske romerske køkken.
+
+
+────────────────────────────────────────
+Trattoria Monti
+────────────────────────────────────────
+
+KØKKEN:           Blandet italiensk
+ADRESSE:          Via di S. Vito 13 (mellem Monti og Piazza Vittorio)
+FROKOST:          Tir–Søn
+AFTENSMAD:        Tir–Søn
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+Rigtig fin restaurant, hvor mamma styrer køkkenet med hård hånd — det lille menukort er en undskyldning for at vende tilbage.
+
+---
+
+LANG ANMELDELSE:
+Er en rigtig fin og hyggelig restaurant med super god mad. Deres køkken fokuserer ikke på et bestemt område i Italien, men blot at få det bedste ud af deres råvarer. Dette er et af de få steder, hvor det stadig er mamma, der styrer køkkenet med hård hånd, hvilket unægteligt har sin charme. Maden er rigtig god, og det kan være meget svært at beslutte sig for, hvad man skal spise på det ellers meget lille menukort. Jeg ser det som en undskyldning for at vende tilbage. Det er svært at få bord uden en reservation, så gør det, og vær forberedt på at de ikke altid svarer telefonen. Det er dog besværet værd.
+
+
+────────────────────────────────────────
+Zia Rosetta
+────────────────────────────────────────
+
+KØKKEN:           Snack, sandwich & pizza slice
+ADRESSE:          Via Urbana 54
+FROKOST:          Man–Lør
+AFTENSMAD:        Ikke tilgængeligt
+BOOKING:          Drop-in
+BOOKING LINK:
+
+KORT TEKST:
+Sandwich i den traditionelle Rosetta-bolle — tag den store udgave, en øl og nyd den på Piazza degli Zingari.
+
+---
+
+LANG ANMELDELSE:
+På Zia Rosetta kan man få en sandwich i den traditionelle romerske bolle Rosetta, som ligner et skildpadeskjold. De har mange varianter, så vælg den du synes lyder bedst. Jeg vil anbefale at få en af de normale størrelse frem for de små fesne hippe versioner. Tag en øl med under hånden og nyd rosettaen på Piazza degli Zingari i det charmerende Monti. Bagefter er det oplagt at få en is fra Fatamorgana, der ligger på samme plads. Og bagefter det er det oplagt at få en kaffe på Er Caffettiere.
+
+
+────────────────────────────────────────
+Hostaria Romana
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Via del Boccaccio 1 (nær Monti/Trevi)
+FROKOST:          Man–Lør
+AFTENSMAD:        Man–Lør
+BOOKING:          Drop-in
+BOOKING LINK:
+
+KORT TEKST:
+Hyggelig og autentisk, lidt gemt væk fra turisterne — mange italienske gæster.
+
+---
+
+LANG ANMELDELSE:
+Er en hyggelig og autentisk restaurant. Det ligger lidt gemt væk fra de mest turistede områder, men det er bestemt ikke dårligt. Maden er god, og her kommer mange italienere.
+
+
+
+
+════════════════════════════════════════
+TRASTEVERE
+════════════════════════════════════════
+
+
+────────────────────────────────────────
+Da Teo
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Piazza del Ponziani 7
+FROKOST:          Ikke tilgængeligt
+AFTENSMAD:        Man–Lør
+BOOKING:          Online booking
+BOOKING LINK:     https://www.ristorantedateo.it
+
+KORT TEKST:
+Fornuftigt trattoria med typisk romersk mad.
+
+---
+
+LANG ANMELDELSE:
+Er et rigtig fornuftigt trattoria. De serverer typisk romersk mad, men har travlt, så vær forberedt på lidt ventetid. Fik en rigtig god carbonara (med lidt for meget olie).
+
+
+────────────────────────────────────────
+Checo Er Caretierre
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Via Benedetta 10
+FROKOST:          Tir–Søn
+AFTENSMAD:        Tir–Søn
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+Hyggelig restaurant med sublime antipasti og fuldstændig fantastiske polpette.
+
+---
+
+LANG ANMELDELSE:
+Hyggelig restaurant der lever lidt i fordums storhed. Det er dog stadig et sted som mange lokale frekventerer. Deres menukort er simpelt og består udelukkende af romerske retter. Foruden dette har de ofte frisk fisk liggende fremme, som man frit kan vælge ud fra. Deres antipasti er også sublime, og det kan næsten anbefales kun at spise disse. Prøv deres Polpette (meatballs), der er fuldstændig fantastiske. N.b.: De har både en restaurant og et hostaria — jeg synes, at restauranten er lidt mere uformel og hyggelig.
+
+
+────────────────────────────────────────
+Da Carlone
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Via della Luce 5
+FROKOST:          Tir–Søn
+AFTENSMAD:        Tir–Søn
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+Godt trattoria med store portioner — send mig et billede, når du rammer Carbonara-muren.
+
+---
+
+LANG ANMELDELSE:
+Er et rigtig godt og hyggeligt trattoria. De serverer rigtig gode romerske retter, men deres portioner er latterligt store, så jeg vil anbefale at være to til tre om en portion. Husk at tage et billede og send det til mig, når du rammer Carbonara-muren, for jeg samler på det. Det er et smukt øjeblik i enhver pastaelskers liv.
+
+
+────────────────────────────────────────
+Le Mani in Pasta
+────────────────────────────────────────
+
+KØKKEN:           Fisk
+ADRESSE:          Via dei Genovesi 37
+FROKOST:          Tir–Søn
+AFTENSMAD:        Tir–Søn
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+Fiskespecialist i Trasteveres stille ende — intimt, lokalt og godt.
+
+---
+
+LANG ANMELDELSE:
+På Le Mani in Pasta specialiserer de sig i fisk, men tilbyder også klassiske romerske retter. Restauranten ligger i Trastevere et stykke fra der, hvor turisterne færdes. Klientellet består af både turister og lokale, hvor førstnævnte forfordeles. Det er fedt. Det er småt med pladsen, og stedet har en god puls — så hvis man kan lide madro og albuerum, er Le Mani in Pasta det forkerte sted at gå hen. Pas på med at købe hele fisk til kiloprisen, da det kan blive en dyr fornøjelse. Vi endte med at betale 80€ for en stor fisk til deling + alt det andet. Sidst jeg var der, fik vi et overdådigt måltid. Vi blev tilmed forkælet med et par ekstra pastaretter til deling ved bordet, fordi de var så glade for os… eller også havde de lavet lidt for meget og gav det til os, fordi vi sad tættest på køkkenet.
+
+
+
+
+════════════════════════════════════════
+TESTACCIO
+════════════════════════════════════════
+
+
+────────────────────────────────────────
+Felicie a Testaccio
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Via Mastro Giorgio 29
+FROKOST:          Man–Lør
+AFTENSMAD:        Man–Lør
+BOOKING:          Online booking
+BOOKING LINK:     https://www.feliceatestaccio.it
+
+KORT TEKST:
+Nyrenoveret institution i Testaccio med traditionerne i behold — romerske artiskokker der giver vand i øjnene.
+
+---
+
+LANG ANMELDELSE:
+Er en institution i Testaccio. Restauranten anbefales i mange guider, men på trods af turisternes indtog frekventeres den stadig af romere. Restauranten er pænt indrettet, og der er en hyggelig stemning. Jeg fik en romersk artiskok, som var en af de bedste jeg nogensinde har fået. Blød som smør og smagfuld. Jeg var ved at knibe en tåre. De er kendt for deres Cacio e Pepe, og som en lille gimmick blander de den færdig ved bordet for at give pastaretten sin karakteristiske sauce. Jeg syntes den manglede lidt peber, og blev desværre nødt til at levne for at have plads til aftensmaden. Det fortrød jeg.
+
+
+────────────────────────────────────────
+Trattoria Perilli
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Via Marmorata 39
+FROKOST:          Tor–Tir
+AFTENSMAD:        Tor–Tir
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+Institution i Testaccio med bundsolid klassisk romersk mad — man går ikke galt i byen.
+
+---
+
+LANG ANMELDELSE:
+Er endnu en institution i Testaccio, som serverer klassisk romersk mad. Her går man ikke galt i byen, og det er et oplagt sted at spise mindst én af de fire klassiske romerske pastaretter.
+
+
+────────────────────────────────────────
+Flavio al Velavevodetto
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Via di Monte Testaccio 97
+FROKOST:          Man–Lør
+AFTENSMAD:        Man–Lør
+BOOKING:          Online booking
+BOOKING LINK:     https://www.ilvelavevodetto.it
+
+KORT TEKST:
+Charmerende restaurant bogstaveligt talt bygget ind i potteskårshøjen.
+
+---
+
+LANG ANMELDELSE:
+Er et af de mere charmerende steder. Restauranten er bygget ind i potteskårshøjen, hvilket man kan se i baglokalerne. Maden er bundsolid, og der er en fed atmosfære.
+
+
+────────────────────────────────────────
+Checchino dal 1887
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Via di Monte Testaccio 30
+FROKOST:          Tir–Lør
+AFTENSMAD:        Tir–Lør
+BOOKING:          Online booking
+BOOKING LINK:     https://www.checchino-dal-1887.com
+
+KORT TEKST:
+En af Roms ældste restauranter — grebet af stemningen med formelle tjenere i et enkelt lokale.
+
+---
+
+LANG ANMELDELSE:
+Er en af de ældste og mest traditionsbundne romerske restauranter. Maden er god og simpel. Jeg blev særlig grebet af stemningen i restauranten, som består af et enkelt lokale, hvor alle gæsterne sidder, og tjenerne har deres formelle, men særegne tjeneruniformer på.
+
+
+────────────────────────────────────────
+Mercato di Testaccio
+────────────────────────────────────────
+
+KØKKEN:           Snack, sandwich & pizza slice
+ADRESSE:          Via Beniamino Franklin
+FROKOST:          Tir–Søn
+AFTENSMAD:        Ikke tilgængeligt
+BOOKING:          Drop-in
+BOOKING LINK:
+
+KORT TEKST:
+Mad- og loppemarked — slå lejr ved og hent mad ved boderne.
+
+---
+
+LANG ANMELDELSE:
+Er Testaccios mad- og loppemarked. Her findes mange gode madboder, og det er svært at vælge. Mange anbefaler Mordi e Vai, men jeg synes at horderne af turister, der ankom på cykler og el-løbehjul for at besøge stedet, var en kæmpe turn off. Derudover var køen ulidelig lang, så vi sprang over sidst vi var der. Vi valgte i stedet at sætte os ved et af bordene i midten og hente mad på skift. Det var en kæmpe oplevelse og kan klart anbefales.
+
+
+
+
+════════════════════════════════════════
+GARBATELLA
+════════════════════════════════════════
+
+
+────────────────────────────────────────
+Tanto Pe Manga
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Via Giovanni Branca 29
+FROKOST:          Tir–Søn
+AFTENSMAD:        Tir–Søn
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+Super hyggelig restaurant, hvor man spiser godt — inden- eller udendørs i roen.
+
+---
+
+LANG ANMELDELSE:
+Er en super hyggelig restaurant, hvor man spiser godt. Her kan man sidde indenfor i de hyggelige lokaler eller udenfor og nyde roen.
+
+
+────────────────────────────────────────
+Ristoro degli Angeli
+────────────────────────────────────────
+
+KØKKEN:           Romersk — finere
+ADRESSE:          Via Luigi Orlando 2
+FROKOST:          Tir–Søn
+AFTENSMAD:        Tir–Søn
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+Super god restaurant, der blander romerske traditioner med egne kreationer — jeg drømmer stadig om carbonaraen.
+
+---
+
+LANG ANMELDELSE:
+Er en super god restaurant, som kombinerer det traditionelle romerske køkken med deres egne kreationer, der følger den romerske stil. Simpelt og godt. Vi fik nogle fantastiske friturestegte zucchiniblomster og en dejlig osteagtig carbonara, som jeg stadig drømmer om.
+
+
+
+
+════════════════════════════════════════
+SAN LORENZO
+════════════════════════════════════════
+
+
+────────────────────────────────────────
+Formula Uno
+────────────────────────────────────────
+
+KØKKEN:           Pizzarestaurant
+ADRESSE:          Via degli Equi 13
+FROKOST:          Ikke tilgængeligt
+AFTENSMAD:        Man–Lør
+BOOKING:          Drop-in
+BOOKING LINK:
+
+KORT TEKST:
+Det bedste pizzeria jeg har besøgt — Ferrari-plakater, hærget look, og virkelig gode billige pizzaer.
+
+---
+
+LANG ANMELDELSE:
+Er det bedste og mest oplevelsesrige pizzeria jeg har besøgt indtil videre. Der er Ferrari-plakater over det hele, og man tror ikke det er et særlig godt sted ved første øjekast. Man skal dog ikke lade sig narre af det lidt hærgede look, da det har meget charme og er meget autentisk. Det er et meget travlt sted — så travlt, at servicen ikke er i top, hvilket heller ikke er det man betaler for. Tjenerne kan virke arrogante, ligeglade og måske lidt fjendtlige, men de kan til gengæld bære op til 11 pizzaer på en gang. Et godt trick til at overvinde tjenernes hjerter er at bestille et par supplì og fiori di zucca, inden man beslutter sig. Der er endnu en gang tale om et sted, der indbefatter Roms ånd om, at ingenting sker på dine egne præmisser — så det er bare om at nyde det Rom nu måtte give dig. Jeg vil indskyde, at man skal holde sig fra vinen og bestille øl. Alt i alt har Formula Uno virkelig gode og billige pizzaer i et meget autentisk og livligt miljø.
+
+
+────────────────────────────────────────
+Pinsa e Buoi
+────────────────────────────────────────
+
+KØKKEN:           Romersk — finere
+ADRESSE:          Viale Scalo San Lorenzo 15/17
+FROKOST:          Tir–Søn
+AFTENSMAD:        Tir–Søn
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+Et af de bedste steder jeg har spist — prøv Carpaccio eller Ragu al Chianti.
+
+---
+
+LANG ANMELDELSE:
+Er en virkelig lækker restaurant, hvor der lige er gjort lidt ekstra ud af retterne. De serverer italiensk mad, så man føler lidt man kender det, mens man prøver noget nyt. Det er lidt i den dyre ende — bestemt alle pengene værd. Charmerende lokaler og god service. Det er klart et af de bedste steder jeg har spist, og jeg kan klart anbefale deres Carpaccio eller Ragu al Chianti.
+
+
+────────────────────────────────────────
+Il Pommidoro
+────────────────────────────────────────
+
+KØKKEN:           Romersk — traditionelt
+ADRESSE:          Piazza dei Sanniti 44
+FROKOST:          Tir–Søn
+AFTENSMAD:        Tir–Søn
+BOOKING:          Telefon
+BOOKING LINK:
+
+KORT TEKST:
+God restaurant med spændende menu — et af de få steder, man kan få pajata og Bistecca alla Fiorentina.
+
+---
+
+LANG ANMELDELSE:
+Er en god romersk restaurant med meget spændende menu. Det er eksempelvis et af de få steder, hvor man kan få den romerske specialitet pajata, som er en pastaret med tarm fra et spædlam. Derudover er det et oplagt sted at få serveret en Bistecca alla Fiorentina — en stor grillet T-bone steak, som skal deles af minimum to personer.

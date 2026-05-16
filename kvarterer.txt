@@ -1,0 +1,100 @@
+JOES ROMGUIDE — KVARTERBESKRIVELSER
+========================================
+Rediger teksten herunder direkte i denne fil.
+Når du er færdig, gem filen og fortæl Claude — så opdaterer han guide.html.
+
+KORT TEKST:   Vises altid direkte under kvarterets navn i guiden.
+              Hold den til 1–2 sætninger. En appetitvækker.
+
+LANG TEKST:   Vises kun når brugeren klikker "Læs mere om kvarteret".
+              Her kan du skrive så meget du har lyst til.
+              Brug linjeskift til at skille afsnit.
+
+Ret kun selve teksterne. Hold strukturen (fx "KORT TEKST:" osv.) intakt.
+========================================
+
+
+
+
+════════════════════════════════════════
+DET HISTORISKE CENTRUM
+════════════════════════════════════════
+
+KORT TEKST:
+THE beaten track. Pantheon, Piazza Navona, Campo dei Fiori og den jødiske ghetto. Turisternes Rom — men med den rigtige guide finder du steder, der stadig tilhører romerne.
+
+---
+
+LANG TEKST:
+(Intet endnu — skriv din tekst her)
+
+
+════════════════════════════════════════
+MONTI
+════════════════════════════════════════
+
+KORT TEKST:
+Roms skjulte og hippe kvarter med sjælen intakt...lidt endnu. Smalle brolagte gader, hyggelige butikker og vinbarer, hvor den lokale toner frem mellem turisterne.
+Besøg det inden de andre opdager det. 
+---
+
+LANG TEKST:
+(Intet endnu — skriv din tekst her)
+
+
+════════════════════════════════════════
+TRASTEVERE
+════════════════════════════════════════
+
+KORT TEKST:
+Fantastisk karismatisk — men efterhånden overrendt af turister. God til en morgentur og et måltid de mindre populære ender.
+
+---
+
+LANG TEKST:
+Generelt er jeg ikke den store fan af Trastevere. Mange anbefaler at tage derhen på grund af kvarterets åbenlyse charme, men jeg synes efterhånden, at det er blevet overrendt af turister, hvilket ses i gadebilledet og kan mærkes på restauranterne. Stedet er stadig fantastisk karismatisk og flot, så jeg vil anbefale at tage derhen en morgen på en rask gåtur.
+
+De restauranter jeg anbefaler ligger i Trastevere, men i de mindre "populære" ender, hvor man har det lidt mere — men ikke helt — for sig selv. Det er stdig muligt at spise godt i Trastevere, hvis man gør en indsats for at finde det rigtige sted.
+
+
+════════════════════════════════════════
+TESTACCIO
+════════════════════════════════════════
+
+KORT TEKST:
+Kvarteret med en myriade af romerske restauranter og et populært sted at gå i byen. Det er her man lærer det romerske køkken at kende.
+
+---
+
+LANG TEKST:
+Flere og flere får øjnene op for Testaccio — og med god grund. Kvarteret er ikke overrendt af turister, som kun kommer ved frokost og aftensmad. Det betyder, at man kan få et lille afbræk fra turistmylderet og udforske kvarteret inden eller efter maden. Om aftenen er det et populært sted at gå i byen, og mange besøger barerne rundt om potteskårshøjen.
+
+Jeg er først lige begyndt at udforske stedet, men det er efterhånden blevet et fast pitstop på mine ture. Jeg er dog langt fra i mål, så Testaccio er det kvarter med flest steder på min To Eat-liste. Prøv et af stederne fra listen og fortæl mig om det.
+
+
+════════════════════════════════════════
+GARBATELLA
+════════════════════════════════════════
+
+KORT TEKST:
+Et unikt kvarter i sin særegne barocchetto-arkitektur — oplagt hvis man vil opleve den romerske charme i ro og mag.
+
+---
+
+LANG TEKST:
+Garbatella er et unikt kvarter i Rom og et oplagt sted at besøge, hvis man vil væk fra mylderet men stadig opleve den romerske charme og spise god mad. Kvarteret er bygget i sin særegne barocchetto-arkitektur, som er en form for moderniseret og forenklet barok byggestil. Husene ligger i små klynger omkring små gårde, og boligklyngerne samles om små pladser. Hver plads har sit eget udtryk og stil.
+
+Jeg har selv boet der på en af mine Rom-ture, hvor vi tog ind til centrum om dagen og nød aftenerne i Garbatella. Hvis man foretrækker at bo i centrum og være tæt på det hele, vil jeg anbefale at tage derhen om eftermiddagen og bruge en times tid på at vandre rundt i kvarteret. Herefter er det oplagt at få en lille aperitivo på en af pladserne og suge stemningen til sig. Aftenen skal naturligvis sluttes af med et godt måltid. Samme rutine kan lires af en lørdag eller søndag til frokost.
+
+
+════════════════════════════════════════
+SAN LORENZO
+════════════════════════════════════════
+
+KORT TEKST:
+Dynamisk, ungt og hipt kvarter lidt fra centrum. Her spiser og drikker man godt og lokalt.
+
+---
+
+LANG TEKST:
+San Lorenzo er et dynamisk, ungt og hipt kvarter lidt i overskuelig afstand fra centrum. Det er her, de unge hænger og går i byen. Rent arkitektonisk slår kvarteret ikke benene væk under en, så man skal besøge kvarteret for at få lidt autenticitet og mærke byens puls. Her er mange barer og restauranter, hvor man sjældent går galt i byen.
