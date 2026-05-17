@@ -12,7 +12,9 @@
       "mcp__claude_ai_Google_Drive__search_files",
       "PowerShell(\\(Get-Content \"c:\\\\Users\\\\mats_\\\\OneDrive\\\\Documents\\\\Rom guide\\\\joes_rom_guide\\\\guide.html\"\\).Count)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "WebFetch(domain:nominatim.openstreetmap.org)",
+      "WebFetch(domain:photon.komoot.io)"
     ]
   }
 }
