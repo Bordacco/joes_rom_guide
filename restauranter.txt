@@ -14,6 +14,7 @@ KØKKEN:           Bruges til filtrering. Vælg én af disse:
                     Snack, sandwich & pizza slice
                     Jødisk-romersk
                     Blandet italiensk
+                    BAR!
 ADRESSE:          Restaurantens adresse
 FROKOST:          Dage åbent til frokost, fx "Man–Lør" eller "Ikke tilgængeligt"
 AFTENSMAD:        Dage åbent til aftensmad, fx "Tir–Søn" eller "Ikke tilgængeligt"
@@ -429,7 +430,7 @@ Da Carlone
 ────────────────────────────────────────
 
 KØKKEN:           Romersk — traditionelt
-ADRESSE:          Via della Luce 5
+ADRESSE:          Via della Cisterna 13
 FROKOST:          Tir–Søn
 AFTENSMAD:        Tir–Søn
 BOOKING:          Telefon
@@ -583,7 +584,7 @@ Tanto Pe Manga
 ────────────────────────────────────────
 
 KØKKEN:           Romersk — traditionelt
-ADRESSE:          Via Giovanni Branca 29
+ADRESSE:          Via Giustino de Jacobis 9
 FROKOST:          Tir–Søn
 AFTENSMAD:        Tir–Søn
 BOOKING:          Telefon
