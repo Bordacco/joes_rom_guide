@@ -120,13 +120,13 @@ body{
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.25rem}
 
 /* ── CARD ── */
-.card{background:var(--card);border:1px solid var(--border);display:flex;flex-direction:column;transition:box-shadow .2s}
+.card{background:var(--card);border:1px solid var(--border);display:flex;flex-direction:column;transition:box-shadow .2s;overflow:hidden}
 .card:hover{box-shadow:0 3px 18px rgba(42,31,14,.07)}
 .card.hidden{display:none}
 
-.card-top{padding:1.25rem 1.25rem .75rem;display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem}
-.card-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;font-style:italic;line-height:1.2}
-.card-badges{display:flex;flex-direction:column;gap:.25rem;align-items:flex-end;flex-shrink:0}
+.card-top{padding:1.25rem 1.25rem .6rem}
+.card-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;font-style:italic;line-height:1.2;margin-bottom:.5rem}
+.card-badges{display:flex;flex-wrap:wrap;gap:.3rem;align-items:flex-start}
 .badge{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:.12rem .5rem;border:1px solid currentColor;white-space:nowrap}
 .badge-kitchen{color:var(--terra)}
 .badge-gem{color:var(--green);background:rgba(58,92,58,.06)}
@@ -508,7 +508,7 @@ const RESTAURANTS = [
     address:'Salita de Crecenzi 31 (ved Pantheon)', lat:41.8989, lng:12.4764,
     teaser:'Flot og charmerende restaurant med typiske romerske retter med \'a little touch of class\'.',
     desc:'Er en flot og charmerende restaurant, som serverer typiske romerske retter med \'a little touch of class\'. Stedet er i den lidt dyre ende, men maden er også derefter. Hvis I har lyst til at se, hvad romere kan gøre ved deres køkken, når de lige gearer den en tand op, så er Armando al Pantheon stedet at gå hen.',
-    lunch:'Man–Lør', dinner:'Man–Fre', booking:'phone', gem:false
+    lunch:'Man–Lør', dinner:'Man–Fre', booking:['online'], bookingUrl:'https://armandoalpantheon.it/prenota/', gem:false
   },
   {
     id:'baguetteria', neighborhood:'centro', name:'Baguetteria del Fico',
@@ -516,7 +516,7 @@ const RESTAURANTS = [
     address:'Via della Fossa 12 (nær Piazza Navona)', lat:41.8993, lng:12.4722,
     teaser:'Suverænt lille sandwichsted i en oase nær Navona — afsides alt turistræset.',
     desc:'Er et suverænt lille sandwichsted på en lille gade i nærheden af Piazza Navona. Det ligger i en oase, hvor man kan nyde en god sandwich med en specialøl eller et glas vin afsides alt turistræset. De har et fast udvalg af sandwichs, men man kan også sammensætte sin egen. Det er også muligt at få en lille plate med diverse oste, grøntsager, skinker og pølser. Man kan passende skylde sandwichen ned med en kaffe eller anden aperitif på Bar del Fico, som ligger lige rundt om hjørnet ved figentræet.',
-    lunch:'Man–Søn', dinner:'Man–Søn', booking:'walkin', gem:true
+    lunch:'Man–Søn', dinner:'Man–Søn', booking:['online','walkin'], bookingUrl:'https://www.baguetteriadelficoroma.it/#prenota-baguetteria-del-fico', gem:true
   },
   {
     id:'corsi', neighborhood:'centro', name:'Enoteca Corsi',
@@ -524,7 +524,7 @@ const RESTAURANTS = [
     address:'Via del Gesù 87/88 (nær Piazza Venezia)', lat:41.8959, lng:12.4798,
     teaser:'Vinbutik og familierestaurant — insistér på at sidde omringet af vine fra gulv til loft.',
     desc:'Er en gammel vinbutik med en indbygget restaurant. I det ene lokale er man omringet af italienske vine fra gulv til loft, hvilket danner en charmerende ramme for et godt måltid. Jeg anbefaler, at I insisterer på at sidde i dette lokale. Man kan tilmed vælge den vin, man ønsker fra en af hylderne. Restauranten er en familiedrevet restaurant, der serverer typisk romersk mad af høj kvalitet. Stedet afholder også kokkekurser, hvilket er værd at prøve, hvis man vil have en lidt anderledes oplevelse. Tjek deres hjemmeside www.3inchfat.com eller send dem en mail.',
-    lunch:'Man–Lør', dinner:null, booking:'email', bookingUrl:'www.3inchfat.com', gem:false
+    lunch:'Man–Lør', dinner:null, booking:['email','phone'], bookingUrl:'https://www.enotecacorsi.com/contatti/', gem:false
   },
   {
     id:'assunta', neighborhood:'centro', name:'Assunta Madre',
@@ -532,7 +532,7 @@ const RESTAURANTS = [
     address:'Via Giulia 14 (nær Campo dei Fiori)', lat:41.8967, lng:12.4713,
     teaser:'Super lækker fiskerestaurant — man vælger selv sin fisk fra isen ved indgangen.',
     desc:'Er en super lækker fiskerestaurant. Det første man mødes af er alle restaurantens fisk, der ligger på is ved indgangen til restauranten. Herfra vælger man også fisk, man ønsker at spise. Restauranten arbejder med et koncept, der går ud på at fremhæve fisk uden så mange dikkedarer. Det er lidt i den dyre ende, men til gengæld er maden rigtig god.',
-    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:'phone', gem:false
+    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:['online'], bookingUrl:'https://www.ristoranteassuntamadre.it/en/assuntamadre-booking-rome/', gem:false
   },
   {
     id:'memmo', neighborhood:'centro', name:'Osteria de Memmo',
@@ -540,7 +540,7 @@ const RESTAURANTS = [
     address:'Via dei Soldati 22/23 (ved Piazza Navona)', lat:41.9000, lng:12.4728,
     teaser:'Klassisk trattoria, særligt kendt for Amatriciana og et fantastisk udvalg af antipasti.',
     desc:'Er et klassisk romersk trattoria. Stedet er især kendt for deres Amatriciana, som er en klassisk romersk pastaret med tørrede svinekæber i tomatsauce. De har desuden et fantastisk udvalg af antipasti, som man heller ikke skal snyde sig selv for.',
-    lunch:'Man–Lør', dinner:'Man–Lør', booking:'phone', gem:false
+    lunch:'Man–Lør', dinner:'Man–Lør', booking:['phone'], bookingUrl:'https://osteriadememmo.it/index.php/contact/', gem:false
   },
   {
     id:'roscioli', neighborhood:'centro', name:'Roscioli',
@@ -548,7 +548,7 @@ const RESTAURANTS = [
     address:'Via dei Guibbonnari 21/22 (nær Campo dei Fiori)', lat:41.8946, lng:12.4717,
     teaser:'Et af de mest hypede steder — spis antipasti og salumi, spring pastaen over.',
     desc:'Er et af de mest hypede steder på den romerske madscene. Jeg vil anbefale at spise antipasti, salumi og oste. Pastaretterne er meget dyrere end gennemsnittet, men kvaliteten er ikke nødvendigvis bedre. Så prøv i stedet deres skinker og pølser, der er af særlig høj kvalitet, og vent med at få en romersk pastaret til du er et andet sted, hvor du får samme kvalitet til mere fornuftige priser. Vær obs på, hvor du bestiller bord henne. Jeg vil fraråde at få plads lige ved indgangen eller i baren.',
-    lunch:'Man–Lør', dinner:'Man–Lør', booking:'online', bookingUrl:'https://www.ristorantesalumeriaroscioli.com', gem:false
+    lunch:'Man–Lør', dinner:'Man–Lør', booking:['online'], bookingUrl:'https://salumeriaroscioli.com/en/pages/prenota', gem:false
   },
   {
     id:'nonnabetta', neighborhood:'centro', name:'Nonna Betta',
@@ -556,7 +556,7 @@ const RESTAURANTS = [
     address:'Via del Portico d\'Ottavia 16 (den jødiske ghetto)', lat:41.8924, lng:12.4779,
     teaser:'Institution for det jødisk-romerske køkken — den jødiske artiskok skal prøves.',
     desc:'Er en institution for det jødisk-romerske køkken. Maden er habil og den jødiske artiskok skal prøves. Der er et lille overlap mellem det klassiske romerske køkken og det jødisk-romerske. Begge køkkener er cucina povera og fokuserer på at få billige råvarer til at smage fantastisk. Det kan anbefales at sætte sig ind i, hvilke retter der hører til det jødisk-romerske køkken for ikke at bestille en ret, man kan få andre steder. Det kan være fristende at sætte sig ved et af bordene på gaden, men jeg vil anbefale at sidde indenfor, hvor der er hyggeligere.',
-    lunch:'Ons–Man', dinner:'Ons–Man', booking:'phone', gem:false
+    lunch:'Ons–Man', dinner:'Ons–Man', booking:['online'], bookingUrl:'https://www.nonnabetta.it/prenota/', gem:false
   },
   {
     id:'soramargherita', neighborhood:'centro', name:'Sora Margherita',
@@ -564,7 +564,7 @@ const RESTAURANTS = [
     address:'Piazza delle Cinque Scole 30 (den jødiske ghetto)', lat:41.8921, lng:12.4774,
     teaser:'Hyggelig lille jødisk familierestaurant med dagligt skiftende menu og forrygende stemning.',
     desc:'Er en hyggelig lille jødisk familierestaurant. Her sidder man tæt, så man rigtig kan mærke tempoet, energien og passionen. Menuen ændres fra dag til dag og står på italiensk. I får næppe tid til at google translate hele menuen, men I kan godt få hjælp til at oversætte. Vær dog opmærksom på, at de taler hurtigt, så tænk hurtigt og beslut jer hurtigt. Maden er lækker og stemningen er forrygende og autentisk.',
-    lunch:'Man–Lør', dinner:null, booking:'walkin', gem:true
+    lunch:'Man–Lør', dinner:null, booking:['phone'], bookingUrl:'https://www.soramargherita.com/contact_us', gem:true
   },
   {
     id:'lilli', neighborhood:'centro', name:'Trattoria Lilli',
@@ -572,7 +572,7 @@ const RESTAURANTS = [
     address:'Via Tor di Nona 23 (nær Piazza Navona)', lat:41.9003, lng:12.4715,
     teaser:'Traditionelt trattoria off the beaten track — lokalt præg og solidt måltid.',
     desc:'Er et traditionelt romersk trattoria. Det ligger off the beaten track og bliver ofte anbefalet som et godt sted at spise romersk. Jeg har været der to gange, og maden var ok ved begge besøg, men jeg kom aldrig helt oppe at ringe. Jeg havde dem mistænkt for at bruge Karl Johan svampe fra glas på deres bruschetta, og pastatypen var forkert til cacio e pepe — selve pastasaucen var god nok. Stedet er ikke overrendt af turister, men et sted lokale kommer, muligvis pga. dets lidt skjulte placering. Her er også mulighed for at sidde ude. Giv det en chance, hvis I er nær Piazza Navona og ikke lige har fået booket frokost.',
-    lunch:'Man–Lør', dinner:'Man–Lør', booking:'walkin', gem:false
+    lunch:'Man–Lør', dinner:'Man–Lør', booking:['phone'], bookingUrl:'https://www.trattorialilli.it/', gem:false
   },
   {
     id:'anticoforno', neighborhood:'centro', name:'Antico Forno Roscioli',
@@ -598,15 +598,15 @@ const RESTAURANTS = [
     address:'Via della Madonna dei Monti 9', lat:41.8940, lng:12.4897,
     teaser:'God, afslappet restaurant med fokus på det romerske køkken — uden fine fornemmelser.',
     desc:'Er en god restaurant, der fokuserer på det romerske køkken. De serverer klassiske romerske retter, men byder også på dagens specialiteter. Det er et hyggeligt og afslappet sted uden fine fornemmelser.',
-    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:'phone', gem:false
+    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:['phone','online'], bookingUrl:'https://www.latavernadeiforiimperiali.com', gem:false
   },
   {
-    id:'trescaline', neighborhood:'monti', name:'Ai Tre Scaline',
+    id:'trescaline', neighborhood:'monti', name:'Ai Tre Scalini',
     kitchen:'vinbar', kitchenLabel:'Vinbar m. mad',
     address:'Via Panisperna 251', lat:41.8978, lng:12.4911,
     teaser:'Charmerende lille vinbar med levende stemning inden- og udendørs på Via Panisperna.',
     desc:'Er en fornuftig og charmerende lille vinbar. Tag på Ai Tre Scaline for at nyde stemningen og vinen. Indenfor er der en levende stemning, og udenfor kan man nyde Via Panispernas charme. Bordene udenfor bliver hurtigt taget, så vær der, når de åbner. Hvis de ikke lige har et udendørs bord klar, kan du altid slå ventetiden ihjel med et glas vin i baren.',
-    lunch:'Man–Lør', dinner:'Man–Lør', booking:'walkin', gem:false
+    lunch:'Man–Lør', dinner:'Man–Lør', booking:['walkin','phone'], bookingUrl:'+39 06 4890 7495', gem:false
   },
   {
     id:'barrique', neighborhood:'monti', name:'La Barrique',
@@ -614,7 +614,7 @@ const RESTAURANTS = [
     address:'Via del Boschetto 41B', lat:41.8945, lng:12.4897,
     teaser:'Dejlig vinbar med uformelt interiør.',
     desc:'En dejlig vinbar med et cool men uformelt interiør og lækker baggrundsmusik. Maden er god og simpel. Jeg fik kalvetunge med salsa verde, hvilket var helt fantastisk. Sidst jeg var der, fik jeg et ekstra glas rødvin i stedet for dessert, da jeg ikke gad gå ud i regnen. Tjeneren syntes vinen så lidt ensom ud, så han gav mig et par stykker ost til det. Det er den slags uhøjtidelige og personlige service, som gør, at jeg elsker Rom, og som bidrager til at jeg anbefaler stedet. Der er både mulighed for at vælge vine fra kortet eller bare tage en flaske ned fra hylderne. Tag derhen, hvis du ønsker et afbræk fra det klassiske romerske køkken.',
-    lunch:'Man–Lør', dinner:'Man–Lør', booking:'walkin', gem:false
+    lunch:'Man–Lør', dinner:'Man–Lør', booking:['phone','email'], bookingUrl:'https://www.labarriquemonti.it/prenotazioni-reservation/', gem:false
   },
   {
     id:'trattoriamonti', neighborhood:'monti', name:'Trattoria Monti',
@@ -622,7 +622,7 @@ const RESTAURANTS = [
     address:'Via di S. Vito 13 (mellem Monti og Piazza Vittorio)', lat:41.8930, lng:12.4980,
     teaser:'Rigtig fin restaurant, hvor mamma styrer køkkenet med hård hånd — det lille menukort er en undskyldning for at vende tilbage.',
     desc:'Er en rigtig fin og hyggelig restaurant med super god mad. Deres køkken fokuserer ikke på et bestemt område i Italien, men blot at få det bedste ud af deres råvarer. Dette er et af de få steder, hvor det stadig er mamma, der styrer køkkenet med hård hånd, hvilket unægteligt har sin charme. Maden er rigtig god, og det kan være meget svært at beslutte sig for, hvad man skal spise på det ellers meget lille menukort. Jeg ser det som en undskyldning for at vende tilbage. Det er svært at få bord uden en reservation, så gør det, og vær forberedt på at de ikke altid svarer telefonen. Det er dog besværet værd.',
-    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:'phone', gem:false
+    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:['phone'], bookingUrl:'+39 06 446 6573', gem:false
   },
   {
     id:'ziarosetta', neighborhood:'monti', name:'Zia Rosetta',
@@ -638,7 +638,7 @@ const RESTAURANTS = [
     address:'Via del Boccaccio 1 (nær Monti/Trevi)', lat:41.9005, lng:12.4866,
     teaser:'Hyggelig og autentisk, lidt gemt væk fra turisterne — mange italienske gæster.',
     desc:'Er en hyggelig og autentisk restaurant. Det ligger lidt gemt væk fra de mest turistede områder, men det er bestemt ikke dårligt. Maden er god, og her kommer mange italienere.',
-    lunch:'Man–Lør', dinner:'Man–Lør', booking:'walkin', gem:false
+    lunch:'Man–Lør', dinner:'Man–Lør', booking:['phone'], bookingUrl:'http://www.hostariaromana.it/', gem:false
   },
 
   // ── TRASTEVERE ──
@@ -648,7 +648,7 @@ const RESTAURANTS = [
     address:'Piazza del Ponziani 7', lat:41.8873, lng:12.4695,
     teaser:'Fornuftigt trattoria med typisk romersk mad.',
     desc:'Er et rigtig fornuftigt trattoria. De serverer typisk romersk mad, men har travlt, så vær forberedt på lidt ventetid. Fik en rigtig god carbonara (med lidt for meget olie).',
-    lunch:null, dinner:'Man–Lør', booking:'online', bookingUrl:'https://www.ristorantedateo.it', gem:false
+    lunch:null, dinner:'Man–Lør', booking:['phone'], bookingUrl:'https://trattoria-da-teo.menu-world.com/', gem:false
   },
   {
     id:'checo', neighborhood:'trastevere', name:'Checo Er Caretierre',
@@ -656,7 +656,7 @@ const RESTAURANTS = [
     address:'Via Benedetta 10, Trastevere', lat:41.8881, lng:12.4719,
     teaser:'Hyggelig restaurant med sublime antipasti og fuldstændig fantastiske polpette.',
     desc:'Hyggelig restaurant der lever lidt i fordums storhed. Det er dog stadig et sted som mange lokale frekventerer. Deres menukort er simpelt og består udelukkende af romerske retter. Foruden dette har de ofte frisk fisk liggende fremme, som man frit kan vælge ud fra. Deres antipasti er også sublime, og det kan næsten anbefales kun at spise disse. Prøv deres Polpette (meatballs), der er fuldstændig fantastiske. N.b.: De har både en restaurant og et hostaria — jeg synes, at restauranten er lidt mere uformel og hyggelig.',
-    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:'phone', gem:false
+    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:['online'], bookingUrl:'https://checcoercarettiere.superbexperience.com/', gem:false
   },
   {
     id:'dacarlone', neighborhood:'trastevere', name:'Da Carlone',
@@ -664,7 +664,7 @@ const RESTAURANTS = [
     address:'Via della Luce 5, Trastevere', lat:41.8868, lng:12.4680,
     teaser:'Godt trattoria med store portioner — send mig et billede, når du rammer Carbonara-muren.',
     desc:'Er et rigtig godt og hyggeligt trattoria. De serverer rigtig gode romerske retter, men deres portioner er latterligt store, så jeg vil anbefale at være to til tre om en portion. Husk at tage et billede og send det til mig, når du rammer Carbonara-muren, for jeg samler på det. Det er et smukt øjeblik i enhver pastaelskers liv.',
-    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:'phone', gem:false
+    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:['phone'], bookingUrl:'+39 06 580 0039', gem:false
   },
   {
     id:'lemaninpasta', neighborhood:'trastevere', name:'Le Mani in Pasta',
@@ -672,7 +672,7 @@ const RESTAURANTS = [
     address:'Via dei Genovesi 37, Trastevere', lat:41.8866, lng:12.4711,
     teaser:'Fiskespecialist i Trasteveres stille ende — intimt, lokalt og godt.',
     desc:'På Le Mani in Pasta specialiserer de sig i fisk, men tilbyder også klassiske romerske retter. Restauranten ligger i Trastevere et stykke fra der, hvor turisterne færdes. Klientellet består af både turister og lokale, hvor førstnævnte forfordeles. Det er fedt. Det er småt med pladsen, og stedet har en god puls — så hvis man kan lide madro og albuerum, er Le Mani in Pasta det forkerte sted at gå hen. Pas på med at købe hele fisk til kiloprisen, da det kan blive en dyr fornøjelse. Vi endte med at betale 80€ for en stor fisk til deling + alt det andet. Sidst jeg var der, fik vi et overdådigt måltid. Vi blev tilmed forkælet med et par ekstra pastaretter til deling ved bordet, fordi de var så glade for os… eller også havde de lavet lidt for meget og gav det til os, fordi vi sad tættest på køkkenet.',
-    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:'phone', gem:true
+    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:['phone'], bookingUrl:'+39 06 581 6017', gem:true
   },
 
   // ── TESTACCIO ──
@@ -690,7 +690,7 @@ const RESTAURANTS = [
     address:'Via Marmorata 39, Testaccio', lat:41.8817, lng:12.4758,
     teaser:'Institution i Testaccio med bundsolid klassisk romersk mad — man går ikke galt i byen.',
     desc:'Er endnu en institution i Testaccio, som serverer klassisk romersk mad. Her går man ikke galt i byen, og det er et oplagt sted at spise mindst én af de fire klassiske romerske pastaretter.',
-    lunch:'Tor–Tir', dinner:'Tor–Tir', booking:'phone', gem:false
+    lunch:'Tor–Tir', dinner:'Tor–Tir', booking:['online'], bookingUrl:'https://www.perilliatestaccio.com/reservations', gem:false
   },
   {
     id:'flavio', neighborhood:'testaccio', name:'Flavio al Velavevodetto',
@@ -698,7 +698,7 @@ const RESTAURANTS = [
     address:'Via di Monte Testaccio 97', lat:41.8803, lng:12.4773,
     teaser:'Charmerende restaurant bogstaveligt talt bygget ind i potteskårshøjen.',
     desc:'Er et af de mere charmerende steder. Restauranten er bygget ind i potteskårshøjen, hvilket man kan se i baglokalerne. Maden er bundsolid, og der er en fed atmosfære.',
-    lunch:'Man–Lør', dinner:'Man–Lør', booking:'online', bookingUrl:'https://www.ilvelavevodetto.it', gem:false
+    lunch:'Man–Lør', dinner:'Man–Lør', booking:['online'], bookingUrl:'https://www.ristorantevelavevodetto.it/en/restaurants/roma-testaccio/', gem:false
   },
   {
     id:'checchino', neighborhood:'testaccio', name:'Checchino dal 1887',
@@ -706,7 +706,7 @@ const RESTAURANTS = [
     address:'Via di Monte Testaccio 30', lat:41.8808, lng:12.4776,
     teaser:'En af Roms ældste restauranter — grebet af stemningen med formelle tjenere i et enkelt lokale.',
     desc:'Er en af de ældste og mest traditionsbundne romerske restauranter. Maden er god og simpel. Jeg blev særlig grebet af stemningen i restauranten, som består af et enkelt lokale, hvor alle gæsterne sidder, og tjenerne har deres formelle, men særegne tjeneruniformer på.',
-    lunch:'Tir–Lør', dinner:'Tir–Lør', booking:'online', bookingUrl:'https://www.checchino-dal-1887.com', gem:false
+    lunch:'Tir–Lør', dinner:'Tir–Lør', booking:['online'], bookingUrl:'https://checchinodal1887.com/prenota', gem:false
   },
   {
     id:'mercatotestaccio', neighborhood:'testaccio', name:'Mercato di Testaccio',
@@ -724,7 +724,7 @@ const RESTAURANTS = [
     address:'Via Giovanni Branca 29, Garbatella', lat:41.8687, lng:12.4841,
     teaser:'Super hyggelig restaurant, hvor man spiser godt — inden- eller udendørs i roen.',
     desc:'Er en super hyggelig restaurant, hvor man spiser godt. Her kan man sidde indenfor i de hyggelige lokaler eller udenfor og nyde roen.',
-    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:'phone', gem:true
+    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:['phone'], bookingUrl:'+39 06 5160 7422', gem:true
   },
   {
     id:'ristoroangeli', neighborhood:'garbatella', name:'Ristoro degli Angeli',
@@ -732,7 +732,7 @@ const RESTAURANTS = [
     address:'Via Luigi Orlando 2, Garbatella', lat:41.8676, lng:12.4829,
     teaser:'Super god restaurant, der blander romerske traditioner med egne kreationer — jeg drømmer stadig om carbonaraen.',
     desc:'Er en super god restaurant, som kombinerer det traditionelle romerske køkken med deres egne kreationer, der følger den romerske stil. Simpelt og godt. Vi fik nogle fantastiske friturestegte zucchiniblomster og en dejlig osteagtig carbonara, som jeg stadig drømmer om.',
-    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:'phone', gem:true
+    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:['online'], bookingUrl:'https://ristorodegliangeli.superbexperience.com/', gem:true
   },
 
   // ── SAN LORENZO ──
@@ -742,7 +742,7 @@ const RESTAURANTS = [
     address:'Via degli Equi 13, San Lorenzo', lat:41.8974, lng:12.5122,
     teaser:'Det bedste pizzeria jeg har besøgt — Ferrari-plakater, hærget look, og virkelig gode billige pizzaer.',
     desc:'Er det bedste og mest oplevelsesrige pizzeria jeg har besøgt indtil videre. Der er Ferrari-plakater over det hele, og man tror ikke det er et særlig godt sted ved første øjekast. Man skal dog ikke lade sig narre af det lidt hærgede look, da det har meget charme og er meget autentisk. Det er et meget travlt sted — så travlt, at servicen ikke er i top, hvilket heller ikke er det man betaler for. Tjenerne kan virke arrogante, ligeglade og måske lidt fjendtlige, men de kan til gengæld bære op til 11 pizzaer på en gang. Et godt trick til at overvinde tjenernes hjerter er at bestille et par supplì og fiori di zucca, inden man beslutter sig. Der er endnu en gang tale om et sted, der indbefatter Roms ånd om, at ingenting sker på dine egne præmisser — så det er bare om at nyde det Rom nu måtte give dig. Jeg vil indskyde, at man skal holde sig fra vinen og bestille øl. Alt i alt har Formula Uno virkelig gode og billige pizzaer i et meget autentisk og livligt miljø.',
-    lunch:null, dinner:'Man–Lør', booking:'walkin', gem:true
+    lunch:null, dinner:'Man–Lør', booking:['walkin','phone'], bookingUrl:'+39 06 445 3866', gem:true
   },
   {
     id:'pinsaebuoi', neighborhood:'sanlorenzo', name:'Pinsa e Buoi',
@@ -750,7 +750,7 @@ const RESTAURANTS = [
     address:'Viale Scalo San Lorenzo 15/17', lat:41.8964, lng:12.5144,
     teaser:'Et af de bedste steder jeg har spist — prøv Carpaccio eller Ragu al Chianti.',
     desc:'Er en virkelig lækker restaurant, hvor der lige er gjort lidt ekstra ud af retterne. De serverer italiensk mad, så man føler lidt man kender det, mens man prøver noget nyt. Det er lidt i den dyre ende — bestemt alle pengene værd. Charmerende lokaler og god service. Det er klart et af de bedste steder jeg har spist, og jeg kan klart anbefale deres Carpaccio eller Ragu al Chianti.',
-    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:'phone', gem:false
+    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:['phone'], bookingUrl:'https://ristorantepinsaebuoi.it/prenotazioni/', gem:false
   },
   {
     id:'pommidoro', neighborhood:'sanlorenzo', name:'Il Pommidoro',
@@ -758,7 +758,7 @@ const RESTAURANTS = [
     address:'Piazza dei Sanniti 44, San Lorenzo', lat:41.8977, lng:12.5134,
     teaser:'God restaurant med spændende menu — et af de få steder, man kan få pajata og Bistecca alla Fiorentina.',
     desc:'Er en god romersk restaurant med meget spændende menu. Det er eksempelvis et af de få steder, hvor man kan få den romerske specialitet pajata, som er en pastaret med tarm fra et spædlam. Derudover er det et oplagt sted at få serveret en Bistecca alla Fiorentina — en stor grillet T-bone steak, som skal deles af minimum to personer.',
-    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:'phone', gem:false
+    lunch:'Tir–Søn', dinner:'Tir–Søn', booking:['online'], bookingUrl:'https://octotable.com/book/restaurant/1000658/booking/new', gem:false
   }
 ];
 
@@ -818,10 +818,17 @@ const kitchenLabels = {
 };
 
 function bookingBadge(r) {
-  if (r.booking==='online') return '<span class="booking-badge book-online">🌐 Online booking</span>';
-  if (r.booking==='phone') return '<span class="booking-badge book-phone">📞 Telefon</span>';
-  if (r.booking==='email') return '<span class="booking-badge book-email">📧 E-mail</span>';
-  return '<span class="booking-badge book-walkin">🚶 Drop-in</span>';
+  const map = {online:['🌐','Online booking','book-online'],phone:['📞','Telefon','book-phone'],email:['📧','E-mail','book-email'],walkin:['🚶','Drop-in','book-walkin']};
+  const methods = Array.isArray(r.booking) ? r.booking : [r.booking];
+  return methods.map(m=>{const [i,l,c]=map[m]||map.walkin;return `<span class="booking-badge ${c}">${i} ${l}</span>`;}).join(' ');
+}
+function bookingLink(r) {
+  if(!r.bookingUrl) return '';
+  const u=r.bookingUrl.trim();
+  if(u.startsWith('+')||/^\d/.test(u)) return ` &nbsp;<a href="tel:${u.replace(/\s/g,'')}" style="color:var(--terra);font-size:.75rem">${u}</a>`;
+  const href=u.startsWith('http')?u:'https://'+u;
+  const label=href.replace(/https?:\/\//,'').split('/')[0];
+  return ` &nbsp;<a href="${href}" target="_blank" style="color:var(--terra);font-size:.75rem">${label}</a>`;
 }
 
 function hoursStr(r) {
@@ -840,7 +847,7 @@ function renderCard(r) {
 
   const gemBadge = '';
   const hours = hoursStr(r);
-  const bookNote = r.bookingUrl ? ' &nbsp;<a href="'+(r.bookingUrl.startsWith('http')?r.bookingUrl:'https://'+r.bookingUrl)+'" target="_blank" style="color:var(--terra);font-size:.75rem">'+r.bookingUrl.replace('https://','')+'</a>' : '';
+  const bookNote = bookingLink(r);
 
   el.innerHTML = `
     <div class="card-top">
@@ -852,7 +859,7 @@ function renderCard(r) {
     </div>
     <p class="card-teaser">${r.teaser}</p>
     <button class="card-read-btn" onclick="toggleReview(this)">
-      Læs hele anmeldelsen
+      Læs hele beskrivelsen
       <svg class="arr" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="card-full">
@@ -878,7 +885,7 @@ function toggleReview(btn) {
   const full = btn.nextElementSibling;
   const open = full.classList.toggle('open');
   btn.classList.toggle('open', open);
-  btn.childNodes[0].textContent = open ? 'Luk anmeldelsen ' : 'Læs hele anmeldelsen ';
+  btn.childNodes[0].textContent = open ? 'Luk beskrivelsen ' : 'Læs hele beskrivelsen ';
 }
 
 

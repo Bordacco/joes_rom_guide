@@ -17,8 +17,8 @@ KØKKEN:           Bruges til filtrering. Vælg én af disse:
 ADRESSE:          Restaurantens adresse
 FROKOST:          Dage åbent til frokost, fx "Man–Lør" eller "Ikke tilgængeligt"
 AFTENSMAD:        Dage åbent til aftensmad, fx "Tir–Søn" eller "Ikke tilgængeligt"
-BOOKING:          Én af disse: Online booking / Telefon / E-mail / Drop-in
-BOOKING LINK:     URL eller e-mail — lad feltet stå tomt hvis ingen
+BOOKING:          Én eller flere af disse: Online booking / Telefon / E-mail / Drop-in
+BOOKING LINK:     Telefonnummer, URL eller e-mail — lad feltet stå tomt hvis ingen
 
 Ret kun selve teksterne. Hold strukturen intakt.
 ========================================
@@ -39,8 +39,8 @@ KØKKEN:           Romersk — finere
 ADRESSE:          Salita de Crecenzi 31 (ved Pantheon)
 FROKOST:          Man–Lør
 AFTENSMAD:        Man–Fre
-BOOKING:          Telefon
-BOOKING LINK:
+BOOKING:          Online booking
+BOOKING LINK:     https://armandoalpantheon.it/prenota/
 
 KORT TEKST:
 Flot og charmerende restaurant med typiske romerske retter med 'a little touch of class'.
@@ -59,8 +59,8 @@ KØKKEN:           Snack, sandwich & pizza slice
 ADRESSE:          Via della Fossa 12 (nær Piazza Navona)
 FROKOST:          Man–Søn
 AFTENSMAD:        Man–Søn
-BOOKING:          Drop-in
-BOOKING LINK:
+BOOKING:          Online booking; Drop-in 
+BOOKING LINK:     https://www.baguetteriadelficoroma.it/#prenota-baguetteria-del-fico
 
 KORT TEKST:
 Suverænt lille sandwichsted i en oase nær Navona — afsides alt turistræset.
@@ -79,9 +79,8 @@ KØKKEN:           Vinbar m. mad
 ADRESSE:          Via del Gesù 87/88 (nær Piazza Venezia)
 FROKOST:          Man–Lør
 AFTENSMAD:        Ikke tilgængeligt
-BOOKING:          E-mail
-BOOKING LINK:     www.3inchfat.com
-
+BOOKING:          E-mail; Telefon
+BOOKING LINK:     https://www.enotecacorsi.com/contatti/
 KORT TEKST:
 Vinbutik og familierestaurant — insistér på at sidde omringet af vine fra gulv til loft.
 
@@ -99,8 +98,8 @@ KØKKEN:           Fisk
 ADRESSE:          Via Giulia 14 (nær Campo dei Fiori)
 FROKOST:          Tir–Søn
 AFTENSMAD:        Tir–Søn
-BOOKING:          Telefon
-BOOKING LINK:
+BOOKING:          Online booking
+BOOKING LINK:     https://www.ristoranteassuntamadre.it/en/assuntamadre-booking-rome/
 
 KORT TEKST:
 Super lækker fiskerestaurant — man vælger selv sin fisk fra isen ved indgangen.
@@ -120,7 +119,7 @@ ADRESSE:          Via dei Soldati 22/23 (ved Piazza Navona)
 FROKOST:          Man–Lør
 AFTENSMAD:        Man–Lør
 BOOKING:          Telefon
-BOOKING LINK:
+BOOKING LINK:     https://osteriadememmo.it/index.php/contact/
 
 KORT TEKST:
 Klassisk trattoria, særligt kendt for Amatriciana og et fantastisk udvalg af antipasti.
@@ -140,7 +139,7 @@ ADRESSE:          Via dei Guibbonnari 21/22 (nær Campo dei Fiori)
 FROKOST:          Man–Lør
 AFTENSMAD:        Man–Lør
 BOOKING:          Online booking
-BOOKING LINK:     https://www.ristorantesalumeriaroscioli.com
+BOOKING LINK:     https://salumeriaroscioli.com/en/pages/prenota?srsltid=AfmBOopk8TSKakvMVEtWEzPZjstrifneGrmsoZZgzFYPhU5iPstbHxg8
 
 KORT TEKST:
 Et af de mest hypede steder — spis antipasti og salumi, spring pastaen over.
@@ -159,8 +158,8 @@ KØKKEN:           Jødisk-romersk
 ADRESSE:          Via del Portico d'Ottavia 16 (den jødiske ghetto)
 FROKOST:          Ons–Man
 AFTENSMAD:        Ons–Man
-BOOKING:          Telefon
-BOOKING LINK:
+BOOKING:          Online booking
+BOOKING LINK:     https://www.nonnabetta.it/prenota/
 
 KORT TEKST:
 Institution for det jødisk-romerske køkken — den jødiske artiskok skal prøves.
@@ -179,8 +178,8 @@ KØKKEN:           Jødisk-romersk
 ADRESSE:          Piazza delle Cinque Scole 30 (den jødiske ghetto)
 FROKOST:          Man–Lør
 AFTENSMAD:        Ikke tilgængeligt
-BOOKING:          Drop-in
-BOOKING LINK:
+BOOKING:          Telefon
+BOOKING LINK:     https://www.soramargherita.com/contact_us
 
 KORT TEKST:
 Hyggelig lille jødisk familierestaurant med dagligt skiftende menu og forrygende stemning.
@@ -199,8 +198,8 @@ KØKKEN:           Romersk — traditionelt
 ADRESSE:          Via Tor di Nona 23 (nær Piazza Navona)
 FROKOST:          Man–Lør
 AFTENSMAD:        Man–Lør
-BOOKING:          Drop-in
-BOOKING LINK:
+BOOKING:          Telefon
+BOOKING LINK:     https://www.trattorialilli.it/
 
 KORT TEKST:
 Traditionelt trattoria off the beaten track — lokalt præg og solidt måltid.
@@ -266,8 +265,8 @@ KØKKEN:           Romersk — traditionelt
 ADRESSE:          Via della Madonna dei Monti 9
 FROKOST:          Tir–Søn
 AFTENSMAD:        Tir–Søn
-BOOKING:          Telefon
-BOOKING LINK:
+BOOKING:          Telefon; Online booking
+BOOKING LINK:     https://www.latavernadeiforiimperiali.com/cucina-romana-roma-centro-storico-roman-cuisine-rome-historic-center/
 
 KORT TEKST:
 God, afslappet restaurant med fokus på det romerske køkken — uden fine fornemmelser.
@@ -279,15 +278,15 @@ Er en god restaurant, der fokuserer på det romerske køkken. De serverer klassi
 
 
 ────────────────────────────────────────
-Ai Tre Scaline
+Ai Tre Scalini
 ────────────────────────────────────────
 
 KØKKEN:           Vinbar m. mad
 ADRESSE:          Via Panisperna 251
 FROKOST:          Man–Lør
 AFTENSMAD:        Man–Lør
-BOOKING:          Drop-in
-BOOKING LINK:
+BOOKING:          Drop-in; Telefon
+BOOKING LINK:     +39 06 4890 7495
 
 KORT TEKST:
 Charmerende lille vinbar med levende stemning inden- og udendørs på Via Panisperna.
@@ -306,8 +305,8 @@ KØKKEN:           Vinbar m. mad
 ADRESSE:          Via del Boschetto 41B
 FROKOST:          Man–Lør
 AFTENSMAD:        Man–Lør
-BOOKING:          Drop-in
-BOOKING LINK:
+BOOKING:          Telefon; E-mail
+BOOKING LINK:     https://www.labarriquemonti.it/prenotazioni-reservation/
 
 KORT TEKST:
 Dejlig vinbar med uformelt interiør.
@@ -327,7 +326,7 @@ ADRESSE:          Via di S. Vito 13 (mellem Monti og Piazza Vittorio)
 FROKOST:          Tir–Søn
 AFTENSMAD:        Tir–Søn
 BOOKING:          Telefon
-BOOKING LINK:
+BOOKING LINK:     +39 06 446 6573
 
 KORT TEKST:
 Rigtig fin restaurant, hvor mamma styrer køkkenet med hård hånd — det lille menukort er en undskyldning for at vende tilbage.
@@ -366,8 +365,8 @@ KØKKEN:           Romersk — traditionelt
 ADRESSE:          Via del Boccaccio 1 (nær Monti/Trevi)
 FROKOST:          Man–Lør
 AFTENSMAD:        Man–Lør
-BOOKING:          Drop-in
-BOOKING LINK:
+BOOKING:          Telefon
+BOOKING LINK:     http://www.hostariaromana.it/
 
 KORT TEKST:
 Hyggelig og autentisk, lidt gemt væk fra turisterne — mange italienske gæster.
@@ -393,8 +392,8 @@ KØKKEN:           Romersk — traditionelt
 ADRESSE:          Piazza del Ponziani 7
 FROKOST:          Ikke tilgængeligt
 AFTENSMAD:        Man–Lør
-BOOKING:          Online booking
-BOOKING LINK:     https://www.ristorantedateo.it
+BOOKING:          Telefon
+BOOKING LINK:     https://trattoria-da-teo.menu-world.com/
 
 KORT TEKST:
 Fornuftigt trattoria med typisk romersk mad.
@@ -413,8 +412,8 @@ KØKKEN:           Romersk — traditionelt
 ADRESSE:          Via Benedetta 10
 FROKOST:          Tir–Søn
 AFTENSMAD:        Tir–Søn
-BOOKING:          Telefon
-BOOKING LINK:
+BOOKING:          Online booking
+BOOKING LINK:     https://checcoercarettiere.superbexperience.com/
 
 KORT TEKST:
 Hyggelig restaurant med sublime antipasti og fuldstændig fantastiske polpette.
@@ -434,7 +433,7 @@ ADRESSE:          Via della Luce 5
 FROKOST:          Tir–Søn
 AFTENSMAD:        Tir–Søn
 BOOKING:          Telefon
-BOOKING LINK:
+BOOKING LINK:     +39 06 580 0039
 
 KORT TEKST:
 Godt trattoria med store portioner — send mig et billede, når du rammer Carbonara-muren.
@@ -454,7 +453,7 @@ ADRESSE:          Via dei Genovesi 37
 FROKOST:          Tir–Søn
 AFTENSMAD:        Tir–Søn
 BOOKING:          Telefon
-BOOKING LINK:
+BOOKING LINK:     +39 06 581 6017
 
 KORT TEKST:
 Fiskespecialist i Trasteveres stille ende — intimt, lokalt og godt.
@@ -500,8 +499,8 @@ KØKKEN:           Romersk — traditionelt
 ADRESSE:          Via Marmorata 39
 FROKOST:          Tor–Tir
 AFTENSMAD:        Tor–Tir
-BOOKING:          Telefon
-BOOKING LINK:
+BOOKING:          Online booking
+BOOKING LINK:     https://www.perilliatestaccio.com/reservations?_gl=1*j8lz0s*_ga*MTgwNDA5ODA0OC4xNzc5MDEzNTA3*_up*MQ..*_ga_EE27S9M6HY*czE3NzkwMTM1MDYkbzEkZzAkdDE3NzkwMTM1MDYkajYwJGwwJGgw
 
 KORT TEKST:
 Institution i Testaccio med bundsolid klassisk romersk mad — man går ikke galt i byen.
@@ -521,7 +520,7 @@ ADRESSE:          Via di Monte Testaccio 97
 FROKOST:          Man–Lør
 AFTENSMAD:        Man–Lør
 BOOKING:          Online booking
-BOOKING LINK:     https://www.ilvelavevodetto.it
+BOOKING LINK:     https://www.ristorantevelavevodetto.it/en/restaurants/roma-testaccio/
 
 KORT TEKST:
 Charmerende restaurant bogstaveligt talt bygget ind i potteskårshøjen.
@@ -541,7 +540,7 @@ ADRESSE:          Via di Monte Testaccio 30
 FROKOST:          Tir–Lør
 AFTENSMAD:        Tir–Lør
 BOOKING:          Online booking
-BOOKING LINK:     https://www.checchino-dal-1887.com
+BOOKING LINK:     https://checchinodal1887.com/prenota
 
 KORT TEKST:
 En af Roms ældste restauranter — grebet af stemningen med formelle tjenere i et enkelt lokale.
@@ -588,7 +587,7 @@ ADRESSE:          Via Giovanni Branca 29
 FROKOST:          Tir–Søn
 AFTENSMAD:        Tir–Søn
 BOOKING:          Telefon
-BOOKING LINK:
+BOOKING LINK:     +39 06 5160 7422
 
 KORT TEKST:
 Super hyggelig restaurant, hvor man spiser godt — inden- eller udendørs i roen.
@@ -607,8 +606,8 @@ KØKKEN:           Romersk — finere
 ADRESSE:          Via Luigi Orlando 2
 FROKOST:          Tir–Søn
 AFTENSMAD:        Tir–Søn
-BOOKING:          Telefon
-BOOKING LINK:
+BOOKING:          Online booking
+BOOKING LINK:     https://ristorodegliangeli.superbexperience.com/
 
 KORT TEKST:
 Super god restaurant, der blander romerske traditioner med egne kreationer — jeg drømmer stadig om carbonaraen.
@@ -634,8 +633,8 @@ KØKKEN:           Pizzarestaurant
 ADRESSE:          Via degli Equi 13
 FROKOST:          Ikke tilgængeligt
 AFTENSMAD:        Man–Lør
-BOOKING:          Drop-in
-BOOKING LINK:
+BOOKING:          Drop-in; Telefon
+BOOKING LINK:     +39 06 445 3866   
 
 KORT TEKST:
 Det bedste pizzeria jeg har besøgt — Ferrari-plakater, hærget look, og virkelig gode billige pizzaer.
@@ -655,7 +654,7 @@ ADRESSE:          Viale Scalo San Lorenzo 15/17
 FROKOST:          Tir–Søn
 AFTENSMAD:        Tir–Søn
 BOOKING:          Telefon
-BOOKING LINK:
+BOOKING LINK:     https://ristorantepinsaebuoi.it/prenotazioni/
 
 KORT TEKST:
 Et af de bedste steder jeg har spist — prøv Carpaccio eller Ragu al Chianti.
@@ -674,8 +673,8 @@ KØKKEN:           Romersk — traditionelt
 ADRESSE:          Piazza dei Sanniti 44
 FROKOST:          Tir–Søn
 AFTENSMAD:        Tir–Søn
-BOOKING:          Telefon
-BOOKING LINK:
+BOOKING:          Online booking
+BOOKING LINK:     https://octotable.com/book/restaurant/1000658/booking/new
 
 KORT TEKST:
 God restaurant med spændende menu — et af de få steder, man kan få pajata og Bistecca alla Fiorentina.
